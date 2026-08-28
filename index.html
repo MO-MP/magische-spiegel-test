@@ -36,6 +36,9 @@
       gap: 28px;
       padding: 30px;
       box-sizing: border-box;
+
+      /* NIEUW: de inhoud krijgt een zachte overgang */
+      transition: opacity 0.5s ease;
     }
 
     /* Hoofdtitel */
@@ -64,12 +67,130 @@
       max-width: 100%;
       padding: 20px;
       box-sizing: border-box;
+
+      /* NIEUW: de rol komt langzaam tevoorschijn */
+      animation: verschijnen 1.8s ease forwards;
+    }
+
+    /* NIEUW: gouden waas over het scherm */
+    #magie {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(180, 140, 60, 0.35),
+          rgba(50, 35, 10, 0.25) 35%,
+          rgba(0, 0, 0, 0.95) 80%
+        );
+      z-index: 10;
+    }
+
+    /* NIEUW: de magie beweegt over het scherm */
+    #magie.actief {
+      animation: magisch 2.5s ease-in-out forwards;
+    }
+
+    /* NIEUW: zachte gouden rookwolken */
+    #rook {
+      position: fixed;
+      inset: -20%;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 11;
+      background:
+        radial-gradient(
+          ellipse at 30% 50%,
+          rgba(170, 125, 45, 0.22),
+          transparent 45%
+        ),
+        radial-gradient(
+          ellipse at 70% 40%,
+          rgba(210, 170, 80, 0.18),
+          transparent 40%
+        ),
+        radial-gradient(
+          ellipse at 50% 80%,
+          rgba(120, 90, 35, 0.20),
+          transparent 45%
+        );
+      filter: blur(25px);
+    }
+
+    /* NIEUW: beweging van de rook */
+    #rook.actief {
+      animation: rook 2.5s ease-in-out forwards;
+    }
+
+    /* NIEUW: de rol verschijnt langzaam */
+    @keyframes verschijnen {
+      from {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* NIEUW: gouden gloed */
+    @keyframes magisch {
+      0% {
+        opacity: 0;
+        transform: scale(1);
+      }
+
+      35% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+
+      70% {
+        opacity: 0.7;
+        transform: scale(1.15);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1.3);
+      }
+    }
+
+    /* NIEUW: rook beweegt en verdwijnt */
+    @keyframes rook {
+      0% {
+        opacity: 0;
+        transform: scale(0.8) rotate(0deg);
+      }
+
+      30% {
+        opacity: 1;
+      }
+
+      70% {
+        opacity: 0.8;
+        transform: scale(1.1) rotate(4deg);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1.4) rotate(-5deg);
+      }
     }
   </style>
 
 </head>
 
 <body>
+
+  <!-- NIEUW: lagen voor het magische effect -->
+
+  <div id="magie"></div>
+  <div id="rook"></div>
 
   <div id="scherm">
 
@@ -100,14 +221,31 @@
     ];
 
     const scherm = document.getElementById("scherm");
+    const magie = document.getElementById("magie");
+    const rook = document.getElementById("rook");
 
     scherm.addEventListener("click", function () {
 
-      const willekeurig =
-        acties[Math.floor(Math.random() * acties.length)];
+      /* NIEUW: magie en rook starten */
+      magie.classList.add("actief");
+      rook.classList.add("actief");
 
-      scherm.innerHTML =
-        '<div id="uitkomst">' + willekeurig + '</div>';
+      /* NIEUW: tekst verdwijnt langzaam */
+      scherm.style.opacity = "0";
+
+      /* Wacht tot de magie bijna voorbij is */
+      setTimeout(function () {
+
+        const willekeurig =
+          acties[Math.floor(Math.random() * acties.length)];
+
+        scherm.innerHTML =
+          '<div id="uitkomst">' + willekeurig + '</div>';
+
+        /* Tekst komt weer langzaam terug */
+        scherm.style.opacity = "1";
+
+      }, 1700);
 
     });
 

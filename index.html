@@ -33,18 +33,32 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 25px;
+      gap: 35px;
       padding: 30px;
       box-sizing: border-box;
     }
 
-    #scherm small {
-      font-size: 4vw;
+    /* Hoofdtitel */
+    #titel {
+      font-size: 12vw;
       font-weight: normal;
     }
 
-    #scherm strong {
-      font-size: 6vw;
+    /* Ondertitel */
+    #ondertitel {
+      font-size: 5vw;
+      font-weight: normal;
+    }
+
+    /* Aanwijzing om te tikken */
+    #aanraken {
+      font-size: 7vw;
+      font-weight: normal;
+    }
+
+    /* De uiteindelijke uitkomst */
+    #uitkomst {
+      font-size: 14vw;
       font-weight: normal;
     }
   </style>
@@ -54,9 +68,19 @@
 <body>
 
   <div id="scherm">
-    <div>✨ MAGISCHE SPIEGEL ✨</div>
-    <small>Sprookjesmagie of Sprookjestragedie</small>
-    <strong>RAAK HET SCHERM AAN</strong>
+
+```
+<div id="titel">✨ MAGISCHE SPIEGEL ✨</div>
+
+<div id="ondertitel">
+  Sprookjesmagie of Sprookjestragedie
+</div>
+
+<div id="aanraken">
+  RAAK HET SCHERM AAN
+</div>
+```
+
   </div>
 
   <script>
@@ -74,10 +98,13 @@
     const scherm = document.getElementById("scherm");
 
     scherm.addEventListener("click", function () {
+
       const willekeurig =
         acties[Math.floor(Math.random() * acties.length)];
 
-      scherm.textContent = willekeurig;
+      scherm.innerHTML =
+        '<div id="uitkomst">' + willekeurig + '</div>';
+
     });
 
     // Service Worker inschakelen voor offline gebruik

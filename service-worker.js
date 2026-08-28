@@ -1,4 +1,4 @@
-const CACHE_NAME = "magische-spiegel";
+const CACHE_NAME = "magische-spiegel-test-v5";
 
 const BESTANDEN = [
 "./",
@@ -16,31 +16,19 @@ caches.open(CACHE_NAME)
 
 self.addEventListener("activate", event => {
 event.waitUntil(
-self.clients.claim()
+caches.keys().then(names =>
+Promise.all(
+names
+.filter(name => name !== CACHE_NAME)
+.map(name => caches.delete(name))
+)
+).then(() => self.clients.claim())
 );
 });
 
 self.addEventListener("fetch", event => {
 event.respondWith(
-fetch(event.request)
-.then(response => {
-
-```
-    if (response.ok) {
-      const kopie = response.clone();
-
-      caches.open(CACHE_NAME)
-        .then(cache => {
-          cache.put(event.request, kopie);
-        });
-    }
-
-    return response;
-  })
-  .catch(() => {
-    return caches.match(event.request);
-  })
-```
-
+caches.match(event.request)
+.then(response => response || fetch(event.request))
 );
 });

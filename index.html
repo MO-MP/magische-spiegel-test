@@ -26,6 +26,42 @@
       -webkit-user-select: none;
     }
 
+    /* De spiegel zelf */
+    #spiegel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+    }
+
+    /* Donkere gouden spiegelrand */
+    #spiegel::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 3px solid rgba(150, 115, 55, 0.65);
+      box-shadow:
+        0 0 12px rgba(150, 115, 55, 0.35),
+        inset 0 0 18px rgba(150, 115, 55, 0.20);
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    /* Kleine ornamenten in de hoeken */
+    #spiegel::after {
+      content: "❦                         ❦\A\A                         ❦                         ❦";
+      white-space: pre;
+      position: absolute;
+      inset: 18px;
+      color: rgba(175, 135, 65, 0.65);
+      font-size: 28px;
+      line-height: 1;
+      text-shadow: 0 0 8px rgba(180, 140, 60, 0.4);
+      pointer-events: none;
+      z-index: 21;
+    }
+
     #scherm {
       width: 100%;
       height: 100%;
@@ -34,10 +70,8 @@
       align-items: center;
       justify-content: center;
       gap: 28px;
-      padding: 30px;
+      padding: 60px;
       box-sizing: border-box;
-
-      /* NIEUW: de inhoud krijgt een zachte overgang */
       transition: opacity 0.5s ease;
     }
 
@@ -67,12 +101,21 @@
       max-width: 100%;
       padding: 20px;
       box-sizing: border-box;
-
-      /* NIEUW: de rol komt langzaam tevoorschijn */
       animation: verschijnen 1.8s ease forwards;
     }
 
-    /* NIEUW: gouden waas over het scherm */
+    /* Korte tekst onder de rol */
+    #beschrijving {
+      font-size: clamp(20px, 3vw, 36px);
+      max-width: 850px;
+      line-height: 1.4;
+      padding: 0 20px;
+      box-sizing: border-box;
+      opacity: 0;
+      animation: beschrijving 1.8s ease 0.4s forwards;
+    }
+
+    /* Gouden waas */
     #magie {
       position: fixed;
       inset: 0;
@@ -88,12 +131,11 @@
       z-index: 10;
     }
 
-    /* NIEUW: de magie beweegt over het scherm */
     #magie.actief {
       animation: magisch 2.5s ease-in-out forwards;
     }
 
-    /* NIEUW: zachte gouden rookwolken */
+    /* Zachte gouden rook */
     #rook {
       position: fixed;
       inset: -20%;
@@ -119,12 +161,11 @@
       filter: blur(25px);
     }
 
-    /* NIEUW: beweging van de rook */
     #rook.actief {
       animation: rook 2.5s ease-in-out forwards;
     }
 
-    /* NIEUW: de rol verschijnt langzaam */
+    /* Rol verschijnt */
     @keyframes verschijnen {
       from {
         opacity: 0;
@@ -137,7 +178,20 @@
       }
     }
 
-    /* NIEUW: gouden gloed */
+    /* Beschrijving verschijnt iets later */
+    @keyframes beschrijving {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Gouden magie */
     @keyframes magisch {
       0% {
         opacity: 0;
@@ -160,7 +214,7 @@
       }
     }
 
-    /* NIEUW: rook beweegt en verdwijnt */
+    /* Rook beweegt */
     @keyframes rook {
       0% {
         opacity: 0;
@@ -187,37 +241,66 @@
 
 <body>
 
-  <!-- NIEUW: lagen voor het magische effect -->
-
-  <div id="magie"></div>
-  <div id="rook"></div>
-
-  <div id="scherm">
+  <div id="spiegel">
 
 ```
-<div id="titel">✨ MAGISCHE SPIEGEL ✨</div>
+<!-- Magische lagen -->
+<div id="magie"></div>
+<div id="rook"></div>
 
-<div id="ondertitel">
-  Sprookjesmagie of Sprookjestragedie
-</div>
+<div id="scherm">
 
-<div id="aanraken">
-  RAAK HET SCHERM AAN
+  <div id="titel">✨ MAGISCHE SPIEGEL ✨</div>
+
+  <div id="ondertitel">
+    Sprookjesmagie of Sprookjestragedie
+  </div>
+
+  <div id="aanraken">
+    RAAK HET SCHERM AAN
+  </div>
+
 </div>
 ```
 
   </div>
 
   <script>
+
+    /* De rollen */
     const acties = [
-      "👑 DE KONINKLIJKE",
-      "🦹 DE SCHURK",
-      "🎭 HET NOODLOT",
-      "⭐ DE UITVERKORENE",
-      "🧙 DE MAGIËR",
-      "🧚 DE BETOVERDE",
-      "🌙 DE RUITER UIT DE MIST",
-      "🐴 DE VROLIJKE RUITER"
+      {
+        naam: "👑 DE KONINKLIJKE",
+        tekst: "Je hebt iets koninklijks. Of je doet in ieder geval alsof."
+      },
+      {
+        naam: "🦹 DE SCHURK",
+        tekst: "Je bedoelingen zijn uitstekend. Dat maakt het alleen maar verdacht."
+      },
+      {
+        naam: "🎭 HET NOODLOT",
+        tekst: "Sommige dingen zijn voorbestemd. Dit was er blijkbaar één van."
+      },
+      {
+        naam: "⭐ DE UITVERKORENE",
+        tekst: "Het lot heeft jou gekozen. Hopelijk weet het lot wat het doet."
+      },
+      {
+        naam: "🧙 DE MAGIËR",
+        tekst: "Je bezit grote krachten. Vooral als niemand kijkt."
+      },
+      {
+        naam: "🧚 DE BETOVERDE",
+        tekst: "Er hangt magie om je heen. Of misschien is dat gewoon je uitstraling."
+      },
+      {
+        naam: "🌙 DE RUITER UIT DE MIST",
+        tekst: "Je verschijnt wanneer niemand je verwacht... zelfs jij niet."
+      },
+      {
+        naam: "🐴 DE VROLIJKE RUITER",
+        tekst: "Je komt te paard. Waarom? Dat weet niemand."
+      }
     ];
 
     const scherm = document.getElementById("scherm");
@@ -226,33 +309,39 @@
 
     scherm.addEventListener("click", function () {
 
-      /* NIEUW: magie en rook starten */
+      /* Start de magie */
       magie.classList.add("actief");
       rook.classList.add("actief");
 
-      /* NIEUW: tekst verdwijnt langzaam */
+      /* Laat de begintekst verdwijnen */
       scherm.style.opacity = "0";
 
-      /* Wacht tot de magie bijna voorbij is */
+      /* Wacht tot de onthulling begint */
       setTimeout(function () {
 
         const willekeurig =
           acties[Math.floor(Math.random() * acties.length)];
 
         scherm.innerHTML =
-          '<div id="uitkomst">' + willekeurig + '</div>';
+          '<div id="uitkomst">' +
+          willekeurig.naam +
+          '</div>' +
+          '<div id="beschrijving">' +
+          willekeurig.tekst +
+          '</div>';
 
-        /* Tekst komt weer langzaam terug */
+        /* Laat de onthulling verschijnen */
         scherm.style.opacity = "1";
 
       }, 1700);
 
     });
 
-    // Service Worker inschakelen voor offline gebruik
+    /* Service Worker voor offline gebruik */
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("service-worker.js");
     }
+
   </script>
 
 </body>

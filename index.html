@@ -62,7 +62,6 @@
 
     #scherm {
       position: relative;
-
       z-index: 5;
 
       width: 100%;
@@ -120,7 +119,6 @@
        ========================================== */
 
     #intro {
-
       font-size: clamp(25px, 4vw, 48px);
 
       line-height: 1.5;
@@ -223,7 +221,7 @@
 
 
     /* ==========================================
-       AFSLUITBOODSCHAP
+       AFSLUITING
        ========================================== */
 
     #afsluiting {
@@ -250,13 +248,58 @@
 
 
     /* ==========================================
+       GEHEIME EZEL-ACTIE
+       ========================================== */
+
+    #ezel-afbeelding {
+
+      display: block;
+
+      width: auto;
+      height: auto;
+
+      max-width: 75vw;
+      max-height: 55vh;
+
+      object-fit: contain;
+
+      margin: 0 auto 10px auto;
+
+      opacity: 0;
+
+      animation:
+        ezelVerschijnen
+        1.5s
+        ease
+        forwards;
+    }
+
+
+    #ezel-tekst {
+
+      font-size:
+        clamp(25px, 4vw, 48px);
+
+      line-height: 1.4;
+
+      opacity: 0;
+
+      animation:
+        afsluitingVerschijnen
+        1.5s
+        ease
+        0.5s
+        forwards;
+    }
+
+
+    /* ==========================================
        GOUDEN MAGIE
        ========================================== */
 
     #magie {
 
       position: fixed;
-
       inset: 0;
 
       pointer-events: none;
@@ -292,7 +335,6 @@
     #slotgloed {
 
       position: fixed;
-
       inset: 0;
 
       pointer-events: none;
@@ -450,6 +492,21 @@
     }
 
 
+    @keyframes ezelVerschijnen {
+
+      from {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+    }
+
+
     @keyframes zachtGloeien {
 
       0% {
@@ -466,8 +523,6 @@
 
     }
 
-
-    /* Eerste magie */
 
     @keyframes magisch {
 
@@ -494,8 +549,6 @@
     }
 
 
-    /* Laatste gloed */
-
     @keyframes slotgloed {
 
       0% {
@@ -520,8 +573,6 @@
 
     }
 
-
-    /* Rook */
 
     @keyframes rook {
 
@@ -561,17 +612,12 @@
 
   <div id="spiegel">
 
-
-    <!-- Magische lagen -->
-
     <div id="magie"></div>
 
     <div id="rook"></div>
 
     <div id="slotgloed"></div>
 
-
-    <!-- Scherm -->
 
     <div id="scherm">
 
@@ -588,7 +634,6 @@
       </div>
 
     </div>
-
 
   </div>
 
@@ -678,7 +723,7 @@
 
 
     /* ==========================================
-       WILLEKEURIGE INTRO'S
+       INTRO'S
        ========================================== */
 
     const intros = [
@@ -697,22 +742,43 @@
 
 
     /* ==========================================
-       WILLEKEURIGE AFSLUITINGEN
+       AFSLUITINGEN
        ========================================== */
 
     const afsluitingen = [
 
-      "De spiegel heeft gesproken... maar sommige geheimen blijven verborgen.",
+      {
+        tekst:
+          "De spiegel heeft gesproken... maar sommige geheimen blijven verborgen."
+      },
 
-      "De magie verdwijnt... maar de spiegel is nog niet uitgesproken.",
+      {
+        tekst:
+          "De magie verdwijnt... maar de spiegel is nog niet uitgesproken."
+      },
 
-      "Was dit werkelijk jouw lot? Misschien moet je nog eens kijken...",
+      {
+        tekst:
+          "Was dit werkelijk jouw lot? Misschien moet je nog eens kijken...",
 
-      "De spiegel zwijgt weer... maar hij heeft jou gezien.",
+        geheimeActie:
+          true
+      },
 
-      "Een verhaal eindigt hier... of begint het pas?",
+      {
+        tekst:
+          "De spiegel zwijgt weer... maar hij heeft jou gezien."
+      },
 
-      "De mist trekt op... maar niet alle geheimen zijn verdwenen."
+      {
+        tekst:
+          "Een verhaal eindigt hier... of begint het pas?"
+      },
+
+      {
+        tekst:
+          "De mist trekt op... maar niet alle geheimen zijn verdwenen."
+      }
 
     ];
 
@@ -736,7 +802,7 @@
 
     /*
      * Voorkomt meerdere aanrakingen
-     * tijdens één volledige beurt.
+     * tijdens één beurt.
      */
 
     let bezig =
@@ -760,6 +826,18 @@
       }
 
     });
+
+
+    /*
+     * Ook de geheime ezelafbeelding
+     * alvast laden.
+     */
+
+    const ezelVoorladen =
+      new Image();
+
+    ezelVoorladen.src =
+      "ezel.png";
 
 
     /* ==========================================
@@ -786,11 +864,10 @@
 
 
     /* ==========================================
-       INTRO TONEN
+       INTRO
        ========================================== */
 
     function toonIntro() {
-
 
       const intro =
         intros[
@@ -828,17 +905,134 @@
 
 
     /* ==========================================
-       AFSLUITING TONEN
+       GEHEIME EZEL-ACTIE
+       ========================================== */
+
+    function toonEzelActie() {
+
+      scherm.style.opacity =
+        "0";
+
+
+      setTimeout(function() {
+
+        scherm.innerHTML = "";
+
+
+        const afbeelding =
+          document.createElement("img");
+
+
+        afbeelding.id =
+          "ezel-afbeelding";
+
+
+        afbeelding.src =
+          "ezel.png";
+
+
+        afbeelding.alt =
+          "Een ridder op een ezel";
+
+
+        scherm.appendChild(
+          afbeelding
+        );
+
+
+        const tekst =
+          document.createElement("div");
+
+
+        tekst.id =
+          "ezel-tekst";
+
+
+        tekst.textContent =
+          "O... Dit had de spiegel niet verwacht.";
+
+
+        scherm.appendChild(
+          tekst
+        );
+
+
+        scherm.style.opacity =
+          "1";
+
+
+        /*
+         * De absurde afbeelding blijft
+         * ongeveer 5 seconden zichtbaar.
+         */
+
+        setTimeout(function() {
+
+          scherm.style.opacity =
+            "0";
+
+
+          setTimeout(function() {
+
+            toonLaatsteGloed();
+
+          }, 800);
+
+
+        }, 5000);
+
+
+      }, 800);
+
+    }
+
+
+    /* ==========================================
+       LAATSTE GOUDEN GLOED
+       ========================================== */
+
+    function toonLaatsteGloed() {
+
+      slotgloed.classList.remove(
+        "actief"
+      );
+
+
+      void slotgloed.offsetWidth;
+
+
+      slotgloed.classList.add(
+        "actief"
+      );
+
+
+      /*
+       * Na 3,5 seconden is de gloed
+       * voorbij en komt het begin terug.
+       */
+
+      setTimeout(function() {
+
+        toonBeginScherm();
+
+        scherm.style.opacity =
+          "1";
+
+        bezig =
+          false;
+
+      }, 3500);
+
+    }
+
+
+    /* ==========================================
+       AFSLUITING
        ========================================== */
 
     function toonAfsluiting() {
 
-
-      /*
-       * Kies willekeurige afsluiting.
-       */
-
-      const boodschap =
+      const gekozen =
         afsluitingen[
           Math.floor(
             Math.random() *
@@ -847,16 +1041,11 @@
         ];
 
 
-      /*
-       * Rol langzaam laten verdwijnen.
-       */
-
       scherm.style.opacity =
         "0";
 
 
       setTimeout(function() {
-
 
         scherm.innerHTML = "";
 
@@ -870,7 +1059,7 @@
 
 
         tekst.textContent =
-          boodschap;
+          gekozen.tekst;
 
 
         scherm.appendChild(
@@ -883,68 +1072,44 @@
 
 
         /*
-         * De afsluiting blijft
-         * ongeveer 5,5 seconden staan.
+         * Afsluiting blijft 7 seconden staan.
          */
 
         setTimeout(function() {
 
 
           /*
-           * Afsluittekst laten verdwijnen.
+           * Als dit een speciale
+           * afsluiting is, komt de
+           * geheime ezelactie.
+           */
+
+          if (gekozen.geheimeActie) {
+
+            toonEzelActie();
+
+            return;
+
+          }
+
+
+          /*
+           * Normale afsluiting:
+           * tekst verdwijnt.
            */
 
           scherm.style.opacity =
             "0";
 
 
-          /*
-           * Daarna de laatste
-           * gouden gloed starten.
-           */
-
           setTimeout(function() {
 
-
-            slotgloed.classList.remove(
-              "actief"
-            );
-
-
-            void slotgloed.offsetWidth;
-
-
-            slotgloed.classList.add(
-              "actief"
-            );
-
-
-            /*
-             * Na de gloed terug
-             * naar het beginscherm.
-             */
-
-            setTimeout(function() {
-
-
-              toonBeginScherm();
-
-
-              scherm.style.opacity =
-                "1";
-
-
-              bezig =
-                false;
-
-
-            }, 3500);
-
+            toonLaatsteGloed();
 
           }, 800);
 
 
-        }, 5500);
+        }, 7000);
 
 
       }, 800);
@@ -962,8 +1127,8 @@
 
 
         /*
-         * Tijdens een lopende beurt
-         * wordt aanraken genegeerd.
+         * Tijdens een beurt
+         * niets opnieuw starten.
          */
 
         if (bezig) {
@@ -983,12 +1148,15 @@
 
 
         /*
-         * Na 3,5 seconden begint
-         * de gouden magie.
+         * INTRO BLIJFT 6 SECONDEN STAAN.
          */
 
         setTimeout(function() {
 
+
+          /*
+           * Gouden magie opnieuw starten.
+           */
 
           magie.classList.remove(
             "actief"
@@ -998,10 +1166,6 @@
             "actief"
           );
 
-
-          /*
-           * Animaties opnieuw starten.
-           */
 
           void magie.offsetWidth;
           void rook.offsetWidth;
@@ -1025,15 +1189,12 @@
 
 
           /*
-           * Na de magie de rol tonen.
+           * Na de gouden magie
+           * de rol tonen.
            */
 
           setTimeout(function() {
 
-
-            /*
-             * Willekeurige rol.
-             */
 
             const willekeurig =
               acties[
@@ -1044,20 +1205,15 @@
               ];
 
 
-            /*
-             * Scherm leegmaken.
-             */
-
             scherm.innerHTML =
               "";
 
 
             /*
-             * Afbeelding als die bestaat.
+             * Afbeelding.
              */
 
             if (willekeurig.afbeelding) {
-
 
               const afbeelding =
                 document.createElement("img");
@@ -1124,29 +1280,24 @@
             );
 
 
-            /*
-             * Rol zichtbaar.
-             */
-
             scherm.style.opacity =
               "1";
 
 
             /*
-             * Rol blijft 10 seconden
-             * volledig zichtbaar.
+             * ROL BLIJFT 12 SECONDEN STAAN.
              */
 
             setTimeout(
               toonAfsluiting,
-              10000
+              12000
             );
 
 
           }, 1700);
 
 
-        }, 3500);
+        }, 6000);
 
 
       }
@@ -1164,7 +1315,6 @@
       );
 
     }
-
 
   </script>
 

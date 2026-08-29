@@ -1,4 +1,4 @@
-const CACHE_NAME = "magische-spiegel-test-v16";
+const CACHE_NAME = "magische-spiegel-test-v17";
 
 const BESTANDEN = [
 "./",

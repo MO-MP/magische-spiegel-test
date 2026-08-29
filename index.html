@@ -26,43 +26,34 @@
       -webkit-user-select: none;
     }
 
-    /* De spiegel zelf */
+    /* De spiegel */
     #spiegel {
       position: relative;
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: black;
+
+      /* NIEUW: achtergrondafbeelding */
+      background-image: url("spiegel.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
-    /* Donkere gouden spiegelrand */
+    /* Donkere laag over het spiegelglas */
     #spiegel::before {
       content: "";
       position: absolute;
-      inset: 12px;
-      border: 3px solid rgba(150, 115, 55, 0.65);
-      box-shadow:
-        0 0 12px rgba(150, 115, 55, 0.35),
-        inset 0 0 18px rgba(150, 115, 55, 0.20);
+      inset: 0;
+      background: rgba(0, 0, 0, 0.30);
       pointer-events: none;
-      z-index: 20;
-    }
-
-    /* Kleine ornamenten in de hoeken */
-    #spiegel::after {
-      content: "❦                         ❦\A\A                         ❦                         ❦";
-      white-space: pre;
-      position: absolute;
-      inset: 18px;
-      color: rgba(175, 135, 65, 0.65);
-      font-size: 28px;
-      line-height: 1;
-      text-shadow: 0 0 8px rgba(180, 140, 60, 0.4);
-      pointer-events: none;
-      z-index: 21;
+      z-index: 1;
     }
 
     #scherm {
+      position: relative;
+      z-index: 5;
+
       width: 100%;
       height: 100%;
       display: flex;
@@ -88,13 +79,13 @@
       font-weight: normal;
     }
 
-    /* Tekst die uitnodigt om te tikken */
+    /* Tekst om aan te raken */
     #aanraken {
       font-size: clamp(25px, 4vw, 48px);
       font-weight: normal;
     }
 
-    /* De uiteindelijke uitkomst */
+    /* Rol */
     #uitkomst {
       font-size: clamp(38px, 6vw, 70px);
       font-weight: normal;
@@ -104,7 +95,7 @@
       animation: verschijnen 1.8s ease forwards;
     }
 
-    /* Korte tekst onder de rol */
+    /* Tekst onder de rol */
     #beschrijving {
       font-size: clamp(20px, 3vw, 36px);
       max-width: 850px;
@@ -115,7 +106,7 @@
       animation: beschrijving 1.8s ease 0.4s forwards;
     }
 
-    /* Gouden waas */
+    /* Gouden magie */
     #magie {
       position: fixed;
       inset: 0;
@@ -135,13 +126,14 @@
       animation: magisch 2.5s ease-in-out forwards;
     }
 
-    /* Zachte gouden rook */
+    /* Gouden rook */
     #rook {
       position: fixed;
       inset: -20%;
       pointer-events: none;
       opacity: 0;
       z-index: 11;
+
       background:
         radial-gradient(
           ellipse at 30% 50%,
@@ -158,6 +150,7 @@
           rgba(120, 90, 35, 0.20),
           transparent 45%
         );
+
       filter: blur(25px);
     }
 
@@ -191,7 +184,7 @@
       }
     }
 
-    /* Gouden magie */
+    /* Gouden gloed */
     @keyframes magisch {
       0% {
         opacity: 0;
@@ -214,7 +207,7 @@
       }
     }
 
-    /* Rook beweegt */
+    /* Rook */
     @keyframes rook {
       0% {
         opacity: 0;
@@ -267,7 +260,6 @@
 
   <script>
 
-    /* De rollen */
     const acties = [
       {
         naam: "👑 DE KONINKLIJKE",
@@ -309,14 +301,11 @@
 
     scherm.addEventListener("click", function () {
 
-      /* Start de magie */
       magie.classList.add("actief");
       rook.classList.add("actief");
 
-      /* Laat de begintekst verdwijnen */
       scherm.style.opacity = "0";
 
-      /* Wacht tot de onthulling begint */
       setTimeout(function () {
 
         const willekeurig =
@@ -330,14 +319,13 @@
           willekeurig.tekst +
           '</div>';
 
-        /* Laat de onthulling verschijnen */
         scherm.style.opacity = "1";
 
       }, 1700);
 
     });
 
-    /* Service Worker voor offline gebruik */
+    /* Service Worker */
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("service-worker.js");
     }

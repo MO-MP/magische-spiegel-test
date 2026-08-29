@@ -614,7 +614,7 @@
         },
 
         fr: {
-          naam: "👑 LE ROYAL",
+          naam: "👑 LE ROYAL / LA ROYALE",
           tekst:
             "Tu as quelque chose de royal. Ou tu fais simplement semblant."
         },
@@ -632,7 +632,7 @@
         },
 
         fr: {
-          naam: "🦹 LE MÉCHANT",
+          naam: "🦹 LE MÉCHANT / LA MÉCHANTE",
           tekst:
             "Tes intentions sont excellentes. C'est justement ce qui est suspect."
         }
@@ -649,7 +649,7 @@
         fr: {
           naam: "🎭 LE DESTIN",
           tekst:
-            "Certaines choses sont écrites. Apparemment, celle-ci en faisait partie."
+            "Certaines choses sont écrites d'avance. Apparemment, celle-ci en faisait partie."
         }
       },
 
@@ -662,7 +662,7 @@
         },
 
         fr: {
-          naam: "⭐ L'ÉLU(E)",
+          naam: "⭐ L'ÉLU / L'ÉLUE",
           tekst:
             "Le destin t'a choisi. Espérons qu'il sait ce qu'il fait."
         }
@@ -677,7 +677,7 @@
         },
 
         fr: {
-          naam: "🧙 LE MAGICIEN",
+          naam: "🧙 LE MAGICIEN / LA MAGICIENNE",
           tekst:
             "Tu possèdes de grands pouvoirs. Surtout quand personne ne regarde."
         },
@@ -695,7 +695,7 @@
         },
 
         fr: {
-          naam: "🧚 L'ENCHANTÉ(E)",
+          naam: "🧚 L'ENCHANTÉ / L'ENCHANTÉE",
           tekst:
             "Il y a de la magie autour de toi. Ou peut-être est-ce simplement ton charme."
         }
@@ -761,7 +761,7 @@
 
       fr: [
 
-        "Une douce brume recouvre le miroir... Quelque part entre magie et tragédie, ton histoire attend.",
+        "Une douce brume envahit le miroir... Quelque part entre magie et tragédie, ton histoire commence.",
 
         "Le miroir te regarde... Mais que voit-il vraiment en toi ?",
 
@@ -769,9 +769,9 @@
 
         "Tous ceux qui regardent dans le miroir ne voient pas la même histoire...",
 
-        "Le conte commence. Mais le miroir hésite encore... choisiras-tu le bon côté, ou le mauvais ?",
+        "Le conte commence. Mais le miroir hésite encore... choisiras-tu le bon côté ou le mauvais ?",
 
-        "Oups... il y a un peu de magie dans la boisson. Le miroir a du mal à faire la mise au point."
+        "Oups... tu as peut-être un peu trop bu. Le miroir n'arrive même plus à faire la mise au point !"
 
       ]
 
@@ -992,7 +992,7 @@
           '</div>' +
 
           '<div id="ondertitel">' +
-            'Magie de conte de fées ou tragédie' +
+            'Magie ou tragédie' +
           '</div>' +
 
           '<div id="aanraken">' +
@@ -1250,7 +1250,7 @@
               (
                 taal === "nl"
                   ? "De spiegel heeft je outfit eens goed bekeken... Je kunt die kans op de prijs wel vergeten."
-                  : "Le miroir a bien observé ta tenue... Tu peux oublier tes chances de gagner le prix."
+                  : "Le miroir a bien examiné ta tenue... Tu peux oublier tes chances de gagner le prix."
               ) +
               '</div>';
 
@@ -1444,13 +1444,20 @@
 
       setTimeout(function() {
 
-  // Na iedere ronde altijd terug naar Nederlands
-  taal = "nl";
+        /*
+         * Iedere nieuwe ronde begint
+         * standaard weer in het Nederlands.
+         */
+
+        taal = "nl";
+
 
         toonBeginScherm();
 
+
         scherm.style.opacity =
           "1";
+
 
         bezig =
           false;
@@ -1508,6 +1515,10 @@
         scherm.style.opacity =
           "1";
 
+
+        /*
+         * De afsluiting blijft 8 seconden staan.
+         */
 
         setTimeout(function() {
 
@@ -1590,8 +1601,16 @@
           true;
 
 
+        /*
+         * Eerst een intro.
+         */
+
         toonIntro();
 
+
+        /*
+         * Intro blijft 8 seconden.
+         */
 
         setTimeout(function() {
 
@@ -1623,6 +1642,10 @@
             "0";
 
 
+          /*
+           * Daarna komt de rol.
+           */
+
           setTimeout(function() {
 
             const willekeurig =
@@ -1641,6 +1664,10 @@
             scherm.innerHTML =
               "";
 
+
+            /*
+             * Afbeelding als die bestaat.
+             */
 
             if (
               willekeurig.afbeelding
@@ -1669,6 +1696,10 @@
             }
 
 
+            /*
+             * Rolnaam.
+             */
+
             const uitkomst =
               document.createElement("div");
 
@@ -1685,6 +1716,10 @@
               uitkomst
             );
 
+
+            /*
+             * Beschrijving.
+             */
 
             const beschrijving =
               document.createElement("div");
@@ -1706,6 +1741,10 @@
             scherm.style.opacity =
               "1";
 
+
+            /*
+             * De rol blijft 8 seconden zichtbaar.
+             */
 
             setTimeout(
               toonAfsluiting,

@@ -1,31 +1,21 @@
 ```javascript
-const CACHE_NAME = "magische-spiegel-test-v10";
+const CACHE_NAME = "magische-spiegel-test-v11";
 
 const BESTANDEN = [
   "./",
   "./index.html",
-
   "./spiegel.png",
-
-  "./koninklijke.png",
-  "./magier.png",
-  "./ruiter-uit-de-mist.png"
+  "./koninklijke.png"
 ];
 
 
-/*
- * INSTALLATIE
- *
- * Alle bestanden worden lokaal opgeslagen
- * zodat de spiegel ook offline kan werken.
- */
+/* Installeren */
 
 self.addEventListener("install", function(event) {
 
   event.waitUntil(
 
-    caches
-      .open(CACHE_NAME)
+    caches.open(CACHE_NAME)
       .then(function(cache) {
 
         return cache.addAll(BESTANDEN);
@@ -39,11 +29,7 @@ self.addEventListener("install", function(event) {
 });
 
 
-/*
- * ACTIVEREN
- *
- * Oude versies van de cache worden verwijderd.
- */
+/* Activeren */
 
 self.addEventListener("activate", function(event) {
 
@@ -77,13 +63,7 @@ self.addEventListener("activate", function(event) {
 });
 
 
-/*
- * BESTANDEN LADEN
- *
- * Eerst proberen we de lokale cache.
- * Als het bestand daar niet staat,
- * wordt het normaal geladen.
- */
+/* Bestanden uit cache gebruiken */
 
 self.addEventListener("fetch", function(event) {
 

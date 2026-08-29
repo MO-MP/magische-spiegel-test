@@ -42,18 +42,16 @@
     }
 
 
-    /* Donkere laag over de spiegel */
+    /* Donkere laag */
 
     #spiegel::before {
       content: "";
-
       position: absolute;
       inset: 0;
 
       background: rgba(0, 0, 0, 0.30);
 
       pointer-events: none;
-
       z-index: 1;
     }
 
@@ -89,7 +87,7 @@
 
 
     /* ==========================================
-       BEGIN SCHERM
+       BEGIN
        ========================================== */
 
     #titel {
@@ -114,6 +112,32 @@
         2.5s
         ease-in-out
         infinite;
+    }
+
+
+    /* ==========================================
+       INTRO
+       ========================================== */
+
+    #intro {
+
+      font-size: clamp(25px, 4vw, 48px);
+
+      line-height: 1.5;
+
+      max-width: 900px;
+
+      padding: 0 30px;
+
+      box-sizing: border-box;
+
+      opacity: 0;
+
+      animation:
+        introVerschijnen
+        2s
+        ease
+        forwards;
     }
 
 
@@ -151,7 +175,8 @@
 
     #uitkomst {
 
-      font-size: clamp(38px, 6vw, 70px);
+      font-size:
+        clamp(38px, 6vw, 70px);
 
       font-weight: normal;
 
@@ -175,7 +200,8 @@
 
     #beschrijving {
 
-      font-size: clamp(20px, 3vw, 36px);
+      font-size:
+        clamp(20px, 3vw, 36px);
 
       max-width: 850px;
 
@@ -205,9 +231,9 @@
       font-size:
         clamp(25px, 4vw, 48px);
 
-      line-height: 1.4;
+      line-height: 1.5;
 
-      max-width: 850px;
+      max-width: 900px;
 
       padding: 0 30px;
 
@@ -256,7 +282,42 @@
         2.5s
         ease-in-out
         forwards;
+    }
 
+
+    /* ==========================================
+       LAATSTE GOUDEN GLOED
+       ========================================== */
+
+    #slotgloed {
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(210, 170, 80, 0.32),
+          rgba(120, 85, 30, 0.20) 40%,
+          rgba(0, 0, 0, 0.90) 85%
+        );
+
+      z-index: 12;
+    }
+
+
+    #slotgloed.actief {
+
+      animation:
+        slotgloed
+        3.5s
+        ease-in-out
+        forwards;
     }
 
 
@@ -307,13 +368,27 @@
         2.5s
         ease-in-out
         forwards;
-
     }
 
 
     /* ==========================================
        ANIMATIES
        ========================================== */
+
+    @keyframes introVerschijnen {
+
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
 
     @keyframes afbeeldingverschijnen {
 
@@ -392,6 +467,8 @@
     }
 
 
+    /* Eerste magie */
+
     @keyframes magisch {
 
       0% {
@@ -417,11 +494,42 @@
     }
 
 
+    /* Laatste gloed */
+
+    @keyframes slotgloed {
+
+      0% {
+        opacity: 0;
+        transform: scale(1);
+      }
+
+      30% {
+        opacity: 0.9;
+        transform: scale(1.03);
+      }
+
+      55% {
+        opacity: 0.65;
+        transform: scale(1.08);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1.18);
+      }
+
+    }
+
+
+    /* Rook */
+
     @keyframes rook {
 
       0% {
         opacity: 0;
-        transform: scale(0.8) rotate(0deg);
+        transform:
+          scale(0.8)
+          rotate(0deg);
       }
 
       30% {
@@ -430,12 +538,16 @@
 
       70% {
         opacity: 0.8;
-        transform: scale(1.1) rotate(4deg);
+        transform:
+          scale(1.1)
+          rotate(4deg);
       }
 
       100% {
         opacity: 0;
-        transform: scale(1.4) rotate(-5deg);
+        transform:
+          scale(1.4)
+          rotate(-5deg);
       }
 
     }
@@ -455,6 +567,8 @@
     <div id="magie"></div>
 
     <div id="rook"></div>
+
+    <div id="slotgloed"></div>
 
 
     <!-- Scherm -->
@@ -483,7 +597,7 @@
 
 
     /* ==========================================
-       DE ROLLEN
+       ROLLEN
        ========================================== */
 
     const acties = [
@@ -564,7 +678,26 @@
 
 
     /* ==========================================
-       AFSLUITBOODSCHAPPEN
+       WILLEKEURIGE INTRO'S
+       ========================================== */
+
+    const intros = [
+
+      "Een zachte mist trekt over het glas... Ergens tussen sprookjesmagie en sprookjestragedie wacht jouw verhaal.",
+
+      "De spiegel kijkt terug... Maar wat ziet hij eigenlijk in jou?",
+
+      "Stil nu... de oude magie wordt wakker.",
+
+      "Niet iedereen die in de spiegel kijkt, krijgt hetzelfde verhaal te zien...",
+
+      "Het sprookje begint. Maar jij bepaalt nog niet hoe het eindigt."
+
+    ];
+
+
+    /* ==========================================
+       WILLEKEURIGE AFSLUITINGEN
        ========================================== */
 
     const afsluitingen = [
@@ -597,10 +730,13 @@
     const rook =
       document.getElementById("rook");
 
+    const slotgloed =
+      document.getElementById("slotgloed");
+
 
     /*
-     * Hiermee voorkomen we dat iemand tijdens
-     * de animatie meerdere keren kan tikken.
+     * Voorkomt meerdere aanrakingen
+     * tijdens één volledige beurt.
      */
 
     let bezig =
@@ -650,14 +786,56 @@
 
 
     /* ==========================================
-       AFSLUITING
+       INTRO TONEN
+       ========================================== */
+
+    function toonIntro() {
+
+
+      const intro =
+        intros[
+          Math.floor(
+            Math.random() *
+            intros.length
+          )
+        ];
+
+
+      scherm.innerHTML = "";
+
+
+      const tekst =
+        document.createElement("div");
+
+
+      tekst.id =
+        "intro";
+
+
+      tekst.textContent =
+        intro;
+
+
+      scherm.appendChild(
+        tekst
+      );
+
+
+      scherm.style.opacity =
+        "1";
+
+    }
+
+
+    /* ==========================================
+       AFSLUITING TONEN
        ========================================== */
 
     function toonAfsluiting() {
 
 
       /*
-       * Kies willekeurig een afsluitboodschap.
+       * Kies willekeurige afsluiting.
        */
 
       const boodschap =
@@ -670,25 +848,34 @@
 
 
       /*
-       * Laat de rol verdwijnen.
+       * Rol langzaam laten verdwijnen.
        */
 
       scherm.style.opacity =
         "0";
 
 
-      /*
-       * Even wachten en daarna
-       * de afsluiting tonen.
-       */
-
       setTimeout(function() {
 
-        scherm.innerHTML =
 
-          '<div id="afsluiting">' +
-            boodschap +
-          '</div>';
+        scherm.innerHTML = "";
+
+
+        const tekst =
+          document.createElement("div");
+
+
+        tekst.id =
+          "afsluiting";
+
+
+        tekst.textContent =
+          boodschap;
+
+
+        scherm.appendChild(
+          tekst
+        );
 
 
         scherm.style.opacity =
@@ -696,29 +883,68 @@
 
 
         /*
-         * Na een paar seconden
-         * terug naar het begin.
+         * De afsluiting blijft
+         * ongeveer 5,5 seconden staan.
          */
 
         setTimeout(function() {
+
+
+          /*
+           * Afsluittekst laten verdwijnen.
+           */
 
           scherm.style.opacity =
             "0";
 
 
+          /*
+           * Daarna de laatste
+           * gouden gloed starten.
+           */
+
           setTimeout(function() {
 
-            toonBeginScherm();
 
-            scherm.style.opacity =
-              "1";
+            slotgloed.classList.remove(
+              "actief"
+            );
 
-            bezig =
-              false;
+
+            void slotgloed.offsetWidth;
+
+
+            slotgloed.classList.add(
+              "actief"
+            );
+
+
+            /*
+             * Na de gloed terug
+             * naar het beginscherm.
+             */
+
+            setTimeout(function() {
+
+
+              toonBeginScherm();
+
+
+              scherm.style.opacity =
+                "1";
+
+
+              bezig =
+                false;
+
+
+            }, 3500);
+
 
           }, 800);
 
-        }, 4000);
+
+        }, 5500);
 
 
       }, 800);
@@ -736,8 +962,8 @@
 
 
         /*
-         * Als de spiegel al bezig is,
-         * negeren we de aanraking.
+         * Tijdens een lopende beurt
+         * wordt aanraken genegeerd.
          */
 
         if (bezig) {
@@ -750,154 +976,178 @@
 
 
         /*
-         * Gouden magie starten.
+         * Intro tonen.
          */
 
-        magie.classList.remove("actief");
-
-        rook.classList.remove("actief");
+        toonIntro();
 
 
         /*
-         * Kleine vertraging zodat de
-         * animatie opnieuw kan beginnen.
-         */
-
-        void magie.offsetWidth;
-        void rook.offsetWidth;
-
-
-        magie.classList.add("actief");
-        rook.classList.add("actief");
-
-
-        /*
-         * Beginbeeld laten verdwijnen.
-         */
-
-        scherm.style.opacity =
-          "0";
-
-
-        /*
-         * Na 1,7 seconde de rol tonen.
+         * Na 3,5 seconden begint
+         * de gouden magie.
          */
 
         setTimeout(function() {
 
 
-          /*
-           * Willekeurige rol kiezen.
-           */
+          magie.classList.remove(
+            "actief"
+          );
 
-          const willekeurig =
-            acties[
-              Math.floor(
-                Math.random() *
-                acties.length
-              )
-            ];
+          rook.classList.remove(
+            "actief"
+          );
 
 
           /*
-           * Scherm leegmaken.
+           * Animaties opnieuw starten.
            */
 
-          scherm.innerHTML =
-            "";
+          void magie.offsetWidth;
+          void rook.offsetWidth;
+
+
+          magie.classList.add(
+            "actief"
+          );
+
+          rook.classList.add(
+            "actief"
+          );
 
 
           /*
-           * Afbeelding tonen als die bestaat.
+           * Intro laten verdwijnen.
            */
 
-          if (willekeurig.afbeelding) {
-
-            const afbeelding =
-              document.createElement("img");
+          scherm.style.opacity =
+            "0";
 
 
-            afbeelding.id =
-              "rol-afbeelding";
+          /*
+           * Na de magie de rol tonen.
+           */
+
+          setTimeout(function() {
 
 
-            afbeelding.src =
-              willekeurig.afbeelding;
+            /*
+             * Willekeurige rol.
+             */
+
+            const willekeurig =
+              acties[
+                Math.floor(
+                  Math.random() *
+                  acties.length
+                )
+              ];
 
 
-            afbeelding.alt =
+            /*
+             * Scherm leegmaken.
+             */
+
+            scherm.innerHTML =
+              "";
+
+
+            /*
+             * Afbeelding als die bestaat.
+             */
+
+            if (willekeurig.afbeelding) {
+
+
+              const afbeelding =
+                document.createElement("img");
+
+
+              afbeelding.id =
+                "rol-afbeelding";
+
+
+              afbeelding.src =
+                willekeurig.afbeelding;
+
+
+              afbeelding.alt =
+                willekeurig.naam;
+
+
+              scherm.appendChild(
+                afbeelding
+              );
+
+            }
+
+
+            /*
+             * Rolnaam.
+             */
+
+            const uitkomst =
+              document.createElement("div");
+
+
+            uitkomst.id =
+              "uitkomst";
+
+
+            uitkomst.textContent =
               willekeurig.naam;
 
 
             scherm.appendChild(
-              afbeelding
+              uitkomst
             );
 
-          }
+
+            /*
+             * Beschrijving.
+             */
+
+            const beschrijving =
+              document.createElement("div");
 
 
-          /*
-           * Rolnaam.
-           */
-
-          const uitkomst =
-            document.createElement("div");
+            beschrijving.id =
+              "beschrijving";
 
 
-          uitkomst.id =
-            "uitkomst";
+            beschrijving.textContent =
+              willekeurig.tekst;
 
 
-          uitkomst.textContent =
-            willekeurig.naam;
+            scherm.appendChild(
+              beschrijving
+            );
 
 
-          scherm.appendChild(
-            uitkomst
-          );
+            /*
+             * Rol zichtbaar.
+             */
+
+            scherm.style.opacity =
+              "1";
 
 
-          /*
-           * Beschrijving.
-           */
+            /*
+             * Rol blijft 10 seconden
+             * volledig zichtbaar.
+             */
 
-          const beschrijving =
-            document.createElement("div");
-
-
-          beschrijving.id =
-            "beschrijving";
-
-
-          beschrijving.textContent =
-            willekeurig.tekst;
+            setTimeout(
+              toonAfsluiting,
+              10000
+            );
 
 
-          scherm.appendChild(
-            beschrijving
-          );
+          }, 1700);
 
 
-          /*
-           * Resultaat zichtbaar maken.
-           */
+        }, 3500);
 
-          scherm.style.opacity =
-            "1";
-
-
-          /*
-           * Na ongeveer 4 seconden
-           * begint de afsluiting.
-           */
-
-          setTimeout(
-            toonAfsluiting,
-            4500
-          );
-
-
-        }, 1700);
 
       }
     );
@@ -915,8 +1165,8 @@
 
     }
 
-  </script>
 
+  </script>
 
 </body>
 </html>

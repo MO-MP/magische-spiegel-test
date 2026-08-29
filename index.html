@@ -1,5 +1,5 @@
-```html
 <!DOCTYPE html>
+
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
@@ -16,6 +16,9 @@
     }
 
     body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: black;
       color: white;
       text-align: center;
@@ -50,21 +53,16 @@
 
       width: 100%;
       height: 100%;
-
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-
       gap: 28px;
       padding: 60px;
       box-sizing: border-box;
 
       transition: opacity 0.8s ease;
-      cursor: pointer;
     }
-
-    /* BEGIN */
 
     #titel {
       font-size: clamp(38px, 6vw, 70px);
@@ -80,169 +78,58 @@
     #aanraken {
       font-size: clamp(25px, 4vw, 48px);
       font-weight: normal;
-
-      animation: zachtGloeien 2.5s ease-in-out infinite;
     }
-
-    /* INTRO */
 
     #intro {
       font-size: clamp(25px, 4vw, 48px);
-      line-height: 1.5;
-
-      max-width: 900px;
-      padding: 0 30px;
+      line-height: 1.4;
+      max-width: 1000px;
+      padding: 20px;
       box-sizing: border-box;
-
-      opacity: 0;
-
-      animation: introVerschijnen 2s ease forwards;
+      animation: verschijnen 1.2s ease forwards;
     }
-
-    /* ROLAFBEELDING */
-
-    #rol-afbeelding {
-      display: block;
-
-      width: auto;
-      height: auto;
-
-      max-width: 70vw;
-      max-height: 45vh;
-
-      object-fit: contain;
-
-      margin: 0 auto 5px auto;
-
-      opacity: 0;
-
-      animation: afbeeldingverschijnen 1.8s ease forwards;
-    }
-
-    /* ROLNAAM */
 
     #uitkomst {
       font-size: clamp(38px, 6vw, 70px);
       font-weight: normal;
-
       max-width: 100%;
-      padding: 10px 20px;
+      padding: 20px;
       box-sizing: border-box;
-
-      animation: verschijnen 1.8s ease forwards;
+      animation: verschijnen 1.2s ease forwards;
     }
-
-    /* BESCHRIJVING */
 
     #beschrijving {
       font-size: clamp(20px, 3vw, 36px);
-
       max-width: 850px;
-
       line-height: 1.4;
-
       padding: 0 20px;
       box-sizing: border-box;
-
       opacity: 0;
-
-      animation: beschrijving 1.8s ease 0.4s forwards;
+      animation: beschrijving 1.2s ease 0.4s forwards;
     }
 
-    /* AFSLUITING */
-
-    #afsluiting {
-      font-size: clamp(25px, 4vw, 48px);
-
-      line-height: 1.5;
-
-      max-width: 900px;
-
-      padding: 0 30px;
-      box-sizing: border-box;
-
-      opacity: 0;
-
-      animation: afsluitingVerschijnen 2s ease forwards;
-    }
-
-    /* GEHEIM */
-
-    #geheim-tekst {
-      font-size: clamp(30px, 5vw, 60px);
-
-      opacity: 0;
-
-      animation: geheimTekst 1.5s ease forwards;
-    }
-
-    /* FLITS-AFBEELDING */
-
-    #geheim-afbeelding {
-      position: fixed;
-
-      left: 50%;
-      top: 50%;
-
-      transform: translate(-50%, -50%);
-
-      max-width: 85vw;
-      max-height: 80vh;
-
+    /* Afbeelding van een rol */
+    #rolAfbeelding {
+      max-width: 70vw;
+      max-height: 45vh;
       object-fit: contain;
-
-      z-index: 20;
-
-      opacity: 0;
+      border-radius: 8px;
+      animation: afbeeldingVerschijnt 1.2s ease forwards;
     }
 
-    #geheim-afbeelding.flits {
-      animation: geheimFlits 0.7s ease forwards;
+    /* Tijdelijke plek wanneer een afbeelding nog ontbreekt */
+    #afbeeldingFallback {
+      display: none;
+      font-size: clamp(24px, 4vw, 48px);
+      padding: 30px;
+      opacity: 0.8;
     }
 
-    /* EZEL */
-
-    #ezel-afbeelding {
-      display: block;
-
-      width: auto;
-      height: auto;
-
-      max-width: 75vw;
-      max-height: 55vh;
-
-      object-fit: contain;
-
-      margin: 0 auto 10px auto;
-
-      opacity: 0;
-
-      animation: ezelVerschijnen 1.5s ease forwards;
-    }
-
-    #ezel-tekst {
-      font-size: clamp(25px, 4vw, 48px);
-
-      line-height: 1.4;
-
-      opacity: 0;
-
-      animation:
-        afsluitingVerschijnen
-        1.5s
-        ease
-        0.5s
-        forwards;
-    }
-
-    /* MAGIE */
-
+    /* Gouden magie */
     #magie {
       position: fixed;
       inset: 0;
-
       pointer-events: none;
-
       opacity: 0;
 
       background:
@@ -260,33 +147,25 @@
       animation: magisch 2.5s ease-in-out forwards;
     }
 
-    /* ROOK */
-
+    /* Gouden rook */
     #rook {
       position: fixed;
-
       inset: -20%;
-
       pointer-events: none;
-
       opacity: 0;
-
       z-index: 11;
 
       background:
-
         radial-gradient(
           ellipse at 30% 50%,
           rgba(170, 125, 45, 0.22),
           transparent 45%
         ),
-
         radial-gradient(
           ellipse at 70% 40%,
           rgba(210, 170, 80, 0.18),
           transparent 40%
         ),
-
         radial-gradient(
           ellipse at 50% 80%,
           rgba(120, 90, 35, 0.20),
@@ -300,55 +179,21 @@
       animation: rook 2.5s ease-in-out forwards;
     }
 
-    /* SLOTGLOED */
-
-    #slotgloed {
+    /* Afbeelding voor afsluitende verrassingen */
+    #afsluitingAfbeelding {
+      display: none;
       position: fixed;
       inset: 0;
-
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      z-index: 20;
       pointer-events: none;
-
-      opacity: 0;
-
-      background:
-        radial-gradient(
-          circle at center,
-          rgba(210, 170, 80, 0.32),
-          rgba(120, 85, 30, 0.20) 40%,
-          rgba(0, 0, 0, 0.90) 85%
-        );
-
-      z-index: 12;
     }
 
-    #slotgloed.actief {
-      animation: slotgloed 3.5s ease-in-out forwards;
-    }
-
-    /* ANIMATIES */
-
-    @keyframes introVerschijnen {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes afbeeldingverschijnen {
-      from {
-        opacity: 0;
-        transform: scale(0.85);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    #afsluitingAfbeelding.flik {
+      display: block;
+      animation: flits 0.8s ease forwards;
     }
 
     @keyframes verschijnen {
@@ -375,19 +220,7 @@
       }
     }
 
-    @keyframes afsluitingVerschijnen {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes geheimTekst {
+    @keyframes afbeeldingVerschijnt {
       from {
         opacity: 0;
         transform: scale(0.9);
@@ -396,62 +229,6 @@
       to {
         opacity: 1;
         transform: scale(1);
-      }
-    }
-
-    @keyframes geheimFlits {
-      0% {
-        opacity: 0;
-
-        transform:
-          translate(-50%, -50%)
-          scale(0.8);
-      }
-
-      20% {
-        opacity: 1;
-
-        transform:
-          translate(-50%, -50%)
-          scale(1);
-      }
-
-      75% {
-        opacity: 1;
-      }
-
-      100% {
-        opacity: 0;
-
-        transform:
-          translate(-50%, -50%)
-          scale(1.05);
-      }
-    }
-
-    @keyframes ezelVerschijnen {
-      from {
-        opacity: 0;
-        transform: scale(0.7);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes zachtGloeien {
-      0% {
-        opacity: 0.65;
-      }
-
-      50% {
-        opacity: 1;
-      }
-
-      100% {
-        opacity: 0.65;
       }
     }
 
@@ -477,35 +254,10 @@
       }
     }
 
-    @keyframes slotgloed {
-      0% {
-        opacity: 0;
-        transform: scale(1);
-      }
-
-      30% {
-        opacity: 0.9;
-        transform: scale(1.03);
-      }
-
-      55% {
-        opacity: 0.65;
-        transform: scale(1.08);
-      }
-
-      100% {
-        opacity: 0;
-        transform: scale(1.18);
-      }
-    }
-
     @keyframes rook {
       0% {
         opacity: 0;
-
-        transform:
-          scale(0.8)
-          rotate(0deg);
+        transform: scale(0.8) rotate(0deg);
       }
 
       30% {
@@ -514,125 +266,74 @@
 
       70% {
         opacity: 0.8;
-
-        transform:
-          scale(1.1)
-          rotate(4deg);
+        transform: scale(1.1) rotate(4deg);
       }
 
       100% {
         opacity: 0;
-
-        transform:
-          scale(1.4)
-          rotate(-5deg);
+        transform: scale(1.4) rotate(-5deg);
       }
     }
 
-  </style>
-</head>
+    @keyframes flits {
+      0% {
+        opacity: 0;
+        transform: scale(0.85);
+      }
 
+      15% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      70% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1.05);
+      }
+    }
+  </style>
+
+</head>
 
 <body>
 
   <div id="spiegel">
 
-    <div id="magie"></div>
+```
+<div id="magie"></div>
+<div id="rook"></div>
 
-    <div id="rook"></div>
+<img id="afsluitingAfbeelding" src="" alt="">
 
-    <div id="slotgloed"></div>
+<div id="scherm">
 
-    <div id="scherm">
+  <div id="titel">✨ MAGISCHE SPIEGEL ✨</div>
 
-      <div id="titel">
-        ✨ MAGISCHE SPIEGEL ✨
-      </div>
+  <div id="ondertitel">
+    Sprookjesmagie of Sprookjestragedie
+  </div>
 
-      <div id="ondertitel">
-        Sprookjesmagie of Sprookjestragedie
-      </div>
+  <div id="aanraken">
+    RAAK HET SCHERM AAN
+  </div>
 
-      <div id="aanraken">
-        RAAK HET SCHERM AAN
-      </div>
-
-    </div>
+</div>
+```
 
   </div>
 
-
   <script>
 
-    /* ==========================================
-       ROLLEN
-       ========================================== */
-
-    const acties = [
-
-      {
-        naam: "👑 DE KONINKLIJKE",
-        tekst:
-          "Je hebt iets koninklijks. Of je doet in ieder geval alsof.",
-        afbeelding:
-          "koninklijke.png"
-      },
-
-      {
-        naam: "🦹 DE SCHURK",
-        tekst:
-          "Je bedoelingen zijn uitstekend. Dat maakt het alleen maar verdacht."
-      },
-
-      {
-        naam: "🎭 HET NOODLOT",
-        tekst:
-          "Sommige dingen zijn voorbestemd. Dit was er blijkbaar één van."
-      },
-
-      {
-        naam: "⭐ DE UITVERKORENE",
-        tekst:
-          "Het lot heeft jou gekozen. Hopelijk weet het lot wat het doet."
-      },
-
-      {
-        naam: "🧙 DE MAGIËR",
-        tekst:
-          "Je bezit grote krachten. Vooral als niemand kijkt.",
-        afbeelding:
-          "magier.png"
-      },
-
-      {
-        naam: "🧚 DE BETOVERDE",
-        tekst:
-          "Er hangt magie om je heen. Of misschien is dat gewoon je uitstraling."
-      },
-
-      {
-        naam: "🌙 DE RUITER UIT DE MIST",
-        tekst:
-          "Je verschijnt wanneer niemand je verwacht... zelfs jij niet.",
-        afbeelding:
-          "ruiter-uit-de-mist.png"
-      },
-
-      {
-        naam: "🐴 DE VROLIJKE RUITER",
-        tekst:
-          "Je komt te paard. Waarom? Dat weet niemand."
-      }
-
-    ];
-
-
-    /* ==========================================
+    /* =========================
        INTRO'S
-       ========================================== */
+    ========================= */
 
     const intros = [
-
       "Een zachte mist trekt over het glas... Ergens tussen sprookjesmagie en sprookjestragedie wacht jouw verhaal.",
 
       "De spiegel kijkt terug... Maar wat ziet hij eigenlijk in jou?",
@@ -641,742 +342,454 @@
 
       "Niet iedereen die in de spiegel kijkt, krijgt hetzelfde verhaal te zien...",
 
-      "Het sprookje begint. Maar jij bepaalt nog niet hoe het eindigt."
-
+      "Iedereen heeft twee kanten... Welke zal de spiegel vandaag in jou ontdekken?"
     ];
 
 
-    /* ==========================================
-       AFSLUITINGEN
-       ========================================== */
+    /* =========================
+       ROLLEN
+    ========================= */
 
-    const afsluitingen = [
+    const acties = [
 
       {
-        tekst:
-          "De spiegel heeft gesproken... maar sommige geheimen blijven verborgen.",
-
-        actie:
-          "geheim1"
+        naam: "👑 DE KONINKLIJKE",
+        tekst: "Je hebt iets koninklijks. Of je doet in ieder geval alsof.",
+        afbeelding: "koninklijke.png"
       },
 
       {
-        tekst:
-          "De magie verdwijnt... maar de spiegel is nog niet uitgesproken.",
-
-        actie:
-          "geheim2"
+        naam: "🦹 DE SCHURK",
+        tekst: "Je bedoelingen zijn uitstekend. Dat maakt het alleen maar verdacht.",
+        afbeelding: "schurk.png"
       },
 
       {
-        tekst:
-          "Was dit werkelijk jouw lot? Misschien moet je nog eens kijken...",
-
-        actie:
-          "ezel"
+        naam: "🎭 HET NOODLOT",
+        tekst: "Sommige dingen zijn voorbestemd. Dit was er blijkbaar één van.",
+        afbeelding: "noodlot.png"
       },
 
       {
-        tekst:
-          "De spiegel zwijgt weer... maar hij heeft jou gezien."
+        naam: "⭐ DE UITVERKORENE",
+        tekst: "Het lot heeft jou gekozen. Hopelijk weet het lot wat het doet.",
+        afbeelding: "uitverkorene.png"
       },
 
       {
-        tekst:
-          "Een verhaal eindigt hier... of begint het pas?"
+        naam: "🧙 DE MAGIËR",
+        tekst: "Je bezit grote krachten. Vooral als niemand kijkt.",
+        afbeelding: "magier.png"
       },
 
       {
-        tekst:
-          "Jouw geheim is zoekgeraakt. We zoeken nog..."
+        naam: "🧚 DE BETOVERDE",
+        tekst: "Er hangt magie om je heen. Of misschien is dat gewoon je uitstraling.",
+        afbeelding: "betoverde.png"
+      },
+
+      {
+        naam: "🌙 DE RUITER UIT DE MIST",
+        tekst: "Je verschijnt wanneer niemand je verwacht... zelfs jij niet.",
+        afbeelding: "ruiter-uit-de-mist.png"
+      },
+
+      {
+        naam: "🐴 DE VROLIJKE RUITER",
+        tekst: "Je komt te paard. Waarom? Dat weet niemand.",
+        afbeelding: "vrolijke-ruiter.png"
       }
 
     ];
 
 
-    /* ==========================================
+    /* =========================
+       AFSLUITINGEN
+    ========================= */
+
+    const afsluitingen = [
+
+      {
+        tekst: "De spiegel heeft gesproken... maar sommige geheimen blijven verborgen.",
+        actie: "geheim"
+      },
+
+      {
+        tekst: "De spiegel heeft je outfit eens goed bekeken... Je kunt die kans op de prijs wel vergeten.",
+        actie: "geen"
+      },
+
+      {
+        tekst: "Was dit werkelijk jouw lot? Misschien moet je nog eens kijken...",
+        actie: "ezel"
+      },
+
+      {
+        tekst: "De spiegel zwijgt weer... maar hij heeft jou gezien.",
+        actie: "oog"
+      },
+
+      {
+        tekst: "Een verhaal eindigt hier... of begint het pas?",
+        actie: "geen"
+      }
+
+    ];
+
+
+    /* =========================
        ELEMENTEN
-       ========================================== */
+    ========================= */
 
-    const scherm =
-      document.getElementById("scherm");
-
-    const magie =
-      document.getElementById("magie");
-
-    const rook =
-      document.getElementById("rook");
-
-    const slotgloed =
-      document.getElementById("slotgloed");
+    const scherm = document.getElementById("scherm");
+    const magie = document.getElementById("magie");
+    const rook = document.getElementById("rook");
+    const afsluitingAfbeelding =
+      document.getElementById("afsluitingAfbeelding");
 
 
     let bezig = false;
 
 
-    /* ==========================================
-       AFBEELDINGEN VOORAF LADEN
-       ========================================== */
+    /* =========================
+       STARTSCHERM
+    ========================= */
 
-    acties.forEach(function(actie) {
+    function startscherm() {
 
-      if (actie.afbeelding) {
+      scherm.innerHTML = `
+        <div id="titel">✨ MAGISCHE SPIEGEL ✨</div>
 
-        const img =
-          new Image();
+        <div id="ondertitel">
+          Sprookjesmagie of Sprookjestragedie
+        </div>
 
-        img.src =
-          actie.afbeelding;
-      }
+        <div id="aanraken">
+          RAAK HET SCHERM AAN
+        </div>
+      `;
 
-    });
+      scherm.style.opacity = "1";
 
+      afsluitingAfbeelding.classList.remove("flik");
+      afsluitingAfbeelding.style.display = "none";
+      afsluitingAfbeelding.src = "";
 
-    const ezelVoorladen =
-      new Image();
-
-    ezelVoorladen.src =
-      "ezel.png";
-
-
-    const geheimVoorladen =
-      new Image();
-
-    geheimVoorladen.src =
-      "achter-de-spiegel.png";
-
-
-    /* ==========================================
-       BEGIN
-       ========================================== */
-
-    function toonBeginScherm() {
-
-      scherm.innerHTML =
-
-        '<div id="titel">' +
-          '✨ MAGISCHE SPIEGEL ✨' +
-        '</div>' +
-
-        '<div id="ondertitel">' +
-          'Sprookjesmagie of Sprookjestragedie' +
-        '</div>' +
-
-        '<div id="aanraken">' +
-          'RAAK HET SCHERM AAN' +
-        '</div>';
-
+      bezig = false;
     }
 
 
-    /* ==========================================
-       INTRO
-       ========================================== */
+    /* =========================
+       HOOFDPROCES
+    ========================= */
 
-    function toonIntro() {
+    scherm.addEventListener("click", function () {
+
+      if (bezig) return;
+
+      bezig = true;
+
+      magie.classList.remove("actief");
+      rook.classList.remove("actief");
+
+      /* Willekeurige intro */
 
       const intro =
-        intros[
-          Math.floor(
-            Math.random() *
-            intros.length
-          )
-        ];
+        intros[Math.floor(Math.random() * intros.length)];
+
+      scherm.style.opacity = "0";
 
 
-      scherm.innerHTML = "";
+      setTimeout(function () {
 
+        scherm.innerHTML = `
+          <div id="intro">${intro}</div>
+        `;
 
-      const tekst =
-        document.createElement("div");
-
-      tekst.id =
-        "intro";
-
-      tekst.textContent =
-        intro;
-
-      scherm.appendChild(
-        tekst
-      );
-
-      scherm.style.opacity =
-        "1";
-
-    }
-
-
-    /* ==========================================
-       GEHEIM 1
-       ========================================== */
-
-    function toonGeheim1() {
-
-      scherm.style.opacity =
-        "0";
-
-
-      setTimeout(function() {
-
-        scherm.innerHTML = "";
-
-
-        const tekst =
-          document.createElement("div");
-
-        tekst.id =
-          "geheim-tekst";
-
-        tekst.textContent =
-          "GEHEIM";
-
-        scherm.appendChild(
-          tekst
-        );
-
-
-        setTimeout(function() {
-
-          scherm.style.opacity =
-            "0";
-
-
-          setTimeout(function() {
-
-            scherm.innerHTML =
-              '<div id="afsluiting">' +
-              'Oeps. Dat mocht je niet zien.' +
-              '</div>';
-
-
-            scherm.style.opacity =
-              "1";
-
-
-            setTimeout(function() {
-
-              scherm.style.opacity =
-                "0";
-
-
-              setTimeout(
-                toonLaatsteGloed,
-                800
-              );
-
-            }, 3500);
-
-
-          }, 700);
-
-
-        }, 1800);
-
-
-      }, 800);
-
-    }
-
-
-    /* ==========================================
-       GEHEIM 2
-       ========================================== */
-
-    function toonGeheim2() {
-
-      scherm.style.opacity =
-        "0";
-
-
-      setTimeout(function() {
-
-        scherm.innerHTML = "";
-
-
-        const tekst =
-          document.createElement("div");
-
-        tekst.id =
-          "geheim-tekst";
-
-        tekst.textContent =
-          "Hij weet meer...";
-
-        scherm.appendChild(
-          tekst
-        );
-
-
-        scherm.style.opacity =
-          "1";
+        scherm.style.opacity = "1";
 
 
         /*
-         * De tekst blijft 2,5 seconden staan.
-         */
+          INTRO BLIJFT LANGER STAAN
+          Daarna begint de gouden magie.
+        */
 
-        setTimeout(function() {
+        setTimeout(function () {
 
-          scherm.style.opacity =
-            "0";
-
-
-          /*
-           * Korte stilte.
-           */
-
-          setTimeout(function() {
-
-            const afbeelding =
-              document.createElement("img");
-
-
-            afbeelding.id =
-              "geheim-afbeelding";
-
-
-            afbeelding.src =
-              "achter-de-spiegel.png";
-
-
-            afbeelding.alt =
-              "Een onverwachte blik achter de spiegel";
-
-
-            document.body.appendChild(
-              afbeelding
-            );
-
-
-            afbeelding.classList.add(
-              "flits"
-            );
-
-
-            /*
-             * De afbeelding verschijnt
-             * maar heel kort.
-             */
-
-            setTimeout(function() {
-
-              afbeelding.remove();
-
-              toonLaatsteGloed();
-
-            }, 800);
-
-
-          }, 300);
-
-        }, 2500);
-
-
-      }, 800);
-
-    }
-
-
-    /* ==========================================
-       EZEL
-       ========================================== */
-
-    function toonEzel() {
-
-      scherm.style.opacity =
-        "0";
-
-
-      setTimeout(function() {
-
-        scherm.innerHTML = "";
-
-
-        const afbeelding =
-          document.createElement("img");
-
-
-        afbeelding.id =
-          "ezel-afbeelding";
-
-
-        afbeelding.src =
-          "ezel.png";
-
-
-        afbeelding.alt =
-          "Een onverwachte ezel";
-
-
-        scherm.appendChild(
-          afbeelding
-        );
-
-
-        const tekst =
-          document.createElement("div");
-
-
-        tekst.id =
-          "ezel-tekst";
-
-
-        tekst.textContent =
-          "O... Dit had de spiegel niet verwacht.";
-
-
-        scherm.appendChild(
-          tekst
-        );
-
-
-        scherm.style.opacity =
-          "1";
-
-
-        /*
-         * Ezel blijft 5 seconden staan.
-         */
-
-        setTimeout(function() {
-
-          scherm.style.opacity =
-            "0";
-
-
-          setTimeout(function() {
-
-            toonLaatsteGloed();
-
-          }, 800);
-
-        }, 5000);
-
-
-      }, 800);
-
-    }
-
-
-    /* ==========================================
-       LAATSTE GOUDEN GLOED
-       ========================================== */
-
-    function toonLaatsteGloed() {
-
-      slotgloed.classList.remove(
-        "actief"
-      );
-
-
-      void slotgloed.offsetWidth;
-
-
-      slotgloed.classList.add(
-        "actief"
-      );
-
-
-      setTimeout(function() {
-
-        toonBeginScherm();
-
-        scherm.style.opacity =
-          "1";
-
-        bezig =
-          false;
-
-      }, 3500);
-
-    }
-
-
-    /* ==========================================
-       AFSLUITING
-       ========================================== */
-
-    function toonAfsluiting() {
-
-      const gekozen =
-        afsluitingen[
-          Math.floor(
-            Math.random() *
-            afsluitingen.length
-          )
-        ];
-
-
-      scherm.style.opacity =
-        "0";
-
-
-      setTimeout(function() {
-
-        scherm.innerHTML = "";
-
-
-        const tekst =
-          document.createElement("div");
-
-
-        tekst.id =
-          "afsluiting";
-
-
-        tekst.textContent =
-          gekozen.tekst;
-
-
-        scherm.appendChild(
-          tekst
-        );
-
-
-        scherm.style.opacity =
-          "1";
-
-
-        /*
-         * Afsluitende tekst blijft 6 seconden staan.
-         */
-
-        setTimeout(function() {
-
-
-          if (
-            gekozen.actie ===
-            "geheim1"
-          ) {
-
-            toonGeheim1();
-
-            return;
-          }
-
-
-          if (
-            gekozen.actie ===
-            "geheim2"
-          ) {
-
-            toonGeheim2();
-
-            return;
-          }
-
-
-          if (
-            gekozen.actie ===
-            "ezel"
-          ) {
-
-            toonEzel();
-
-            return;
-          }
-
-
-          scherm.style.opacity =
-            "0";
-
-
-          setTimeout(
-            toonLaatsteGloed,
-            800
-          );
-
-
-        }, 6000);
-
-
-      }, 800);
-
-    }
-
-
-    /* ==========================================
-       AANRAKEN
-       ========================================== */
-
-    scherm.addEventListener(
-      "click",
-      function() {
-
-        if (bezig) {
-          return;
-        }
-
-
-        bezig =
-          true;
-
-
-        /*
-         * Eerst een intro.
-         */
-
-        toonIntro();
-
-
-        /*
-         * Intro blijft 6 seconden.
-         */
-
-        setTimeout(function() {
-
-
-          magie.classList.remove(
-            "actief"
-          );
-
-          rook.classList.remove(
-            "actief"
-          );
-
+          magie.classList.remove("actief");
+          rook.classList.remove("actief");
 
           void magie.offsetWidth;
           void rook.offsetWidth;
 
+          magie.classList.add("actief");
+          rook.classList.add("actief");
 
-          magie.classList.add(
-            "actief"
-          );
-
-          rook.classList.add(
-            "actief"
-          );
-
-
-          scherm.style.opacity =
-            "0";
+          scherm.style.opacity = "0";
 
 
           /*
-           * Daarna komt de rol.
-           */
+            Tijdens de gouden gloed
+            wordt de rol gekozen.
+          */
 
-          setTimeout(function() {
-
+          setTimeout(function () {
 
             const willekeurig =
-              acties[
-                Math.floor(
-                  Math.random() *
-                  acties.length
-                )
-              ];
+              acties[Math.floor(Math.random() * acties.length)];
 
 
-            scherm.innerHTML =
-              "";
+            scherm.innerHTML = `
 
+              <img
+                id="rolAfbeelding"
+                src="${willekeurig.afbeelding}"
+                alt="${willekeurig.naam}"
+                onerror="
+                  this.style.display='none';
+                  document.getElementById('afbeeldingFallback').style.display='block';
+                "
+              >
 
-            /*
-             * Afbeelding als die bestaat.
-             */
+              <div id="afbeeldingFallback">
+                ${willekeurig.naam}
+              </div>
 
-            if (
-              willekeurig.afbeelding
-            ) {
+              <div id="uitkomst">
+                ${willekeurig.naam}
+              </div>
 
-              const afbeelding =
-                document.createElement("img");
+              <div id="beschrijving">
+                ${willekeurig.tekst}
+              </div>
 
+            `;
 
-              afbeelding.id =
-                "rol-afbeelding";
-
-
-              afbeelding.src =
-                willekeurig.afbeelding;
-
-
-              afbeelding.alt =
-                willekeurig.naam;
-
-
-              scherm.appendChild(
-                afbeelding
-              );
-
-            }
+            scherm.style.opacity = "1";
 
 
             /*
-             * Rolnaam.
-             */
+              ROL BLIJFT KORTER STAAN
+            */
 
-            const uitkomst =
-              document.createElement("div");
+            setTimeout(function () {
 
+              toonAfsluiting();
 
-            uitkomst.id =
-              "uitkomst";
-
-
-            uitkomst.textContent =
-              willekeurig.naam;
+            }, 5000);
 
 
-            scherm.appendChild(
-              uitkomst
+          }, 1200);
+
+        }, 500);
+
+
+      }, 800);
+
+    });
+
+
+    /* =========================
+       AFSLUITING
+    ========================= */
+
+    function toonAfsluiting() {
+
+      const afsluiting =
+        afsluitingen[
+          Math.floor(Math.random() * afsluitingen.length)
+        ];
+
+
+      scherm.style.opacity = "0";
+
+
+      setTimeout(function () {
+
+        scherm.innerHTML = `
+          <div id="beschrijving"
+               style="opacity:1; animation:none;">
+            ${afsluiting.tekst}
+          </div>
+        `;
+
+        scherm.style.opacity = "1";
+
+
+        /*
+          Afsluiting blijft LANGER staan.
+        */
+
+        setTimeout(function () {
+
+          voerAfsluitActieUit(afsluiting.actie);
+
+        }, 6500);
+
+
+      }, 800);
+
+    }
+
+
+    /* =========================
+       AFSLUITACTIES
+    ========================= */
+
+    function voerAfsluitActieUit(actie) {
+
+      if (actie === "geheim") {
+
+        scherm.style.opacity = "0";
+
+        setTimeout(function () {
+
+          scherm.innerHTML = `
+            <div id="uitkomst">
+              GEHEIM
+            </div>
+          `;
+
+          scherm.style.opacity = "1";
+
+
+          setTimeout(function () {
+
+            toonAfbeelding(
+              "prins-heks.png",
+              "Oeps... dit stond niet in het sprookjesboek."
             );
 
+          }, 1800);
 
-            /*
-             * Beschrijving.
-             */
-
-            const beschrijving =
-              document.createElement("div");
-
-
-            beschrijving.id =
-              "beschrijving";
-
-
-            beschrijving.textContent =
-              willekeurig.tekst;
-
-
-            scherm.appendChild(
-              beschrijving
-            );
-
-
-            scherm.style.opacity =
-              "1";
-
-
-            /*
-             * De rol blijft 7 seconden zichtbaar.
-             */
-
-            setTimeout(
-              toonAfsluiting,
-              7000
-            );
-
-
-          }, 1700);
-
-
-        }, 6000);
+        }, 700);
 
       }
-    );
+
+      else if (actie === "ezel") {
+
+        toonAfbeelding(
+          "ezel.png",
+          ""
+        );
+
+      }
+
+      else if (actie === "oog") {
+
+        toonAfbeelding(
+          "oog.png",
+          ""
+        );
+
+      }
+
+      else {
+
+        goudenAfsluiting();
+
+      }
+
+    }
 
 
-    /* ==========================================
+    /* =========================
+       AFBEELDING TONEN
+    ========================= */
+
+    function toonAfbeelding(bestand, tekst) {
+
+      afsluitingAfbeelding.src = bestand;
+      afsluitingAfbeelding.style.display = "block";
+
+      void afsluitingAfbeelding.offsetWidth;
+
+      afsluitingAfbeelding.classList.add("flik");
+
+
+      setTimeout(function () {
+
+        afsluitingAfbeelding.classList.remove("flik");
+        afsluitingAfbeelding.style.display = "none";
+
+
+        if (tekst) {
+
+          scherm.style.opacity = "0";
+
+          setTimeout(function () {
+
+            scherm.innerHTML = `
+              <div id="beschrijving"
+                   style="opacity:1; animation:none;">
+                ${tekst}
+              </div>
+            `;
+
+            scherm.style.opacity = "1";
+
+
+            setTimeout(function () {
+
+              goudenAfsluiting();
+
+            }, 3500);
+
+          }, 500);
+
+        }
+
+        else {
+
+          goudenAfsluiting();
+
+        }
+
+      }, 800);
+
+    }
+
+
+    /* =========================
+       TERUG NAAR HET BEGIN
+    ========================= */
+
+    function goudenAfsluiting() {
+
+      magie.classList.remove("actief");
+      rook.classList.remove("actief");
+
+      void magie.offsetWidth;
+      void rook.offsetWidth;
+
+      magie.classList.add("actief");
+      rook.classList.add("actief");
+
+
+      setTimeout(function () {
+
+        startscherm();
+
+      }, 2500);
+
+    }
+
+
+    /* =========================
        SERVICE WORKER
-       ========================================== */
+    ========================= */
 
     if ("serviceWorker" in navigator) {
 
-      navigator.serviceWorker.register(
-        "service-worker.js"
-      );
+      navigator.serviceWorker.register("service-worker.js")
+        .catch(function (error) {
+
+          console.log(
+            "Service Worker kon niet worden geladen:",
+            error
+          );
+
+        });
 
     }
 
@@ -1384,4 +797,3 @@
 
 </body>
 </html>
-```

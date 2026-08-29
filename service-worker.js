@@ -1,5 +1,5 @@
 ```javascript
-const CACHE_NAME = "magische-spiegel-test-v14";
+const CACHE_NAME = "magische-spiegel-test-v15";
 
 const BESTANDEN = [
   "./",
@@ -11,13 +11,12 @@ const BESTANDEN = [
   "./magier.png",
   "./ruiter-uit-de-mist.png",
 
-  "./ezel.png"
+  "./ezel.png",
+  "./achter-de-spiegel.png"
 ];
 
 
-/*
- * INSTALLEREN
- */
+/* INSTALLEREN */
 
 self.addEventListener(
   "install",
@@ -43,9 +42,7 @@ self.addEventListener(
 );
 
 
-/*
- * ACTIVEREN
- */
+/* ACTIVEREN */
 
 self.addEventListener(
   "activate",
@@ -85,9 +82,7 @@ self.addEventListener(
 );
 
 
-/*
- * BESTANDEN LADEN
- */
+/* BESTANDEN LADEN */
 
 self.addEventListener(
   "fetch",

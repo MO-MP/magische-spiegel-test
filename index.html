@@ -24,10 +24,17 @@
       -webkit-user-select: none;
     }
 
+
+    /* ==========================================
+       DE SPIEGEL
+       ========================================== */
+
     #spiegel {
       position: relative;
+
       width: 100%;
       height: 100%;
+
       overflow: hidden;
 
       background-image: url("spiegel.png");
@@ -36,26 +43,37 @@
       background-repeat: no-repeat;
     }
 
-    /* Donkere laag */
+
+    /* Donkere laag over de spiegel */
+
     #spiegel::before {
       content: "";
+
       position: absolute;
       inset: 0;
 
       background: rgba(0, 0, 0, 0.30);
 
       pointer-events: none;
+
       z-index: 1;
     }
 
+
+    /* ==========================================
+       SCHERM
+       ========================================== */
+
     #scherm {
       position: relative;
+
       z-index: 5;
 
       width: 100%;
       height: 100%;
 
       display: flex;
+
       flex-direction: column;
 
       align-items: center;
@@ -64,6 +82,7 @@
       gap: 28px;
 
       padding: 60px;
+
       box-sizing: border-box;
 
       transition: opacity 0.5s ease;
@@ -71,48 +90,93 @@
       cursor: pointer;
     }
 
+
+    /* ==========================================
+       BEGINTEKST
+       ========================================== */
+
     #titel {
       font-size: clamp(38px, 6vw, 70px);
+
       font-weight: normal;
+
+      white-space: nowrap;
     }
+
 
     #ondertitel {
       font-size: clamp(20px, 3vw, 38px);
+
+      font-weight: normal;
     }
+
 
     #aanraken {
       font-size: clamp(25px, 4vw, 48px);
+
+      font-weight: normal;
     }
 
-    /* Koninklijke afbeelding */
-    #rol-afbeelding {
-      display: block;
 
-      max-width: 70vw;
-      max-height: 55vh;
+    /* ==========================================
+       ROL-AFBEELDING
+       ========================================== */
+
+    #rol-afbeelding {
+
+      display: block;
 
       width: auto;
       height: auto;
 
+      max-width: 70vw;
+      max-height: 45vh;
+
       object-fit: contain;
+
+      margin: 0 auto 5px auto;
 
       opacity: 0;
 
-      animation: afbeeldingverschijnen 1.8s ease forwards;
+      animation:
+        afbeeldingverschijnen
+        1.8s ease
+        forwards;
     }
 
+
+    /* ==========================================
+       ROLNAAM
+       ========================================== */
+
     #uitkomst {
-      font-size: clamp(38px, 6vw, 70px);
+
+      font-size:
+        clamp(38px, 6vw, 70px);
 
       font-weight: normal;
 
+      max-width: 100%;
+
       padding: 10px 20px;
 
-      animation: verschijnen 1.8s ease forwards;
+      box-sizing: border-box;
+
+      animation:
+        verschijnen
+        1.8s ease
+        forwards;
     }
 
+
+    /* ==========================================
+       BESCHRIJVING
+       ========================================== */
+
     #beschrijving {
-      font-size: clamp(20px, 3vw, 36px);
+
+      font-size:
+        clamp(20px, 3vw, 36px);
 
       max-width: 850px;
 
@@ -124,12 +188,20 @@
 
       opacity: 0;
 
-      animation: beschrijving 1.8s ease 0.4s forwards;
+      animation:
+        beschrijving
+        1.8s ease
+        0.4s
+        forwards;
     }
 
-    /* Gouden magie */
+
+    /* ==========================================
+       GOUDEN MAGIE
+       ========================================== */
 
     #magie {
+
       position: fixed;
 
       inset: 0;
@@ -149,13 +221,22 @@
       z-index: 10;
     }
 
+
     #magie.actief {
-      animation: magisch 2.5s ease-in-out forwards;
+      animation:
+        magisch
+        2.5s
+        ease-in-out
+        forwards;
     }
 
-    /* Gouden rook */
+
+    /* ==========================================
+       GOUDEN ROOK
+       ========================================== */
 
     #rook {
+
       position: fixed;
 
       inset: -20%;
@@ -167,6 +248,7 @@
       z-index: 11;
 
       background:
+
         radial-gradient(
           ellipse at 30% 50%,
           rgba(170, 125, 45, 0.22),
@@ -188,83 +270,118 @@
       filter: blur(25px);
     }
 
+
     #rook.actief {
-      animation: rook 2.5s ease-in-out forwards;
+      animation:
+        rook
+        2.5s
+        ease-in-out
+        forwards;
     }
 
-    /* Animaties */
+
+    /* ==========================================
+       ANIMATIES
+       ========================================== */
 
     @keyframes afbeeldingverschijnen {
 
       from {
         opacity: 0;
-        transform: scale(0.85);
+
+        transform:
+          scale(0.85);
       }
 
       to {
         opacity: 1;
-        transform: scale(1);
+
+        transform:
+          scale(1);
       }
 
     }
+
 
     @keyframes verschijnen {
 
       from {
         opacity: 0;
-        transform: scale(0.85);
+
+        transform:
+          scale(0.85);
       }
 
       to {
         opacity: 1;
-        transform: scale(1);
+
+        transform:
+          scale(1);
       }
 
     }
+
 
     @keyframes beschrijving {
 
       from {
         opacity: 0;
-        transform: translateY(15px);
+
+        transform:
+          translateY(15px);
       }
 
       to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+          translateY(0);
       }
 
     }
+
 
     @keyframes magisch {
 
       0% {
         opacity: 0;
-        transform: scale(1);
+
+        transform:
+          scale(1);
       }
 
       35% {
         opacity: 1;
-        transform: scale(1.05);
+
+        transform:
+          scale(1.05);
       }
 
       70% {
         opacity: 0.7;
-        transform: scale(1.15);
+
+        transform:
+          scale(1.15);
       }
 
       100% {
         opacity: 0;
-        transform: scale(1.3);
+
+        transform:
+          scale(1.3);
       }
 
     }
+
 
     @keyframes rook {
 
       0% {
         opacity: 0;
-        transform: scale(0.8) rotate(0deg);
+
+        transform:
+          scale(0.8)
+          rotate(0deg);
       }
 
       30% {
@@ -273,12 +390,18 @@
 
       70% {
         opacity: 0.8;
-        transform: scale(1.1) rotate(4deg);
+
+        transform:
+          scale(1.1)
+          rotate(4deg);
       }
 
       100% {
         opacity: 0;
-        transform: scale(1.4) rotate(-5deg);
+
+        transform:
+          scale(1.4)
+          rotate(-5deg);
       }
 
     }
@@ -286,13 +409,21 @@
   </style>
 </head>
 
+
 <body>
 
+
   <div id="spiegel">
+
+
+    <!-- Gouden magie -->
 
     <div id="magie"></div>
 
     <div id="rook"></div>
+
+
+    <!-- Scherm -->
 
     <div id="scherm">
 
@@ -310,10 +441,97 @@
 
     </div>
 
+
   </div>
 
 
   <script>
+
+
+    /* ==========================================
+       DE ROLLEN
+       ========================================== */
+
+    const acties = [
+
+      {
+        naam: "👑 DE KONINKLIJKE",
+
+        tekst:
+          "Je hebt iets koninklijks. Of je doet in ieder geval alsof.",
+
+        afbeelding:
+          "koninklijke.png"
+      },
+
+
+      {
+        naam: "🦹 DE SCHURK",
+
+        tekst:
+          "Je bedoelingen zijn uitstekend. Dat maakt het alleen maar verdacht."
+      },
+
+
+      {
+        naam: "🎭 HET NOODLOT",
+
+        tekst:
+          "Sommige dingen zijn voorbestemd. Dit was er blijkbaar één van."
+      },
+
+
+      {
+        naam: "⭐ DE UITVERKORENE",
+
+        tekst:
+          "Het lot heeft jou gekozen. Hopelijk weet het lot wat het doet."
+      },
+
+
+      {
+        naam: "🧙 DE MAGIËR",
+
+        tekst:
+          "Je bezit grote krachten. Vooral als niemand kijkt.",
+
+        afbeelding:
+          "magier.png"
+      },
+
+
+      {
+        naam: "🧚 DE BETOVERDE",
+
+        tekst:
+          "Er hangt magie om je heen. Of misschien is dat gewoon je uitstraling."
+      },
+
+
+      {
+        naam: "🌙 DE RUITER UIT DE MIST",
+
+        tekst:
+          "Je verschijnt wanneer niemand je verwacht... zelfs jij niet.",
+
+        afbeelding:
+          "ruiter-uit-de-mist.png"
+      },
+
+
+      {
+        naam: "🐴 DE VROLIJKE RUITER",
+
+        tekst:
+          "Je komt te paard. Waarom? Dat weet niemand."
+      }
+
+    ];
+
+
+    /* ==========================================
+       ELEMENTEN OP HET SCHERM
+       ========================================== */
 
     const scherm =
       document.getElementById("scherm");
@@ -325,114 +543,174 @@
       document.getElementById("rook");
 
 
-    /* Koninklijke afbeelding vooraf laden */
+    /* ==========================================
+       AFBEELDINGEN VOORAF LADEN
+       ========================================== */
 
-    const koninklijke =
-      new Image();
+    acties.forEach(function(actie) {
 
-    koninklijke.src =
-      "koninklijke.png";
+      if (actie.afbeelding) {
 
+        const img =
+          new Image();
 
-    /* Bij aanraken */
+        img.src =
+          actie.afbeelding;
 
-    scherm.addEventListener("click", function() {
-
-      /* Gouden magie starten */
-
-      magie.classList.add("actief");
-
-      rook.classList.add("actief");
-
-
-      /* Beginbeeld laten verdwijnen */
-
-      scherm.style.opacity = "0";
-
-
-      /* Na 1,7 seconde de Koninklijke tonen */
-
-      setTimeout(function() {
-
-        scherm.innerHTML = "";
-
-
-        /* Afbeelding */
-
-        const afbeelding =
-          document.createElement("img");
-
-        afbeelding.id =
-          "rol-afbeelding";
-
-        afbeelding.src =
-          "koninklijke.png";
-
-        afbeelding.alt =
-          "De Koninklijke";
-
-
-        /* Foutmelding als bestand niet gevonden wordt */
-
-        afbeelding.onerror =
-          function() {
-
-            console.error(
-              "koninklijke.png kon niet worden geladen."
-            );
-
-          };
-
-
-        scherm.appendChild(
-          afbeelding
-        );
-
-
-        /* Naam */
-
-        const uitkomst =
-          document.createElement("div");
-
-        uitkomst.id =
-          "uitkomst";
-
-        uitkomst.textContent =
-          "👑 DE KONINKLIJKE";
-
-        scherm.appendChild(
-          uitkomst
-        );
-
-
-        /* Beschrijving */
-
-        const beschrijving =
-          document.createElement("div");
-
-        beschrijving.id =
-          "beschrijving";
-
-        beschrijving.textContent =
-          "Je hebt iets koninklijks. Of je doet in ieder geval alsof.";
-
-        scherm.appendChild(
-          beschrijving
-        );
-
-
-        /* Resultaat zichtbaar */
-
-        scherm.style.opacity =
-          "1";
-
-
-      }, 1700);
+      }
 
     });
 
 
-    /* Service Worker */
+    /* ==========================================
+       SPIEGEL AANRAKEN
+       ========================================== */
+
+    scherm.addEventListener(
+      "click",
+      function() {
+
+
+        /* Gouden magie */
+
+        magie.classList.add("actief");
+
+        rook.classList.add("actief");
+
+
+        /* Beginbeeld laten verdwijnen */
+
+        scherm.style.opacity = "0";
+
+
+        /*
+         * Na 1,7 seconde
+         * een willekeurige rol tonen.
+         */
+
+        setTimeout(function() {
+
+
+          /* Willekeurige rol */
+
+          const willekeurig =
+            acties[
+              Math.floor(
+                Math.random() *
+                acties.length
+              )
+            ];
+
+
+          /* Scherm leegmaken */
+
+          scherm.innerHTML = "";
+
+
+          /* ----------------------------------
+             AFBEELDING
+             ---------------------------------- */
+
+          if (willekeurig.afbeelding) {
+
+
+            const afbeelding =
+              document.createElement("img");
+
+
+            afbeelding.id =
+              "rol-afbeelding";
+
+
+            afbeelding.src =
+              willekeurig.afbeelding;
+
+
+            afbeelding.alt =
+              willekeurig.naam;
+
+
+            /*
+             * Controle voor het geval
+             * een bestand ontbreekt.
+             */
+
+            afbeelding.onerror =
+              function() {
+
+                console.error(
+                  "Afbeelding niet gevonden:",
+                  willekeurig.afbeelding
+                );
+
+              };
+
+
+            scherm.appendChild(
+              afbeelding
+            );
+
+          }
+
+
+          /* ----------------------------------
+             NAAM
+             ---------------------------------- */
+
+          const uitkomst =
+            document.createElement("div");
+
+
+          uitkomst.id =
+            "uitkomst";
+
+
+          uitkomst.textContent =
+            willekeurig.naam;
+
+
+          scherm.appendChild(
+            uitkomst
+          );
+
+
+          /* ----------------------------------
+             BESCHRIJVING
+             ---------------------------------- */
+
+          const beschrijving =
+            document.createElement("div");
+
+
+          beschrijving.id =
+            "beschrijving";
+
+
+          beschrijving.textContent =
+            willekeurig.tekst;
+
+
+          scherm.appendChild(
+            beschrijving
+          );
+
+
+          /* Resultaat tonen */
+
+          scherm.style.opacity =
+            "1";
+
+
+        }, 1700);
+
+      }
+
+    );
+
+
+    /* ==========================================
+       SERVICE WORKER
+       ========================================== */
 
     if ("serviceWorker" in navigator) {
 
@@ -442,7 +720,9 @@
 
     }
 
+
   </script>
+
 
 </body>
 </html>

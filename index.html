@@ -31,10 +31,8 @@
 
     #spiegel {
       position: relative;
-
       width: 100%;
       height: 100%;
-
       overflow: hidden;
 
       background-image: url("spiegel.png");
@@ -73,7 +71,6 @@
       height: 100%;
 
       display: flex;
-
       flex-direction: column;
 
       align-items: center;
@@ -85,36 +82,38 @@
 
       box-sizing: border-box;
 
-      transition: opacity 0.5s ease;
+      transition: opacity 0.8s ease;
 
       cursor: pointer;
     }
 
 
     /* ==========================================
-       BEGINTEKST
+       BEGIN SCHERM
        ========================================== */
 
     #titel {
       font-size: clamp(38px, 6vw, 70px);
-
       font-weight: normal;
-
       white-space: nowrap;
     }
 
 
     #ondertitel {
       font-size: clamp(20px, 3vw, 38px);
-
       font-weight: normal;
     }
 
 
     #aanraken {
       font-size: clamp(25px, 4vw, 48px);
-
       font-weight: normal;
+
+      animation:
+        zachtGloeien
+        2.5s
+        ease-in-out
+        infinite;
     }
 
 
@@ -140,7 +139,8 @@
 
       animation:
         afbeeldingverschijnen
-        1.8s ease
+        1.8s
+        ease
         forwards;
     }
 
@@ -151,8 +151,7 @@
 
     #uitkomst {
 
-      font-size:
-        clamp(38px, 6vw, 70px);
+      font-size: clamp(38px, 6vw, 70px);
 
       font-weight: normal;
 
@@ -164,7 +163,8 @@
 
       animation:
         verschijnen
-        1.8s ease
+        1.8s
+        ease
         forwards;
     }
 
@@ -175,8 +175,7 @@
 
     #beschrijving {
 
-      font-size:
-        clamp(20px, 3vw, 36px);
+      font-size: clamp(20px, 3vw, 36px);
 
       max-width: 850px;
 
@@ -190,8 +189,36 @@
 
       animation:
         beschrijving
-        1.8s ease
+        1.8s
+        ease
         0.4s
+        forwards;
+    }
+
+
+    /* ==========================================
+       AFSLUITBOODSCHAP
+       ========================================== */
+
+    #afsluiting {
+
+      font-size:
+        clamp(25px, 4vw, 48px);
+
+      line-height: 1.4;
+
+      max-width: 850px;
+
+      padding: 0 30px;
+
+      box-sizing: border-box;
+
+      opacity: 0;
+
+      animation:
+        afsluitingVerschijnen
+        2.5s
+        ease
         forwards;
     }
 
@@ -223,11 +250,13 @@
 
 
     #magie.actief {
+
       animation:
         magisch
         2.5s
         ease-in-out
         forwards;
+
     }
 
 
@@ -272,11 +301,13 @@
 
 
     #rook.actief {
+
       animation:
         rook
         2.5s
         ease-in-out
         forwards;
+
     }
 
 
@@ -288,16 +319,12 @@
 
       from {
         opacity: 0;
-
-        transform:
-          scale(0.85);
+        transform: scale(0.85);
       }
 
       to {
         opacity: 1;
-
-        transform:
-          scale(1);
+        transform: scale(1);
       }
 
     }
@@ -307,16 +334,12 @@
 
       from {
         opacity: 0;
-
-        transform:
-          scale(0.85);
+        transform: scale(0.85);
       }
 
       to {
         opacity: 1;
-
-        transform:
-          scale(1);
+        transform: scale(1);
       }
 
     }
@@ -326,16 +349,44 @@
 
       from {
         opacity: 0;
-
-        transform:
-          translateY(15px);
+        transform: translateY(15px);
       }
 
       to {
         opacity: 1;
+        transform: translateY(0);
+      }
 
-        transform:
-          translateY(0);
+    }
+
+
+    @keyframes afsluitingVerschijnen {
+
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+    }
+
+
+    @keyframes zachtGloeien {
+
+      0% {
+        opacity: 0.65;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.65;
       }
 
     }
@@ -345,30 +396,22 @@
 
       0% {
         opacity: 0;
-
-        transform:
-          scale(1);
+        transform: scale(1);
       }
 
       35% {
         opacity: 1;
-
-        transform:
-          scale(1.05);
+        transform: scale(1.05);
       }
 
       70% {
         opacity: 0.7;
-
-        transform:
-          scale(1.15);
+        transform: scale(1.15);
       }
 
       100% {
         opacity: 0;
-
-        transform:
-          scale(1.3);
+        transform: scale(1.3);
       }
 
     }
@@ -378,10 +421,7 @@
 
       0% {
         opacity: 0;
-
-        transform:
-          scale(0.8)
-          rotate(0deg);
+        transform: scale(0.8) rotate(0deg);
       }
 
       30% {
@@ -390,18 +430,12 @@
 
       70% {
         opacity: 0.8;
-
-        transform:
-          scale(1.1)
-          rotate(4deg);
+        transform: scale(1.1) rotate(4deg);
       }
 
       100% {
         opacity: 0;
-
-        transform:
-          scale(1.4)
-          rotate(-5deg);
+        transform: scale(1.4) rotate(-5deg);
       }
 
     }
@@ -416,7 +450,7 @@
   <div id="spiegel">
 
 
-    <!-- Gouden magie -->
+    <!-- Magische lagen -->
 
     <div id="magie"></div>
 
@@ -530,7 +564,28 @@
 
 
     /* ==========================================
-       ELEMENTEN OP HET SCHERM
+       AFSLUITBOODSCHAPPEN
+       ========================================== */
+
+    const afsluitingen = [
+
+      "De spiegel heeft gesproken... maar sommige geheimen blijven verborgen.",
+
+      "De magie verdwijnt... maar de spiegel is nog niet uitgesproken.",
+
+      "Was dit werkelijk jouw lot? Misschien moet je nog eens kijken...",
+
+      "De spiegel zwijgt weer... maar hij heeft jou gezien.",
+
+      "Een verhaal eindigt hier... of begint het pas?",
+
+      "De mist trekt op... maar niet alle geheimen zijn verdwenen."
+
+    ];
+
+
+    /* ==========================================
+       ELEMENTEN
        ========================================== */
 
     const scherm =
@@ -541,6 +596,15 @@
 
     const rook =
       document.getElementById("rook");
+
+
+    /*
+     * Hiermee voorkomen we dat iemand tijdens
+     * de animatie meerdere keren kan tikken.
+     */
+
+    let bezig =
+      false;
 
 
     /* ==========================================
@@ -563,6 +627,106 @@
 
 
     /* ==========================================
+       BEGIN SCHERM
+       ========================================== */
+
+    function toonBeginScherm() {
+
+      scherm.innerHTML =
+
+        '<div id="titel">' +
+          '✨ MAGISCHE SPIEGEL ✨' +
+        '</div>' +
+
+        '<div id="ondertitel">' +
+          'Sprookjesmagie of Sprookjestragedie' +
+        '</div>' +
+
+        '<div id="aanraken">' +
+          'RAAK HET SCHERM AAN' +
+        '</div>';
+
+    }
+
+
+    /* ==========================================
+       AFSLUITING
+       ========================================== */
+
+    function toonAfsluiting() {
+
+
+      /*
+       * Kies willekeurig een afsluitboodschap.
+       */
+
+      const boodschap =
+        afsluitingen[
+          Math.floor(
+            Math.random() *
+            afsluitingen.length
+          )
+        ];
+
+
+      /*
+       * Laat de rol verdwijnen.
+       */
+
+      scherm.style.opacity =
+        "0";
+
+
+      /*
+       * Even wachten en daarna
+       * de afsluiting tonen.
+       */
+
+      setTimeout(function() {
+
+        scherm.innerHTML =
+
+          '<div id="afsluiting">' +
+            boodschap +
+          '</div>';
+
+
+        scherm.style.opacity =
+          "1";
+
+
+        /*
+         * Na een paar seconden
+         * terug naar het begin.
+         */
+
+        setTimeout(function() {
+
+          scherm.style.opacity =
+            "0";
+
+
+          setTimeout(function() {
+
+            toonBeginScherm();
+
+            scherm.style.opacity =
+              "1";
+
+            bezig =
+              false;
+
+          }, 800);
+
+        }, 4000);
+
+
+      }, 800);
+
+    }
+
+
+    /* ==========================================
        SPIEGEL AANRAKEN
        ========================================== */
 
@@ -571,27 +735,60 @@
       function() {
 
 
-        /* Gouden magie */
+        /*
+         * Als de spiegel al bezig is,
+         * negeren we de aanraking.
+         */
 
-        magie.classList.add("actief");
+        if (bezig) {
+          return;
+        }
 
-        rook.classList.add("actief");
 
-
-        /* Beginbeeld laten verdwijnen */
-
-        scherm.style.opacity = "0";
+        bezig =
+          true;
 
 
         /*
-         * Na 1,7 seconde
-         * een willekeurige rol tonen.
+         * Gouden magie starten.
+         */
+
+        magie.classList.remove("actief");
+
+        rook.classList.remove("actief");
+
+
+        /*
+         * Kleine vertraging zodat de
+         * animatie opnieuw kan beginnen.
+         */
+
+        void magie.offsetWidth;
+        void rook.offsetWidth;
+
+
+        magie.classList.add("actief");
+        rook.classList.add("actief");
+
+
+        /*
+         * Beginbeeld laten verdwijnen.
+         */
+
+        scherm.style.opacity =
+          "0";
+
+
+        /*
+         * Na 1,7 seconde de rol tonen.
          */
 
         setTimeout(function() {
 
 
-          /* Willekeurige rol */
+          /*
+           * Willekeurige rol kiezen.
+           */
 
           const willekeurig =
             acties[
@@ -602,17 +799,19 @@
             ];
 
 
-          /* Scherm leegmaken */
+          /*
+           * Scherm leegmaken.
+           */
 
-          scherm.innerHTML = "";
+          scherm.innerHTML =
+            "";
 
 
-          /* ----------------------------------
-             AFBEELDING
-             ---------------------------------- */
+          /*
+           * Afbeelding tonen als die bestaat.
+           */
 
           if (willekeurig.afbeelding) {
-
 
             const afbeelding =
               document.createElement("img");
@@ -630,22 +829,6 @@
               willekeurig.naam;
 
 
-            /*
-             * Controle voor het geval
-             * een bestand ontbreekt.
-             */
-
-            afbeelding.onerror =
-              function() {
-
-                console.error(
-                  "Afbeelding niet gevonden:",
-                  willekeurig.afbeelding
-                );
-
-              };
-
-
             scherm.appendChild(
               afbeelding
             );
@@ -653,9 +836,9 @@
           }
 
 
-          /* ----------------------------------
-             NAAM
-             ---------------------------------- */
+          /*
+           * Rolnaam.
+           */
 
           const uitkomst =
             document.createElement("div");
@@ -674,9 +857,9 @@
           );
 
 
-          /* ----------------------------------
-             BESCHRIJVING
-             ---------------------------------- */
+          /*
+           * Beschrijving.
+           */
 
           const beschrijving =
             document.createElement("div");
@@ -695,16 +878,28 @@
           );
 
 
-          /* Resultaat tonen */
+          /*
+           * Resultaat zichtbaar maken.
+           */
 
           scherm.style.opacity =
             "1";
 
 
+          /*
+           * Na ongeveer 4 seconden
+           * begint de afsluiting.
+           */
+
+          setTimeout(
+            toonAfsluiting,
+            4500
+          );
+
+
         }, 1700);
 
       }
-
     );
 
 
@@ -719,7 +914,6 @@
       );
 
     }
-
 
   </script>
 

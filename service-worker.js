@@ -1,82 +1,112 @@
 ```javascript
-const CACHE_NAME = "magische-spiegel-test-v11";
+const CACHE_NAME = "magische-spiegel-test-v12";
 
 const BESTANDEN = [
   "./",
   "./index.html",
+
   "./spiegel.png",
-  "./koninklijke.png"
+
+  "./koninklijke.png",
+  "./magier.png",
+  "./ruiter-uit-de-mist.png"
 ];
 
 
-/* Installeren */
+/*
+ * INSTALLEREN
+ */
 
-self.addEventListener("install", function(event) {
+self.addEventListener(
+  "install",
+  function(event) {
 
-  event.waitUntil(
+    event.waitUntil(
 
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
+      caches
+        .open(CACHE_NAME)
+        .then(function(cache) {
 
-        return cache.addAll(BESTANDEN);
+          return cache.addAll(
+            BESTANDEN
+          );
 
-      })
+        })
 
-  );
+    );
 
-  self.skipWaiting();
+    self.skipWaiting();
 
-});
-
-
-/* Activeren */
-
-self.addEventListener("activate", function(event) {
-
-  event.waitUntil(
-
-    caches.keys().then(function(cachesNamen) {
-
-      return Promise.all(
-
-        cachesNamen
-          .filter(function(naam) {
-
-            return naam !== CACHE_NAME;
-
-          })
-
-          .map(function(naam) {
-
-            return caches.delete(naam);
-
-          })
-
-      );
-
-    })
-
-  );
-
-  self.clients.claim();
-
-});
+  }
+);
 
 
-/* Bestanden uit cache gebruiken */
+/*
+ * ACTIVEREN
+ */
 
-self.addEventListener("fetch", function(event) {
+self.addEventListener(
+  "activate",
+  function(event) {
 
-  event.respondWith(
+    event.waitUntil(
 
-    caches.match(event.request)
+      caches.keys()
+        .then(function(cachesNamen) {
+
+          return Promise.all(
+
+            cachesNamen
+              .filter(function(naam) {
+
+                return naam !== CACHE_NAME;
+
+              })
+
+              .map(function(naam) {
+
+                return caches.delete(
+                  naam
+                );
+
+              })
+
+          );
+
+        })
+
+    );
+
+    self.clients.claim();
+
+  }
+);
+
+
+/*
+ * BESTANDEN LADEN
+ */
+
+self.addEventListener(
+  "fetch",
+  function(event) {
+
+    event.respondWith(
+
+      caches.match(
+        event.request
+      )
       .then(function(response) {
 
-        return response || fetch(event.request);
+        return (
+          response ||
+          fetch(event.request)
+        );
 
       })
 
-  );
+    );
 
-});
+  }
+);
 ```

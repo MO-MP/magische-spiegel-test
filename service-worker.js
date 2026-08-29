@@ -1,109 +1,90 @@
-```javascript
-const CACHE_NAME = "magische-spiegel-test-v15";
+const CACHE_NAME = "magische-spiegel-test-v16";
 
 const BESTANDEN = [
-  "./",
-  "./index.html",
-
-  "./spiegel.png",
-
-  "./koninklijke.png",
-  "./magier.png",
-  "./ruiter-uit-de-mist.png",
-
-  "./ezel.png",
-  "./achter-de-spiegel.png"
+"./",
+"./index.html",
+"./spiegel.png",
+"./koninklijke.png",
+"./magier.png",
+"./ruiter-uit-de-mist.png"
 ];
 
+/* Installeren */
 
-/* INSTALLEREN */
+self.addEventListener("install", function(event) {
 
-self.addEventListener(
-  "install",
-  function(event) {
+event.waitUntil(
 
-    event.waitUntil(
+```
+caches.open(CACHE_NAME)
+  .then(function(cache) {
 
-      caches
-        .open(CACHE_NAME)
-        .then(function(cache) {
+    return cache.addAll(BESTANDEN);
 
-          return cache.addAll(
-            BESTANDEN
-          );
+  })
+```
 
-        })
-
-    );
-
-    self.skipWaiting();
-
-  }
 );
 
+self.skipWaiting();
 
-/* ACTIVEREN */
+});
 
-self.addEventListener(
-  "activate",
-  function(event) {
+/* Activeren */
 
-    event.waitUntil(
+self.addEventListener("activate", function(event) {
 
-      caches.keys()
-        .then(function(cachesNamen) {
+event.waitUntil(
 
-          return Promise.all(
+```
+caches.keys().then(function(cacheNames) {
 
-            cachesNamen
-              .filter(function(naam) {
+  return Promise.all(
 
-                return naam !== CACHE_NAME;
+    cacheNames
+      .filter(function(cacheName) {
 
-              })
+        return cacheName !== CACHE_NAME;
 
-              .map(function(naam) {
+      })
+      .map(function(cacheName) {
 
-                return caches.delete(
-                  naam
-                );
-
-              })
-
-          );
-
-        })
-
-    );
-
-    self.clients.claim();
-
-  }
-);
-
-
-/* BESTANDEN LADEN */
-
-self.addEventListener(
-  "fetch",
-  function(event) {
-
-    event.respondWith(
-
-      caches.match(
-        event.request
-      )
-      .then(function(response) {
-
-        return (
-          response ||
-          fetch(event.request)
-        );
+        return caches.delete(cacheName);
 
       })
 
-    );
+  );
 
-  }
-);
+})
 ```
+
+);
+
+self.clients.claim();
+
+});
+
+/* Bestanden ophalen */
+
+self.addEventListener("fetch", function(event) {
+
+event.respondWith(
+
+```
+caches.match(event.request)
+  .then(function(response) {
+
+    if (response) {
+
+      return response;
+
+    }
+
+    return fetch(event.request);
+
+  })
+```
+
+);
+
+});

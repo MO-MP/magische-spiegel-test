@@ -176,7 +176,7 @@
       animation: geheimTekst 1.5s ease forwards;
     }
 
-    /* FLITS-AFBEELDING */
+    /* GEHEIME AFBEELDING */
 
     #geheim-afbeelding {
       position: fixed;
@@ -678,17 +678,15 @@
 
       {
         tekst:
-          "De spiegel zwijgt weer... maar hij heeft jou gezien."
+          "De spiegel zwijgt weer... maar hij heeft jou gezien.",
+
+        actie:
+          "oog"
       },
 
       {
         tekst:
           "Een verhaal eindigt hier... of begint het pas?"
-      },
-
-      {
-        tekst:
-          "Jouw geheim is zoekgeraakt. We zoeken nog..."
       }
 
     ];
@@ -739,11 +737,18 @@
       "ezel.png";
 
 
-    const geheimVoorladen =
+    const prinsHeksVoorladen =
       new Image();
 
-    geheimVoorladen.src =
-      "achter-de-spiegel.png";
+    prinsHeksVoorladen.src =
+      "prins-heks.png";
+
+
+    const oogVoorladen =
+      new Image();
+
+    oogVoorladen.src =
+      "oog.png";
 
 
     /* ==========================================
@@ -843,29 +848,57 @@
 
           setTimeout(function() {
 
-            scherm.innerHTML =
-              '<div id="afsluiting">' +
-              'Oeps. Dat mocht je niet zien.' +
-              '</div>';
+            const afbeelding =
+              document.createElement("img");
 
+            afbeelding.id =
+              "geheim-afbeelding";
 
-            scherm.style.opacity =
-              "1";
+            afbeelding.src =
+              "prins-heks.png";
+
+            afbeelding.alt =
+              "Een prins die stiekem een heks kust";
+
+            document.body.appendChild(
+              afbeelding
+            );
+
+            afbeelding.classList.add(
+              "flits"
+            );
 
 
             setTimeout(function() {
 
+              afbeelding.remove();
+
+
+              scherm.innerHTML =
+                '<div id="afsluiting">' +
+                'Oeps... dit stond niet in het sprookjesboek.' +
+                '</div>';
+
+
               scherm.style.opacity =
-                "0";
+                "1";
 
 
-              setTimeout(
-                toonLaatsteGloed,
-                800
-              );
+              setTimeout(function() {
 
-            }, 3500);
+                scherm.style.opacity =
+                  "0";
 
+
+                setTimeout(
+                  toonLaatsteGloed,
+                  800
+                );
+
+              }, 4000);
+
+
+            }, 800);
 
           }, 700);
 
@@ -912,7 +945,7 @@
 
 
         /*
-         * De tekst blijft 2,5 seconden staan.
+         * "Hij weet meer..." blijft 2,5 seconden staan.
          */
 
         setTimeout(function() {
@@ -921,53 +954,38 @@
             "0";
 
 
-          /*
-           * Korte stilte.
-           */
-
           setTimeout(function() {
 
-            const afbeelding =
-              document.createElement("img");
+            scherm.innerHTML =
+              '<div id="afsluiting">' +
+              'De spiegel heeft je outfit eens goed bekeken... Je kunt die kans op de prijs wel vergeten.' +
+              '</div>';
 
 
-            afbeelding.id =
-              "geheim-afbeelding";
-
-
-            afbeelding.src =
-              "achter-de-spiegel.png";
-
-
-            afbeelding.alt =
-              "Een onverwachte blik achter de spiegel";
-
-
-            document.body.appendChild(
-              afbeelding
-            );
-
-
-            afbeelding.classList.add(
-              "flits"
-            );
+            scherm.style.opacity =
+              "1";
 
 
             /*
-             * De afbeelding verschijnt
-             * maar heel kort.
+             * Outfittekst blijft 6 seconden staan.
              */
 
             setTimeout(function() {
 
-              afbeelding.remove();
-
-              toonLaatsteGloed();
-
-            }, 800);
+              scherm.style.opacity =
+                "0";
 
 
-          }, 300);
+              setTimeout(
+                toonLaatsteGloed,
+                800
+              );
+
+            }, 6000);
+
+
+          }, 700);
+
 
         }, 2500);
 
@@ -1054,6 +1072,66 @@
 
 
       }, 800);
+
+    }
+
+
+    /* ==========================================
+       OOG
+       ========================================== */
+
+    function toonOog() {
+
+      scherm.style.opacity =
+        "0";
+
+
+      setTimeout(function() {
+
+        scherm.innerHTML =
+          "";
+
+
+        const afbeelding =
+          document.createElement("img");
+
+
+        afbeelding.id =
+          "geheim-afbeelding";
+
+
+        afbeelding.src =
+          "oog.png";
+
+
+        afbeelding.alt =
+          "Een gigantisch oog";
+
+
+        document.body.appendChild(
+          afbeelding
+        );
+
+
+        afbeelding.classList.add(
+          "flits"
+        );
+
+
+        /*
+         * Korte onverwachte schrikflits.
+         */
+
+        setTimeout(function() {
+
+          afbeelding.remove();
+
+          toonLaatsteGloed();
+
+        }, 800);
+
+
+      }, 500);
 
     }
 
@@ -1172,6 +1250,17 @@
           ) {
 
             toonEzel();
+
+            return;
+          }
+
+
+          if (
+            gekozen.actie ===
+            "oog"
+          ) {
+
+            toonOog();
 
             return;
           }

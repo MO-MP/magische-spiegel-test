@@ -1,34 +1,47 @@
+```javascript
 const CACHE_NAME = "magische-spiegel-test-v8";
 
 const BESTANDEN = [
-"./",
-"./index.html"
+  "./",
+  "./index.html",
+  "./spiegel.png",
+  "./koninklijke.png",
+  "./magier.png",
+  "./ruiter-uit-de-mist.png"
 ];
 
+/* Installeren en bestanden opslaan */
 self.addEventListener("install", event => {
-self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(BESTANDEN))
+  );
 
-event.waitUntil(
-caches.open(CACHE_NAME)
-.then(cache => cache.addAll(BESTANDEN))
-);
+  self.skipWaiting();
 });
 
+/* Activeren en oude caches verwijderen */
 self.addEventListener("activate", event => {
-event.waitUntil(
-caches.keys().then(names =>
-Promise.all(
-names
-.filter(name => name !== CACHE_NAME)
-.map(name => caches.delete(name))
-)
-).then(() => self.clients.claim())
-);
+  event.waitUntil(
+    caches.keys().then(cachesNamen => {
+      return Promise.all(
+        cachesNamen
+          .filter(naam => naam !== CACHE_NAME)
+          .map(naam => caches.delete(naam))
+      );
+    })
+  );
+
+  self.clients.claim();
 });
 
+/* Offline bestanden gebruiken */
 self.addEventListener("fetch", event => {
-event.respondWith(
-caches.match(event.request)
-.then(response => response || fetch(event.request))
-);
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        return response || fetch(event.request);
+      })
+  );
 });
+```

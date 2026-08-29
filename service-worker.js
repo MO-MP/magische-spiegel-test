@@ -9,7 +9,9 @@ const BESTANDEN = [
 
   "./koninklijke.png",
   "./magier.png",
-  "./ruiter-uit-de-mist.png"
+  "./ruiter-uit-de-mist.png",
+
+  "./ezel.png"
 ];
 
 

@@ -197,7 +197,10 @@
           rgba(0,0,0,0.65)
         );
 
-      /* Zachte rand zodat de hoeken verdwijnen */
+      /*
+       * Zachte maskering zodat de hoeken
+       * van de foto's verdwijnen.
+       */
 
       -webkit-mask-image:
         radial-gradient(
@@ -227,7 +230,11 @@
       position: fixed;
 
       left: 50%;
-      bottom: 8vh;
+
+      /*
+       * Iets hoger dan eerst.
+       */
+      bottom: 14vh;
 
       transform: translateX(-50%);
 
@@ -250,11 +257,14 @@
     }
 
     #uitkomst {
-      font-size: clamp(30px, 5vw, 58px);
+      /*
+       * Iets groter.
+       */
+      font-size: clamp(34px, 5.5vw, 64px);
 
       font-weight: normal;
 
-      margin-bottom: 12px;
+      margin-bottom: 14px;
 
       text-shadow:
         0 2px 8px black,
@@ -262,11 +272,14 @@
     }
 
     #beschrijving {
-      font-size: clamp(18px, 2.5vw, 30px);
+      /*
+       * Iets groter.
+       */
+      font-size: clamp(20px, 2.8vw, 34px);
 
       line-height: 1.35;
 
-      max-width: 850px;
+      max-width: 900px;
 
       margin: auto;
 
@@ -331,11 +344,8 @@
       transform:
         translate(-50%, -50%);
 
-      width: 100vw;
-      height: 100vh;
-
-      max-width: 100%;
-      max-height: 100%;
+      max-width: 90vw;
+      max-height: 90vh;
 
       object-fit: contain;
 
@@ -343,14 +353,9 @@
 
       opacity: 0;
 
-      filter:
-        drop-shadow(
-          0 0 30px
-          rgba(255,255,255,0.35)
-        );
-
-      /* Hoeken zacht laten verdwijnen */
-
+      /*
+       * Hoeken zacht laten verdwijnen.
+       */
       -webkit-mask-image:
         radial-gradient(
           ellipse at center,
@@ -368,12 +373,18 @@
           rgba(0,0,0,0.65) 72%,
           transparent 94%
         );
+
+      filter:
+        drop-shadow(
+          0 0 30px
+          rgba(255,255,255,0.35)
+        );
     }
 
     #geheim-afbeelding.flits {
       animation:
         geheimFlits
-        1.2s
+        1.4s
         ease
         forwards;
     }
@@ -386,19 +397,26 @@
     #ezel-afbeelding {
       display: block;
 
-      width: auto;
-      height: auto;
+      /*
+       * Nu net zo groot als de
+       * afbeeldingen van de rollen.
+       */
+      width: 100vw;
+      height: 100vh;
 
-      max-width: 85vw;
-      max-height: 65vh;
+      max-width: 100%;
+      max-height: 100%;
 
       object-fit: contain;
 
-      margin: 0 auto 10px auto;
+      margin: 0 auto;
 
       opacity: 0;
 
-      /* Hoeken van ezelfoto verdwijnen */
+      /*
+       * Zachte maskering zodat de hoeken
+       * van de ezelfoto verdwijnen.
+       */
 
       -webkit-mask-image:
         radial-gradient(
@@ -583,7 +601,6 @@
 
       from {
         opacity: 0;
-
         transform:
           translateX(-50%)
           translateY(20px);
@@ -591,7 +608,6 @@
 
       to {
         opacity: 1;
-
         transform:
           translateX(-50%)
           translateY(0);
@@ -655,7 +671,7 @@
           scale(0.8);
       }
 
-      20% {
+      15% {
         opacity: 1;
 
         transform:
@@ -663,7 +679,7 @@
           scale(1);
       }
 
-      80% {
+      82% {
         opacity: 1;
       }
 
@@ -1349,10 +1365,6 @@
           "1";
 
 
-        /*
-         * GEHEIM blijft nu 3,5 seconden staan.
-         */
-
         setTimeout(function() {
 
           scherm.style.opacity =
@@ -1390,8 +1402,7 @@
 
 
             /*
-             * Geheimafbeelding blijft
-             * iets langer zichtbaar.
+             * Geheim blijft nu langer zichtbaar.
              */
 
             setTimeout(function() {
@@ -1429,13 +1440,13 @@
               }, 4000);
 
 
-            }, 1200);
+            }, 1400);
 
 
           }, 700);
 
 
-        }, 3500);
+        }, 1800);
 
 
       }, 800);
@@ -1481,10 +1492,6 @@
           "1";
 
 
-        /*
-         * Deze tekst blijft 3,5 seconden staan.
-         */
-
         setTimeout(function() {
 
           scherm.style.opacity =
@@ -1528,7 +1535,7 @@
           }, 700);
 
 
-        }, 3500);
+        }, 2500);
 
 
       }, 800);
@@ -1548,7 +1555,8 @@
 
       setTimeout(function() {
 
-        scherm.innerHTML = "";
+        scherm.innerHTML =
+          "";
 
 
         const afbeelding =
@@ -1666,7 +1674,7 @@
 
           toonLaatsteGloed();
 
-        }, 1200);
+        }, 1400);
 
 
       }, 500);
@@ -2010,7 +2018,7 @@
 
               /*
                * Foto + tekst blijven
-               * totaal 11 seconden staan.
+               * 11 seconden staan.
                */
 
               setTimeout(function() {

@@ -1,12 +1,10 @@
 ```javascript
-const CACHE_NAME = "magische-spiegel-v26";
+const CACHE_NAME = "magische-spiegel-test-v27";
 
-const FILES_TO_CACHE = [
+const BESTANDEN = [
 
   "./",
   "./index.html",
-  "./service-worker.js",
-
   "./spiegel.png",
 
   "./koninklijke.png",
@@ -19,6 +17,7 @@ const FILES_TO_CACHE = [
   "./vrolijke-ruiter.png",
 
   "./geheim.png",
+  "./prins-heks.png",
   "./ezel.png",
   "./oog.png"
 
@@ -34,9 +33,7 @@ self.addEventListener(
       caches.open(CACHE_NAME)
         .then(function(cache) {
 
-          return cache.addAll(
-            FILES_TO_CACHE
-          );
+          return cache.addAll(BESTANDEN);
 
         })
 
@@ -59,19 +56,17 @@ self.addEventListener(
 
           return Promise.all(
 
-            keys.map(function(key) {
+            keys
+              .filter(function(key) {
 
-              if (
-                key !== CACHE_NAME
-              ) {
+                return key !== CACHE_NAME;
 
-                return caches.delete(
-                  key
-                );
+              })
+              .map(function(key) {
 
-              }
+                return caches.delete(key);
 
-            })
+              })
 
           );
 
@@ -91,20 +86,33 @@ self.addEventListener(
 
     event.respondWith(
 
-      caches.match(
-        event.request
-      )
-      .then(function(response) {
+      caches.match(event.request)
+        .then(function(response) {
 
-        if (response) {
-          return response;
-        }
+          if (response) {
 
-        return fetch(
-          event.request
-        );
+            return response;
 
-      })
+          }
+
+          return fetch(event.request)
+            .then(function(networkResponse) {
+
+              return caches.open(CACHE_NAME)
+                .then(function(cache) {
+
+                  cache.put(
+                    event.request,
+                    networkResponse.clone()
+                  );
+
+                  return networkResponse;
+
+                });
+
+            });
+
+        })
 
     );
 

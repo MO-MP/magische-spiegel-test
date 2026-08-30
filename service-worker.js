@@ -1,11 +1,13 @@
 ```javascript
-const CACHE_NAME = "magische-spiegel-v43";
+const CACHE_NAME = "magische-spiegel-v44";
 
 const BESTANDEN = [
   "./",
   "./index.html",
   "./spiegel.png",
-
+  "./ezel.png",
+  "./geheim.png",
+  "./oog.png",
   "./koninklijke.png",
   "./schurk.png",
   "./het-noodlot.png",
@@ -13,110 +15,35 @@ const BESTANDEN = [
   "./magier.png",
   "./betoverde.png",
   "./ruiter-uit-de-mist.png",
-  "./vrolijke-ruiter.png",
-
-  "./geheim.png",
-  "./prins-heks.png",
-  "./ezel.png",
-  "./oog.png"
+  "./vrolijke-ruiter.png"
 ];
 
-
-// ==========================================
-// INSTALL
-// ==========================================
-
-self.addEventListener("install", function(event) {
-
+self.addEventListener("install", event => {
   event.waitUntil(
-
     caches.open(CACHE_NAME)
-      .then(function(cache) {
-
-        return cache.addAll(BESTANDEN);
-
-      })
-
+      .then(cache => cache.addAll(BESTANDEN))
+      .then(() => self.skipWaiting())
   );
-
-  self.skipWaiting();
-
 });
 
-
-// ==========================================
-// ACTIVATE
-// ==========================================
-
-self.addEventListener("activate", function(event) {
-
+self.addEventListener("activate", event => {
   event.waitUntil(
-
-    caches.keys()
-      .then(function(keys) {
-
-        return Promise.all(
-
-          keys
-            .filter(function(key) {
-
-              return key !== CACHE_NAME;
-
-            })
-            .map(function(key) {
-
-              return caches.delete(key);
-
-            })
-
-        );
-
-      })
-
+    caches.keys().then(keys =>
+      Promise.all(
+        keys
+          .filter(key => key !== CACHE_NAME)
+          .map(key => caches.delete(key))
+      )
+    ).then(() => self.clients.claim())
   );
-
-  self.clients.claim();
-
 });
 
-
-// ==========================================
-// FETCH
-// ==========================================
-
-self.addEventListener("fetch", function(event) {
-
+self.addEventListener("fetch", event => {
   event.respondWith(
-
     caches.match(event.request)
-      .then(function(response) {
-
-        if (response) {
-
-          return response;
-
-        }
-
-        return fetch(event.request)
-          .then(function(networkResponse) {
-
-            return caches.open(CACHE_NAME)
-              .then(function(cache) {
-
-                cache.put(
-                  event.request,
-                  networkResponse.clone()
-                );
-
-                return networkResponse;
-
-              });
-
-          });
-
+      .then(cachedResponse => {
+        return cachedResponse || fetch(event.request);
       })
-
   );
-
 });
 ```

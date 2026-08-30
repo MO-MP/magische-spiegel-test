@@ -7,6 +7,7 @@
   <title>De Magische Spiegel</title>
 
   <style>
+
     html, body {
       margin: 0;
       width: 100%;
@@ -46,20 +47,26 @@
     #scherm {
       position: relative;
       z-index: 5;
+
       width: 100%;
       height: 100%;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
       gap: 18px;
-      padding: 40px;
+      padding: 35px;
       box-sizing: border-box;
+
       transition: opacity 0.8s ease;
       cursor: pointer;
     }
 
-    /* BEGIN */
+    /* =========================
+       BEGIN
+       ========================= */
 
     #titel {
       font-size: clamp(38px, 6vw, 70px);
@@ -78,7 +85,9 @@
       animation: zachtGloeien 2.5s ease-in-out infinite;
     }
 
-    /* INTRO */
+    /* =========================
+       INTRO
+       ========================= */
 
     #intro {
       font-size: clamp(25px, 4vw, 48px);
@@ -90,7 +99,9 @@
       animation: introVerschijnen 2s ease forwards;
     }
 
-    /* ROLAFBEELDING — GROTER */
+    /* =========================
+       ROLAFBEELDING
+       ========================= */
 
     #rol-afbeelding {
       display: block;
@@ -101,35 +112,45 @@
       max-height: 52vh;
 
       object-fit: contain;
-      margin: 0 auto 5px auto;
+      margin: 0 auto 0 auto;
+
       opacity: 0;
       animation: afbeeldingverschijnen 1.8s ease forwards;
     }
 
-    /* ROLNAAM */
+    /* =========================
+       ROLNAAM
+       ========================= */
 
     #uitkomst {
-      font-size: clamp(30px, 4.5vw, 55px);
+      font-size: clamp(28px, 4.2vw, 52px);
       font-weight: normal;
+
       max-width: 100%;
       padding: 5px 20px;
       box-sizing: border-box;
+
       animation: verschijnen 1.8s ease forwards;
     }
 
-    /* BESCHRIJVING */
+    /* =========================
+       BESCHRIJVING
+       ========================= */
 
     #beschrijving {
-      font-size: clamp(18px, 2.6vw, 30px);
+      font-size: clamp(17px, 2.4vw, 29px);
       max-width: 850px;
       line-height: 1.35;
       padding: 0 20px;
       box-sizing: border-box;
+
       opacity: 0;
       animation: beschrijving 1.8s ease 0.4s forwards;
     }
 
-    /* AFSLUITING */
+    /* =========================
+       AFSLUITING
+       ========================= */
 
     #afsluiting {
       font-size: clamp(25px, 4vw, 48px);
@@ -137,11 +158,14 @@
       max-width: 900px;
       padding: 0 30px;
       box-sizing: border-box;
+
       opacity: 0;
       animation: afsluitingVerschijnen 2s ease forwards;
     }
 
-    /* GEHEIM */
+    /* =========================
+       GEHEIM
+       ========================= */
 
     #geheim-tekst {
       font-size: clamp(30px, 5vw, 60px);
@@ -149,34 +173,36 @@
       animation: geheimTekst 1.5s ease forwards;
     }
 
-    /* GROOT OOG */
+    #geheim-afbeelding {
+      display: block;
+      width: auto;
+      height: auto;
 
-    #oog-afbeelding {
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      max-width: 85vw;
-      max-height: 80vh;
+      max-width: 75vw;
+      max-height: 55vh;
+
       object-fit: contain;
-      z-index: 20;
+
       opacity: 0;
+      animation: afbeeldingverschijnen 1.5s ease forwards;
     }
 
-    #oog-afbeelding.flits {
-      animation: oogFlits 0.7s ease forwards;
-    }
-
-    /* EZEL */
+    /* =========================
+       EZEL
+       ========================= */
 
     #ezel-afbeelding {
       display: block;
       width: auto;
       height: auto;
+
       max-width: 75vw;
       max-height: 55vh;
+
       object-fit: contain;
+
       margin: 0 auto 10px auto;
+
       opacity: 0;
       animation: ezelVerschijnen 1.5s ease forwards;
     }
@@ -184,17 +210,49 @@
     #ezel-tekst {
       font-size: clamp(25px, 4vw, 48px);
       line-height: 1.4;
+
       opacity: 0;
       animation: afsluitingVerschijnen 1.5s ease 0.5s forwards;
     }
 
-    /* MAGIE */
+    /* =========================
+       OOG
+       ========================= */
+
+    #oog-afbeelding {
+      position: fixed;
+
+      left: 50%;
+      top: 50%;
+
+      transform: translate(-50%, -50%);
+
+      max-width: 85vw;
+      max-height: 80vh;
+
+      object-fit: contain;
+
+      z-index: 20;
+
+      opacity: 0;
+    }
+
+    #oog-afbeelding.flits {
+      animation: oogFlits 0.7s ease forwards;
+    }
+
+    /* =========================
+       MAGIE
+       ========================= */
 
     #magie {
       position: fixed;
       inset: 0;
+
       pointer-events: none;
+
       opacity: 0;
+
       background:
         radial-gradient(
           circle at center,
@@ -202,6 +260,7 @@
           rgba(50, 35, 10, 0.25) 35%,
           rgba(0, 0, 0, 0.95) 80%
         );
+
       z-index: 10;
     }
 
@@ -209,30 +268,40 @@
       animation: magisch 2.5s ease-in-out forwards;
     }
 
-    /* ROOK */
+    /* =========================
+       ROOK
+       ========================= */
 
     #rook {
       position: fixed;
       inset: -20%;
+
       pointer-events: none;
+
       opacity: 0;
+
       z-index: 11;
+
       background:
+
         radial-gradient(
           ellipse at 30% 50%,
           rgba(170, 125, 45, 0.22),
           transparent 45%
         ),
+
         radial-gradient(
           ellipse at 70% 40%,
           rgba(210, 170, 80, 0.18),
           transparent 40%
         ),
+
         radial-gradient(
           ellipse at 50% 80%,
           rgba(120, 90, 35, 0.20),
           transparent 45%
         );
+
       filter: blur(25px);
     }
 
@@ -240,13 +309,18 @@
       animation: rook 2.5s ease-in-out forwards;
     }
 
-    /* SLOTGLOED */
+    /* =========================
+       SLOTGLOED
+       ========================= */
 
     #slotgloed {
       position: fixed;
       inset: 0;
+
       pointer-events: none;
+
       opacity: 0;
+
       background:
         radial-gradient(
           circle at center,
@@ -254,6 +328,7 @@
           rgba(120, 85, 30, 0.20) 40%,
           rgba(0, 0, 0, 0.90) 85%
         );
+
       z-index: 12;
     }
 
@@ -261,13 +336,16 @@
       animation: slotgloed 3.5s ease-in-out forwards;
     }
 
-    /* ANIMATIES */
+    /* =========================
+       ANIMATIES
+       ========================= */
 
     @keyframes introVerschijnen {
       from {
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -279,6 +357,7 @@
         opacity: 0;
         transform: scale(0.85);
       }
+
       to {
         opacity: 1;
         transform: scale(1);
@@ -290,6 +369,7 @@
         opacity: 0;
         transform: scale(0.85);
       }
+
       to {
         opacity: 1;
         transform: scale(1);
@@ -301,6 +381,7 @@
         opacity: 0;
         transform: translateY(15px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -312,6 +393,7 @@
         opacity: 0;
         transform: scale(0.95);
       }
+
       to {
         opacity: 1;
         transform: scale(1);
@@ -323,6 +405,19 @@
         opacity: 0;
         transform: scale(0.9);
       }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes ezelVerschijnen {
+      from {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+
       to {
         opacity: 1;
         transform: scale(1);
@@ -334,27 +429,19 @@
         opacity: 0;
         transform: translate(-50%, -50%) scale(0.8);
       }
+
       20% {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1);
       }
+
       75% {
         opacity: 1;
       }
+
       100% {
         opacity: 0;
         transform: translate(-50%, -50%) scale(1.05);
-      }
-    }
-
-    @keyframes ezelVerschijnen {
-      from {
-        opacity: 0;
-        transform: scale(0.7);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
       }
     }
 
@@ -362,9 +449,11 @@
       0% {
         opacity: 0.65;
       }
+
       50% {
         opacity: 1;
       }
+
       100% {
         opacity: 0.65;
       }
@@ -375,36 +464,20 @@
         opacity: 0;
         transform: scale(1);
       }
+
       35% {
         opacity: 1;
         transform: scale(1.05);
       }
+
       70% {
         opacity: 0.7;
         transform: scale(1.15);
       }
+
       100% {
         opacity: 0;
         transform: scale(1.3);
-      }
-    }
-
-    @keyframes slotgloed {
-      0% {
-        opacity: 0;
-        transform: scale(1);
-      }
-      30% {
-        opacity: 0.9;
-        transform: scale(1.03);
-      }
-      55% {
-        opacity: 0.65;
-        transform: scale(1.08);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(1.18);
       }
     }
 
@@ -413,16 +486,41 @@
         opacity: 0;
         transform: scale(0.8) rotate(0deg);
       }
+
       30% {
         opacity: 1;
       }
+
       70% {
         opacity: 0.8;
         transform: scale(1.1) rotate(4deg);
       }
+
       100% {
         opacity: 0;
         transform: scale(1.4) rotate(-5deg);
+      }
+    }
+
+    @keyframes slotgloed {
+      0% {
+        opacity: 0;
+        transform: scale(1);
+      }
+
+      30% {
+        opacity: 0.9;
+        transform: scale(1.03);
+      }
+
+      55% {
+        opacity: 0.65;
+        transform: scale(1.08);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1.18);
       }
     }
 
@@ -455,6 +553,7 @@
 
   </div>
 
+
   <script>
 
     /* ==========================================
@@ -465,56 +564,50 @@
 
       {
         naam: "👑 DE KONINKLIJKE",
-        tekst:
-          "Je hebt iets koninklijks. Of je doet in ieder geval alsof.",
-        afbeelding:
-          "koninklijke.png"
+        tekst: "Je hebt iets koninklijks. Of je doet in ieder geval alsof.",
+        afbeelding: "koninklijke.png"
       },
 
       {
         naam: "🦹 DE SCHURK",
-        tekst:
-          "Je bedoelingen zijn uitstekend. Dat maakt het alleen maar verdacht."
+        tekst: "Je bedoelingen zijn uitstekend. Dat maakt het alleen maar verdacht.",
+        afbeelding: "schurk.png"
       },
 
       {
         naam: "🎭 HET NOODLOT",
-        tekst:
-          "Sommige dingen zijn voorbestemd. Dit was er blijkbaar één van."
+        tekst: "Sommige dingen zijn voorbestemd. Dit was er blijkbaar één van.",
+        afbeelding: "het-noodlot.png"
       },
 
       {
         naam: "⭐ DE UITVERKORENE",
-        tekst:
-          "Het lot heeft jou gekozen. Hopelijk weet het lot wat het doet."
+        tekst: "Het lot heeft jou gekozen. Hopelijk weet het lot wat het doet.",
+        afbeelding: "uitverkorene.png"
       },
 
       {
         naam: "🧙 DE MAGIËR",
-        tekst:
-          "Je bezit grote krachten. Vooral als niemand kijkt.",
-        afbeelding:
-          "magier.png"
+        tekst: "Je bezit grote krachten. Vooral als niemand kijkt.",
+        afbeelding: "magier.png"
       },
 
       {
         naam: "🧚 DE BETOVERDE",
-        tekst:
-          "Er hangt magie om je heen. Of misschien is dat gewoon je uitstraling."
+        tekst: "Er hangt magie om je heen. Of misschien is dat gewoon je uitstraling.",
+        afbeelding: "betoverde.png"
       },
 
       {
         naam: "🌙 DE RUITER UIT DE MIST",
-        tekst:
-          "Je verschijnt wanneer niemand je verwacht... zelfs jij niet.",
-        afbeelding:
-          "ruiter-uit-de-mist.png"
+        tekst: "Je verschijnt wanneer niemand je verwacht... zelfs jij niet.",
+        afbeelding: "ruiter-uit-de-mist.png"
       },
 
       {
         naam: "🐴 DE VROLIJKE RUITER",
-        tekst:
-          "Je komt te paard. Waarom? Dat weet niemand."
+        tekst: "Je komt te paard. Waarom? Dat weet niemand.",
+        afbeelding: "vrolijke-ruiter.png"
       }
 
     ];
@@ -548,40 +641,27 @@
     const afsluitingen = [
 
       {
-        tekst:
-          "De spiegel heeft gesproken... maar sommige geheimen blijven verborgen.",
-
-        actie:
-          "geheim1"
+        tekst: "De spiegel heeft gesproken... maar sommige geheimen blijven verborgen.",
+        actie: "geheim"
       },
 
       {
-        tekst:
-          "De magie verdwijnt... maar de spiegel is nog niet uitgesproken.",
-
-        actie:
-          "geheim2"
+        tekst: "De magie verdwijnt... maar de spiegel is nog niet uitgesproken.",
+        actie: "outfit"
       },
 
       {
-        tekst:
-          "Was dit werkelijk jouw lot? Misschien moet je nog eens kijken...",
-
-        actie:
-          "ezel"
+        tekst: "Was dit werkelijk jouw lot? Misschien moet je nog eens kijken...",
+        actie: "ezel"
       },
 
       {
-        tekst:
-          "De spiegel zwijgt weer... maar hij heeft jou gezien.",
-
-        actie:
-          "oog"
+        tekst: "De spiegel zwijgt weer... maar hij heeft jou gezien.",
+        actie: "oog"
       },
 
       {
-        tekst:
-          "Een verhaal eindigt hier... of begint het pas?"
+        tekst: "Een verhaal eindigt hier... of begint het pas?"
       }
 
     ];
@@ -591,18 +671,10 @@
        ELEMENTEN
        ========================================== */
 
-    const scherm =
-      document.getElementById("scherm");
-
-    const magie =
-      document.getElementById("magie");
-
-    const rook =
-      document.getElementById("rook");
-
-    const slotgloed =
-      document.getElementById("slotgloed");
-
+    const scherm = document.getElementById("scherm");
+    const magie = document.getElementById("magie");
+    const rook = document.getElementById("rook");
+    const slotgloed = document.getElementById("slotgloed");
 
     let bezig = false;
 
@@ -612,27 +684,18 @@
        ========================================== */
 
     acties.forEach(function(actie) {
-
-      if (actie.afbeelding) {
-
-        const img = new Image();
-        img.src = actie.afbeelding;
-
-      }
-
+      const img = new Image();
+      img.src = actie.afbeelding;
     });
 
-
-    const ezelVoorladen = new Image();
-    ezelVoorladen.src = "ezel.png";
-
-
-    const geheimVoorladen = new Image();
-    geheimVoorladen.src = "geheim.png";
-
-
-    const oogVoorladen = new Image();
-    oogVoorladen.src = "oog.png";
+    [
+      "geheim.png",
+      "ezel.png",
+      "oog.png"
+    ].forEach(function(bestand) {
+      const img = new Image();
+      img.src = bestand;
+    });
 
 
     /* ==========================================
@@ -642,18 +705,9 @@
     function toonBeginScherm() {
 
       scherm.innerHTML =
-
-        '<div id="titel">' +
-          '✨ MAGISCHE SPIEGEL ✨' +
-        '</div>' +
-
-        '<div id="ondertitel">' +
-          'Sprookjesmagie of Sprookjestragedie' +
-        '</div>' +
-
-        '<div id="aanraken">' +
-          'RAAK HET SCHERM AAN' +
-        '</div>';
+        '<div id="titel">✨ MAGISCHE SPIEGEL ✨</div>' +
+        '<div id="ondertitel">Sprookjesmagie of Sprookjestragedie</div>' +
+        '<div id="aanraken">RAAK HET SCHERM AAN</div>';
 
     }
 
@@ -665,14 +719,11 @@
     function toonIntro() {
 
       const intro =
-        intros[
-          Math.floor(Math.random() * intros.length)
-        ];
+        intros[Math.floor(Math.random() * intros.length)];
 
       scherm.innerHTML = "";
 
-      const tekst =
-        document.createElement("div");
+      const tekst = document.createElement("div");
 
       tekst.id = "intro";
       tekst.textContent = intro;
@@ -685,10 +736,10 @@
 
 
     /* ==========================================
-       GEHEIM 1
+       GEHEIM
        ========================================== */
 
-    function toonGeheim1() {
+    function toonGeheim() {
 
       scherm.style.opacity = "0";
 
@@ -696,8 +747,7 @@
 
         scherm.innerHTML = "";
 
-        const tekst =
-          document.createElement("div");
+        const tekst = document.createElement("div");
 
         tekst.id = "geheim-tekst";
         tekst.textContent = "GEHEIM";
@@ -706,18 +756,27 @@
 
         scherm.style.opacity = "1";
 
+
         setTimeout(function() {
 
           scherm.style.opacity = "0";
 
+
           setTimeout(function() {
 
-            scherm.innerHTML =
-              '<div id="afsluiting">' +
-              'Oeps... dit stond niet in het sprookjesboek.' +
-              '</div>';
+            scherm.innerHTML = "";
+
+            const afbeelding =
+              document.createElement("img");
+
+            afbeelding.id = "geheim-afbeelding";
+            afbeelding.src = "geheim.png";
+            afbeelding.alt = "Een geheimzinnige verschijning";
+
+            scherm.appendChild(afbeelding);
 
             scherm.style.opacity = "1";
+
 
             setTimeout(function() {
 
@@ -725,9 +784,9 @@
 
               setTimeout(toonLaatsteGloed, 800);
 
-            }, 3500);
+            }, 4000);
 
-          }, 700);
+          }, 600);
 
         }, 1800);
 
@@ -737,10 +796,10 @@
 
 
     /* ==========================================
-       GEHEIM 2 — OUTFIT
+       OUTFIT
        ========================================== */
 
-    function toonGeheim2() {
+    function toonOutfit() {
 
       scherm.style.opacity = "0";
 
@@ -748,8 +807,7 @@
 
         scherm.innerHTML = "";
 
-        const tekst =
-          document.createElement("div");
+        const tekst = document.createElement("div");
 
         tekst.id = "geheim-tekst";
         tekst.textContent = "Hij weet meer...";
@@ -758,9 +816,11 @@
 
         scherm.style.opacity = "1";
 
+
         setTimeout(function() {
 
           scherm.style.opacity = "0";
+
 
           setTimeout(function() {
 
@@ -771,6 +831,7 @@
               '</div>';
 
             scherm.style.opacity = "1";
+
 
             setTimeout(function() {
 
@@ -810,6 +871,7 @@
 
         scherm.appendChild(afbeelding);
 
+
         const tekst =
           document.createElement("div");
 
@@ -820,6 +882,7 @@
         scherm.appendChild(tekst);
 
         scherm.style.opacity = "1";
+
 
         setTimeout(function() {
 
@@ -849,11 +912,12 @@
 
         afbeelding.id = "oog-afbeelding";
         afbeelding.src = "oog.png";
-        afbeelding.alt = "Een groot oog";
+        afbeelding.alt = "De spiegel kijkt terug";
 
         document.body.appendChild(afbeelding);
 
         afbeelding.classList.add("flits");
+
 
         setTimeout(function() {
 
@@ -879,6 +943,7 @@
       void slotgloed.offsetWidth;
 
       slotgloed.classList.add("actief");
+
 
       setTimeout(function() {
 
@@ -906,6 +971,7 @@
 
       scherm.style.opacity = "0";
 
+
       setTimeout(function() {
 
         scherm.innerHTML = "";
@@ -914,23 +980,22 @@
           document.createElement("div");
 
         tekst.id = "afsluiting";
-
-        /* innerHTML voor eventuele <br> in teksten */
         tekst.innerHTML = gekozen.tekst;
 
         scherm.appendChild(tekst);
 
         scherm.style.opacity = "1";
 
+
         setTimeout(function() {
 
-          if (gekozen.actie === "geheim1") {
-            toonGeheim1();
+          if (gekozen.actie === "geheim") {
+            toonGeheim();
             return;
           }
 
-          if (gekozen.actie === "geheim2") {
-            toonGeheim2();
+          if (gekozen.actie === "outfit") {
+            toonOutfit();
             return;
           }
 
@@ -943,6 +1008,7 @@
             toonOog();
             return;
           }
+
 
           scherm.style.opacity = "0";
 
@@ -969,7 +1035,13 @@
 
         bezig = true;
 
+
         toonIntro();
+
+
+        /*
+         * Intro blijft 6 seconden.
+         */
 
         setTimeout(function() {
 
@@ -982,7 +1054,9 @@
           magie.classList.add("actief");
           rook.classList.add("actief");
 
+
           scherm.style.opacity = "0";
+
 
           setTimeout(function() {
 
@@ -991,20 +1065,19 @@
                 Math.floor(Math.random() * acties.length)
               ];
 
+
             scherm.innerHTML = "";
 
-            if (willekeurig.afbeelding) {
 
-              const afbeelding =
-                document.createElement("img");
+            const afbeelding =
+              document.createElement("img");
 
-              afbeelding.id = "rol-afbeelding";
-              afbeelding.src = willekeurig.afbeelding;
-              afbeelding.alt = willekeurig.naam;
+            afbeelding.id = "rol-afbeelding";
+            afbeelding.src = willekeurig.afbeelding;
+            afbeelding.alt = willekeurig.naam;
 
-              scherm.appendChild(afbeelding);
+            scherm.appendChild(afbeelding);
 
-            }
 
             const uitkomst =
               document.createElement("div");
@@ -1014,6 +1087,7 @@
 
             scherm.appendChild(uitkomst);
 
+
             const beschrijving =
               document.createElement("div");
 
@@ -1022,7 +1096,9 @@
 
             scherm.appendChild(beschrijving);
 
+
             scherm.style.opacity = "1";
+
 
             /*
              * Rol blijft 9 seconden zichtbaar.

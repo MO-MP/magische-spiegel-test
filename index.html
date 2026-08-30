@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -217,7 +218,7 @@
 
 
     /* ==========================================
-       TEKST ONDER ROL
+       TEKST OVER DE ROLFOTO
        ========================================== */
 
     #rol-tekst {
@@ -226,7 +227,7 @@
       left: 50%;
 
       /*
-       * Iets hoger dan eerst.
+       * Iets hoger dan voorheen.
        */
       bottom: 14vh;
 
@@ -234,9 +235,9 @@
 
       z-index: 8;
 
-      width: 92vw;
+      width: 90vw;
 
-      max-width: 1100px;
+      max-width: 1000px;
 
       opacity: 0;
 
@@ -251,11 +252,11 @@
     }
 
     #uitkomst {
-      font-size: clamp(36px, 5.5vw, 64px);
+      font-size: clamp(34px, 5.5vw, 64px);
 
       font-weight: normal;
 
-      margin-bottom: 16px;
+      margin-bottom: 12px;
 
       text-shadow:
         0 2px 8px black,
@@ -264,13 +265,13 @@
 
     #beschrijving {
       /*
-       * Groter dan de vorige versie.
+       * Grotere tekst onder de rol.
        */
-      font-size: clamp(26px, 3.2vw, 38px);
+      font-size: clamp(24px, 3.2vw, 36px);
 
       line-height: 1.35;
 
-      max-width: 950px;
+      max-width: 850px;
 
       margin: auto;
 
@@ -335,8 +336,8 @@
       transform:
         translate(-50%, -50%);
 
-      max-width: 94vw;
-      max-height: 94vh;
+      max-width: 90vw;
+      max-height: 90vh;
 
       object-fit: contain;
 
@@ -349,33 +350,12 @@
           0 0 30px
           rgba(255,255,255,0.35)
         );
-
-      /*
-       * Hoeken zacht laten verdwijnen.
-       */
-      -webkit-mask-image:
-        radial-gradient(
-          ellipse at center,
-          black 45%,
-          rgba(0,0,0,0.95) 60%,
-          rgba(0,0,0,0.70) 76%,
-          transparent 96%
-        );
-
-      mask-image:
-        radial-gradient(
-          ellipse at center,
-          black 45%,
-          rgba(0,0,0,0.95) 60%,
-          rgba(0,0,0,0.70) 76%,
-          transparent 96%
-        );
     }
 
     #geheim-afbeelding.flits {
       animation:
         geheimFlits
-        1.4s
+        0.9s
         ease
         forwards;
     }
@@ -392,10 +372,11 @@
       height: auto;
 
       /*
-       * Even groot opgezet als de rolafbeeldingen.
+       * Zelfde grote uitstraling
+       * als de rolafbeeldingen.
        */
       max-width: 100vw;
-      max-height: 75vh;
+      max-height: 85vh;
 
       object-fit: contain;
 
@@ -435,26 +416,119 @@
     }
 
     #ezel-tekst {
-      font-size: clamp(30px, 4.5vw, 54px);
+      /*
+       * Tekst bewust hoger geplaatst.
+       */
+      position: relative;
+      margin-top: -8vh;
+
+      z-index: 8;
+
+      font-size: clamp(28px, 4.5vw, 52px);
 
       line-height: 1.4;
-
-      /*
-       * Tekst hoger bij de ezel.
-       */
-      margin-top: -35px;
-
-      opacity: 0;
 
       text-shadow:
         0 2px 8px black,
         0 0 18px black;
+
+      opacity: 0;
 
       animation:
         afsluitingVerschijnen
         1.5s
         ease
         0.5s
+        forwards;
+    }
+
+
+    /* ==========================================
+       EASTER EGG — PRINS + HEKS
+       ========================================== */
+
+    #easter-egg {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 30;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      pointer-events: none;
+
+      opacity: 0;
+
+      animation:
+        easterFotoVerschijnen
+        1s
+        ease
+        forwards;
+    }
+
+    #easter-egg img {
+      width: 100vw;
+      height: 100vh;
+
+      object-fit: contain;
+
+      max-width: 100%;
+      max-height: 100%;
+
+      filter:
+        drop-shadow(
+          0 0 30px
+          rgba(0,0,0,0.75)
+        );
+
+      -webkit-mask-image:
+        radial-gradient(
+          ellipse at center,
+          black 42%,
+          rgba(0,0,0,0.95) 58%,
+          rgba(0,0,0,0.65) 72%,
+          transparent 94%
+        );
+
+      mask-image:
+        radial-gradient(
+          ellipse at center,
+          black 42%,
+          rgba(0,0,0,0.95) 58%,
+          rgba(0,0,0,0.65) 72%,
+          transparent 94%
+        );
+    }
+
+    #easter-tekst {
+      position: fixed;
+
+      left: 50%;
+      bottom: 12vh;
+
+      transform: translateX(-50%);
+
+      z-index: 31;
+
+      width: 90vw;
+
+      font-size: clamp(28px, 4.5vw, 52px);
+
+      text-shadow:
+        0 2px 8px black,
+        0 0 18px black;
+
+      opacity: 0;
+
+      animation:
+        easterTekstVerschijnen
+        1s
+        ease
+        4.5s
         forwards;
     }
 
@@ -595,7 +669,6 @@
 
       from {
         opacity: 0;
-
         transform:
           translateX(-50%)
           translateY(20px);
@@ -603,7 +676,6 @@
 
       to {
         opacity: 1;
-
         transform:
           translateX(-50%)
           translateY(0);
@@ -667,7 +739,7 @@
           scale(0.8);
       }
 
-      15% {
+      20% {
         opacity: 1;
 
         transform:
@@ -675,7 +747,7 @@
           scale(1);
       }
 
-      85% {
+      75% {
         opacity: 1;
       }
 
@@ -804,6 +876,48 @@
 
     }
 
+
+    /* ==========================================
+       EASTER EGG ANIMATIES
+       ========================================== */
+
+    @keyframes easterFotoVerschijnen {
+
+      from {
+        opacity: 0;
+
+        transform: scale(0.92);
+      }
+
+      to {
+        opacity: 1;
+
+        transform: scale(1);
+      }
+
+    }
+
+
+    @keyframes easterTekstVerschijnen {
+
+      from {
+        opacity: 0;
+
+        transform:
+          translateX(-50%)
+          translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translateX(-50%)
+          translateY(0);
+      }
+
+    }
+
   </style>
 </head>
 
@@ -813,7 +927,9 @@
   <div id="spiegel">
 
     <div id="magie"></div>
+
     <div id="rook"></div>
+
     <div id="slotgloed"></div>
 
     <div id="scherm"></div>
@@ -1000,15 +1116,7 @@
 
         "Het sprookje begint. Maar de spiegel twijfelt nog... kies jij de goede kant, of de slechte?",
 
-        "Oei... er zit wat magie in de drank. De spiegel krijgt je maar moeilijk scherp in beeld.",
-
-        "De spiegel heeft lang genoeg gewacht... nu wil hij weten wie jij werkelijk bent.",
-
-        "Een vreemd gevoel trekt door de kamer... alsof de spiegel jou al kende.",
-
-        "De magie draait langzaam rond het glas... en kiest uiteindelijk jou.",
-
-        "Pas op... sommige spiegels vertellen liever de waarheid dan je lief is."
+        "Oei... er zit wat magie in de drank. De spiegel krijgt je maar moeilijk scherp in beeld."
 
       ],
 
@@ -1024,15 +1132,7 @@
 
         "Le conte commence. Mais le miroir hésite encore... choisiras-tu le bon côté ou le mauvais ?",
 
-        "Oups... tu as peut-être un peu trop bu. Le miroir n'arrive même plus à faire la mise au point !",
-
-        "Le miroir a assez attendu... maintenant, il veut savoir qui tu es vraiment.",
-
-        "Une étrange sensation traverse la pièce... comme si le miroir te connaissait déjà.",
-
-        "La magie tourne lentement autour du verre... et finit par te choisir.",
-
-        "Attention... certains miroirs préfèrent dire la vérité, même quand elle dérange."
+        "Oups... tu as peut-être un peu trop bu. Le miroir n'arrive même plus à faire la mise au point !"
 
       ]
 
@@ -1078,21 +1178,6 @@
         {
           tekst:
             "Een verhaal eindigt hier... of begint het pas?"
-        },
-
-        {
-          tekst:
-            "De spiegel lijkt tevreden... maar helemaal zeker is hij niet."
-        },
-
-        {
-          tekst:
-            "De magie trekt zich terug... althans, voorlopig."
-        },
-
-        {
-          tekst:
-            "Misschien was dit geen toeval. Misschien was het juist heel toevallig."
         }
 
       ],
@@ -1131,21 +1216,6 @@
         {
           tekst:
             "Une histoire se termine ici... ou est-ce seulement le début ?"
-        },
-
-        {
-          tekst:
-            "Le miroir semble satisfait... mais rien n'est jamais certain."
-        },
-
-        {
-          tekst:
-            "La magie se retire... du moins, pour le moment."
-        },
-
-        {
-          tekst:
-            "Ce n'était peut-être pas un hasard. Ou peut-être que si."
         }
 
       ]
@@ -1172,6 +1242,12 @@
 
     let bezig = false;
 
+    /*
+     * Hiermee voorkomen we dat een normale
+     * aanraking meteen als easter egg telt.
+     */
+    let easterEggBeschikbaar = false;
+
 
     /* ==========================================
        AFBEELDINGEN VOORAF LADEN
@@ -1186,7 +1262,6 @@
 
         img.src =
           actie.afbeelding;
-
       }
 
     });
@@ -1206,18 +1281,18 @@
       "geheim.png";
 
 
-    const prinsHeksVoorladen =
-      new Image();
-
-    prinsHeksVoorladen.src =
-      "prins-heks.png";
-
-
     const oogVoorladen =
       new Image();
 
     oogVoorladen.src =
       "oog.png";
+
+
+    const prinsHeksVoorladen =
+      new Image();
+
+    prinsHeksVoorladen.src =
+      "prins-heks.png";
 
 
     /* ==========================================
@@ -1330,6 +1405,144 @@
 
         });
 
+
+      /*
+       * Na terugkeer naar het beginscherm
+       * krijgt de easter egg een korte periode
+       * waarin een extra aanraking hem kan activeren.
+       */
+      easterEggBeschikbaar = true;
+
+      setTimeout(function() {
+
+        easterEggBeschikbaar = false;
+
+      }, 3000);
+
+    }
+
+
+    /* ==========================================
+       EASTER EGG
+       ========================================== */
+
+    function toonEasterEgg() {
+
+      if (!easterEggBeschikbaar) {
+        return;
+      }
+
+      easterEggBeschikbaar = false;
+
+      bezig = true;
+
+
+      scherm.style.opacity =
+        "0";
+
+
+      setTimeout(function() {
+
+        scherm.innerHTML =
+          "";
+
+
+        const laag =
+          document.createElement("div");
+
+
+        laag.id =
+          "easter-egg";
+
+
+        const afbeelding =
+          document.createElement("img");
+
+
+        afbeelding.src =
+          "prins-heks.png";
+
+
+        afbeelding.alt =
+          taal === "nl"
+            ? "Een prins die een heks kust"
+            : "Un prince qui embrasse une sorcière";
+
+
+        laag.appendChild(
+          afbeelding
+        );
+
+
+        document.body.appendChild(
+          laag
+        );
+
+
+        /*
+         * Foto blijft 4,5 seconden zichtbaar.
+         */
+
+        setTimeout(function() {
+
+          const tekst =
+            document.createElement("div");
+
+
+          tekst.id =
+            "easter-tekst";
+
+
+          tekst.textContent =
+            taal === "nl"
+              ? "Dat had je niet moeten zien."
+              : "Tu n'aurais pas dû voir ça.";
+
+
+          document.body.appendChild(
+            tekst
+          );
+
+
+        }, 4500);
+
+
+        /*
+         * Na foto + tekst terug naar
+         * de gouden afsluiting.
+         */
+
+        setTimeout(function() {
+
+          const foto =
+            document.getElementById(
+              "easter-egg"
+            );
+
+
+          const tekst =
+            document.getElementById(
+              "easter-tekst"
+            );
+
+
+          if (foto) {
+            foto.remove();
+          }
+
+
+          if (tekst) {
+            tekst.remove();
+          }
+
+
+          toonLaatsteGloed();
+
+        }, 7500);
+
+
+      }, 500);
+
     }
 
 
@@ -1341,6 +1554,7 @@
 
       const lijst =
         intros[taal];
+
 
       const intro =
         lijst[
@@ -1356,9 +1570,7 @@
 
 
       const tekst =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
 
       tekst.id =
@@ -1397,9 +1609,7 @@
 
 
         const tekst =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
 
         tekst.id =
@@ -1421,10 +1631,6 @@
           "1";
 
 
-        /*
-         * GEHEIM-tekst iets langer.
-         */
-
         setTimeout(function() {
 
           scherm.style.opacity =
@@ -1434,9 +1640,7 @@
           setTimeout(function() {
 
             const afbeelding =
-              document.createElement(
-                "img"
-              );
+              document.createElement("img");
 
 
             afbeelding.id =
@@ -1449,8 +1653,8 @@
 
             afbeelding.alt =
               taal === "nl"
-                ? "Een prins op een stokpaard"
-                : "Un prince sur un cheval à bâton";
+                ? "Een geheim sprookjesbeeld"
+                : "Une image secrète de conte";
 
 
             document.body.appendChild(
@@ -1464,7 +1668,7 @@
 
 
             /*
-             * Afbeelding langer zichtbaar.
+             * Geheim blijft iets langer zichtbaar.
              */
 
             setTimeout(function() {
@@ -1502,13 +1706,13 @@
               }, 4000);
 
 
-            }, 1400);
+            }, 900);
 
 
           }, 700);
 
 
-        }, 2500);
+        }, 1800);
 
 
       }, 800);
@@ -1517,7 +1721,7 @@
 
 
     /* ==========================================
-       GEHEIM 2
+       GEHEIM 2 — OUTFIT
        ========================================== */
 
     function toonGeheim2() {
@@ -1533,9 +1737,7 @@
 
 
         const tekst =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
 
         tekst.id =
@@ -1625,9 +1827,7 @@
 
 
         const afbeelding =
-          document.createElement(
-            "img"
-          );
+          document.createElement("img");
 
 
         afbeelding.id =
@@ -1650,9 +1850,7 @@
 
 
         const tekst =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
 
         tekst.id =
@@ -1710,9 +1908,7 @@
 
 
         const afbeelding =
-          document.createElement(
-            "img"
-          );
+          document.createElement("img");
 
 
         afbeelding.id =
@@ -1740,7 +1936,7 @@
 
 
         /*
-         * Oog langer zichtbaar.
+         * Oog blijft langer zichtbaar.
          */
 
         setTimeout(function() {
@@ -1753,95 +1949,6 @@
 
 
       }, 500);
-
-    }
-
-
-    /* ==========================================
-       ONVERWACHTE AANRAKING
-       ========================================== */
-
-    function toonPrinsHeks() {
-
-      scherm.style.opacity =
-        "0";
-
-
-      setTimeout(function() {
-
-        scherm.innerHTML =
-          "";
-
-
-        const afbeelding =
-          document.createElement(
-            "img"
-          );
-
-
-        afbeelding.id =
-          "geheim-afbeelding";
-
-
-        afbeelding.src =
-          "prins-heks.png";
-
-
-        afbeelding.alt =
-          taal === "nl"
-            ? "Een prins die stiekem een heks kust"
-            : "Un prince qui embrasse une sorcière en secret";
-
-
-        document.body.appendChild(
-          afbeelding
-        );
-
-
-        afbeelding.classList.add(
-          "flits"
-        );
-
-
-        setTimeout(function() {
-
-          afbeelding.remove();
-
-
-          scherm.innerHTML =
-            '<div id="afsluiting">' +
-
-            (
-              taal === "nl"
-                ? "Oeps... dat was niet de bedoeling."
-                : "Oups... ce n'était pas prévu."
-            ) +
-
-            '</div>';
-
-
-          scherm.style.opacity =
-            "1";
-
-
-          setTimeout(function() {
-
-            scherm.style.opacity =
-              "0";
-
-
-            setTimeout(
-              toonLaatsteGloed,
-              800
-            );
-
-          }, 4500);
-
-
-        }, 1800);
-
-
-      }, 400);
 
     }
 
@@ -1916,9 +2023,7 @@
 
 
         const tekst =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
 
         tekst.id =
@@ -2008,7 +2113,25 @@
 
     scherm.addEventListener(
       "click",
-      function() {
+      function(event) {
+
+        /*
+         * Als de spiegel net klaar is en iemand
+         * nogmaals tikt, proberen we eerst
+         * de verborgen easter egg.
+         */
+
+        if (
+          easterEggBeschikbaar &&
+          !bezig
+        ) {
+
+          toonEasterEgg();
+
+          return;
+
+        }
+
 
         if (bezig) {
           return;
@@ -2017,19 +2140,6 @@
 
         bezig =
           true;
-
-
-        /*
-         * Kleine kans op de grappige
-         * prins/heks-verrassing.
-         *
-         * Dit gebeurt alleen bij een
-         * onverwachte extra aanraking
-         * tijdens het beginscherm.
-         */
-
-        const willekeurigeKans =
-          Math.random();
 
 
         toonIntro();
@@ -2069,10 +2179,6 @@
 
           setTimeout(function() {
 
-            /*
-             * Normale rol kiezen.
-             */
-
             const willekeurig =
               acties[
                 Math.floor(
@@ -2094,59 +2200,146 @@
              * Grote foto.
              */
 
-            const fotoLaag =
-              document.createElement(
-                "div"
-              );
+            if (
+              willekeurig.afbeelding
+            ) {
 
-
-            fotoLaag.id =
-              "rol-foto-laag";
-
-
-            const afbeelding =
-              document.createElement(
-                "img"
-              );
-
-
-            afbeelding.id =
-              "rol-foto";
-
-
-            afbeelding.src =
-              willekeurig.afbeelding;
-
-
-            afbeelding.alt =
-              taalData.naam;
-
-
-            fotoLaag.appendChild(
-              afbeelding
-            );
-
-
-            document.body.appendChild(
-              fotoLaag
-            );
-
-
-            /*
-             * Foto eerst alleen.
-             */
-
-            setTimeout(function() {
-
-              const rolTekst =
+              const fotoLaag =
                 document.createElement(
                   "div"
                 );
 
 
-              rolTekst.id =
-                "rol-tekst";
+              fotoLaag.id =
+                "rol-foto-laag";
 
+
+              const afbeelding =
+                document.createElement(
+                  "img"
+                );
+
+
+              afbeelding.id =
+                "rol-foto";
+
+
+              afbeelding.src =
+                willekeurig.afbeelding;
+
+
+              afbeelding.alt =
+                taalData.naam;
+
+
+              fotoLaag.appendChild(
+                afbeelding
+              );
+
+
+              document.body.appendChild(
+                fotoLaag
+              );
+
+
+              /*
+               * Foto blijft eerst
+               * 2 seconden alleen.
+               */
+
+              setTimeout(function() {
+
+                const rolTekst =
+                  document.createElement(
+                    "div"
+                  );
+
+
+                rolTekst.id =
+                  "rol-tekst";
+
+
+                const uitkomst =
+                  document.createElement(
+                    "div"
+                  );
+
+
+                uitkomst.id =
+                  "uitkomst";
+
+
+                uitkomst.textContent =
+                  taalData.naam;
+
+
+                rolTekst.appendChild(
+                  uitkomst
+                );
+
+
+                const beschrijving =
+                  document.createElement(
+                    "div"
+                  );
+
+
+                beschrijving.id =
+                  "beschrijving";
+
+
+                beschrijving.textContent =
+                  taalData.tekst;
+
+
+                rolTekst.appendChild(
+                  beschrijving
+                );
+
+
+                document.body.appendChild(
+                  rolTekst
+                );
+
+
+              }, 2000);
+
+
+              /*
+               * Foto + tekst blijven
+               * samen 11 seconden staan.
+               */
+
+              setTimeout(function() {
+
+                const foto =
+                  document.getElementById(
+                    "rol-foto-laag"
+                  );
+
+
+                const tekst =
+                  document.getElementById(
+                    "rol-tekst"
+                  );
+
+
+                if (foto) {
+                  foto.remove();
+                }
+
+
+                if (tekst) {
+                  tekst.remove();
+                }
+
+
+                toonAfsluiting();
+
+              }, 11000);
+
+
+            } else {
 
               const uitkomst =
                 document.createElement(
@@ -2162,7 +2355,7 @@
                 taalData.naam;
 
 
-              rolTekst.appendChild(
+              scherm.appendChild(
                 uitkomst
               );
 
@@ -2181,66 +2374,22 @@
                 taalData.tekst;
 
 
-              rolTekst.appendChild(
+              scherm.appendChild(
                 beschrijving
               );
 
 
-              document.body.appendChild(
-                rolTekst
+              scherm.style.opacity =
+                "1";
+
+
+              setTimeout(
+                toonAfsluiting,
+                11000
               );
 
+            }
 
-            }, 2000);
-
-
-            /*
-             * Rol totaal ongeveer 14 seconden.
-             */
-
-            setTimeout(function() {
-
-              const foto =
-                document.getElementById(
-                  "rol-foto-laag"
-                );
-
-
-              const tekst =
-                document.getElementById(
-                  "rol-tekst"
-                );
-
-
-              if (foto) {
-                foto.remove();
-              }
-
-
-              if (tekst) {
-                tekst.remove();
-              }
-
-
-              /*
-               * Heel kleine kans op de
-               * grappige prins/heks-foto
-               * als onverwachte verrassing.
-               */
-
-              if (
-                willekeurigeKans < 0.08
-              ) {
-
-                toonPrinsHeks();
-
-              } else {
-
-                toonAfsluiting();
-
-              }
-
-            }, 14000);
 
           }, 1700);
 
@@ -2276,3 +2425,4 @@
 
 </body>
 </html>
+```

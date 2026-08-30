@@ -1,9 +1,10 @@
-const CACHE_NAME = "magische-spiegel-test-v38";
+const CACHE_NAME = "magische-spiegel-test-v39";
 
 const BESTANDEN = [
 
   "./",
   "./index.html",
+
   "./spiegel.png",
 
   "./koninklijke.png",
@@ -32,7 +33,9 @@ self.addEventListener(
       caches.open(CACHE_NAME)
         .then(function(cache) {
 
-          return cache.addAll(BESTANDEN);
+          return cache.addAll(
+            BESTANDEN
+          );
 
         })
 
@@ -94,20 +97,23 @@ self.addEventListener(
 
           }
 
+
           return fetch(event.request)
             .then(function(networkResponse) {
 
-              return caches.open(CACHE_NAME)
-                .then(function(cache) {
+              return caches.open(
+                CACHE_NAME
+              )
+              .then(function(cache) {
 
-                  cache.put(
-                    event.request,
-                    networkResponse.clone()
-                  );
+                cache.put(
+                  event.request,
+                  networkResponse.clone()
+                );
 
-                  return networkResponse;
+                return networkResponse;
 
-                });
+              });
 
             });
 

@@ -1,90 +1,90 @@
-const CACHE_NAME = "magische-spiegel-test-v24";
+```javascript
+const CACHE_NAME = "magische-spiegel-v25";
 
-const BESTANDEN = [
-"./",
-"./index.html",
-"./spiegel.png",
-"./koninklijke.png",
-"./magier.png",
-"./ruiter-uit-de-mist.png"
+const FILES_TO_CACHE = [
+
+  "./",
+  "./index.html",
+
+  "./spiegel.png",
+
+  "./koninklijke.png",
+  "./schurk.png",
+  "./het-noodlot.png",
+  "./uitverkorene.png",
+  "./magier.png",
+  "./betoverde.png",
+  "./ruiter-uit-de-mist.png",
+  "./vrolijke-ruiter.png",
+
+  "./geheim.png",
+  "./ezel.png",
+  "./oog.png"
+
 ];
 
-/* Installeren */
 
-self.addEventListener("install", function(event) {
+self.addEventListener(
+  "install",
+  function(event) {
 
-event.waitUntil(
+    event.waitUntil(
+      caches.open(CACHE_NAME)
+        .then(function(cache) {
+          return cache.addAll(FILES_TO_CACHE);
+        })
+    );
 
-```
-caches.open(CACHE_NAME)
-  .then(function(cache) {
+    self.skipWaiting();
 
-    return cache.addAll(BESTANDEN);
-
-  })
-```
-
+  }
 );
 
-self.skipWaiting();
 
-});
+self.addEventListener(
+  "activate",
+  function(event) {
 
-/* Activeren */
+    event.waitUntil(
+      caches.keys()
+        .then(function(keys) {
 
-self.addEventListener("activate", function(event) {
+          return Promise.all(
 
-event.waitUntil(
+            keys.map(function(key) {
 
-```
-caches.keys().then(function(cacheNames) {
+              if (key !== CACHE_NAME) {
+                return caches.delete(key);
+              }
 
-  return Promise.all(
+            })
 
-    cacheNames
-      .filter(function(cacheName) {
+          );
 
-        return cacheName !== CACHE_NAME;
+        })
+    );
 
-      })
-      .map(function(cacheName) {
+    self.clients.claim();
 
-        return caches.delete(cacheName);
-
-      })
-
-  );
-
-})
-```
-
+  }
 );
 
-self.clients.claim();
 
-});
+self.addEventListener(
+  "fetch",
+  function(event) {
 
-/* Bestanden ophalen */
+    event.respondWith(
 
-self.addEventListener("fetch", function(event) {
+      caches.match(event.request)
+        .then(function(response) {
 
-event.respondWith(
+          return response || fetch(event.request);
 
-```
-caches.match(event.request)
-  .then(function(response) {
+        })
 
-    if (response) {
+    );
 
-      return response;
-
-    }
-
-    return fetch(event.request);
-
-  })
-```
-
+  }
 );
-
-});
+```

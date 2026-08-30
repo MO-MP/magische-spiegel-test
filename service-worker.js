@@ -1,5 +1,4 @@
-```javascript
-const CACHE_NAME = "magische-spiegel-test-v37";
+const CACHE_NAME = "magische-spiegel-test-v38";
 
 const BESTANDEN = [
 
@@ -118,4 +117,3 @@ self.addEventListener(
 
   }
 );
-```

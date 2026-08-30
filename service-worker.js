@@ -1,8 +1,7 @@
 ```javascript
-const CACHE_NAME = "magische-spiegel-test-v40";
+const CACHE_NAME = "magische-spiegel-v1";
 
 const BESTANDEN = [
-
   "./",
   "./index.html",
   "./spiegel.png",
@@ -20,102 +19,104 @@ const BESTANDEN = [
   "./prins-heks.png",
   "./ezel.png",
   "./oog.png"
-
 ];
 
 
-self.addEventListener(
-  "install",
-  function(event) {
+// ==========================================
+// INSTALL
+// ==========================================
 
-    event.waitUntil(
+self.addEventListener("install", function(event) {
 
-      caches.open(CACHE_NAME)
-        .then(function(cache) {
+  event.waitUntil(
 
-          return cache.addAll(BESTANDEN);
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
 
-        })
+        return cache.addAll(BESTANDEN);
 
-    );
+      })
 
-    self.skipWaiting();
+  );
 
-  }
-);
+  self.skipWaiting();
 
-
-self.addEventListener(
-  "activate",
-  function(event) {
-
-    event.waitUntil(
-
-      caches.keys()
-        .then(function(keys) {
-
-          return Promise.all(
-
-            keys
-              .filter(function(key) {
-
-                return key !== CACHE_NAME;
-
-              })
-              .map(function(key) {
-
-                return caches.delete(key);
-
-              })
-
-          );
-
-        })
-
-    );
-
-    self.clients.claim();
-
-  }
-);
+});
 
 
-self.addEventListener(
-  "fetch",
-  function(event) {
+// ==========================================
+// ACTIVATE
+// ==========================================
 
-    event.respondWith(
+self.addEventListener("activate", function(event) {
 
-      caches.match(event.request)
-        .then(function(response) {
+  event.waitUntil(
 
-          if (response) {
+    caches.keys()
+      .then(function(keys) {
 
-            return response;
+        return Promise.all(
 
-          }
+          keys
+            .filter(function(key) {
 
-          return fetch(event.request)
-            .then(function(networkResponse) {
+              return key !== CACHE_NAME;
 
-              return caches.open(CACHE_NAME)
-                .then(function(cache) {
+            })
+            .map(function(key) {
 
-                  cache.put(
-                    event.request,
-                    networkResponse.clone()
-                  );
+              return caches.delete(key);
 
-                  return networkResponse;
+            })
 
-                });
+        );
 
-            });
+      })
 
-        })
+  );
 
-    );
+  self.clients.claim();
 
-  }
-);
+});
+
+
+// ==========================================
+// FETCH
+// ==========================================
+
+self.addEventListener("fetch", function(event) {
+
+  event.respondWith(
+
+    caches.match(event.request)
+      .then(function(response) {
+
+        if (response) {
+
+          return response;
+
+        }
+
+        return fetch(event.request)
+          .then(function(networkResponse) {
+
+            return caches.open(CACHE_NAME)
+              .then(function(cache) {
+
+                cache.put(
+                  event.request,
+                  networkResponse.clone()
+                );
+
+                return networkResponse;
+
+              });
+
+          });
+
+      })
+
+  );
+
+});
 ```

@@ -191,11 +191,6 @@
       max-width: 100%;
       max-height: 100%;
 
-      /*
-       * De foto mag groot worden,
-       * maar wordt niet uitgerekt.
-       */
-
       filter:
         drop-shadow(
           0 0 25px
@@ -203,24 +198,27 @@
         );
 
       /*
-       * Masker zorgt ervoor dat de
-       * hoeken zacht verdwijnen.
+       * Zachte rand rondom de foto.
+       * Hierdoor verdwijnen harde hoeken
+       * tegen de spiegelachtergrond.
        */
 
       -webkit-mask-image:
         radial-gradient(
           ellipse at center,
-          black 45%,
-          rgba(0,0,0,0.9) 65%,
-          transparent 92%
+          black 42%,
+          rgba(0,0,0,0.95) 58%,
+          rgba(0,0,0,0.65) 72%,
+          transparent 94%
         );
 
       mask-image:
         radial-gradient(
           ellipse at center,
-          black 45%,
-          rgba(0,0,0,0.9) 65%,
-          transparent 92%
+          black 42%,
+          rgba(0,0,0,0.95) 58%,
+          rgba(0,0,0,0.65) 72%,
+          transparent 94%
         );
     }
 
@@ -372,14 +370,43 @@
       width: auto;
       height: auto;
 
-      max-width: 75vw;
-      max-height: 55vh;
+      max-width: 85vw;
+      max-height: 65vh;
 
       object-fit: contain;
 
       margin: 0 auto 10px auto;
 
       opacity: 0;
+
+      /*
+       * Zachte maskering zodat de hoeken
+       * van de ezelfoto verdwijnen.
+       */
+
+      -webkit-mask-image:
+        radial-gradient(
+          ellipse at center,
+          black 42%,
+          rgba(0,0,0,0.95) 58%,
+          rgba(0,0,0,0.65) 72%,
+          transparent 94%
+        );
+
+      mask-image:
+        radial-gradient(
+          ellipse at center,
+          black 42%,
+          rgba(0,0,0,0.95) 58%,
+          rgba(0,0,0,0.65) 72%,
+          transparent 94%
+        );
+
+      filter:
+        drop-shadow(
+          0 0 25px
+          rgba(0,0,0,0.65)
+        );
 
       animation:
         ezelVerschijnen
@@ -1246,8 +1273,10 @@
       const tekst =
         document.createElement("div");
 
+
       tekst.id =
         "intro";
+
 
       tekst.textContent =
         intro;
@@ -1281,6 +1310,7 @@
 
         const tekst =
           document.createElement("div");
+
 
         tekst.id =
           "geheim-tekst";
@@ -1819,10 +1849,6 @@
             "0";
 
 
-          /*
-           * Rol verschijnt.
-           */
-
           setTimeout(function() {
 
             const willekeurig =
@@ -1952,7 +1978,8 @@
 
 
               /*
-               * Alles na 8 seconden weg.
+               * Foto + tekst blijven
+               * nu 11 seconden staan.
                */
 
               setTimeout(function() {
@@ -1961,6 +1988,7 @@
                   document.getElementById(
                     "rol-foto-laag"
                   );
+
 
                 const tekst =
                   document.getElementById(
@@ -1980,15 +2008,10 @@
 
                 toonAfsluiting();
 
-              }, 8000);
+              }, 11000);
 
 
             } else {
-
-              /*
-               * Veiligheidsoptie:
-               * als een afbeelding ontbreekt.
-               */
 
               const uitkomst =
                 document.createElement(
@@ -2034,7 +2057,7 @@
 
               setTimeout(
                 toonAfsluiting,
-                8000
+                11000
               );
 
             }

@@ -1,10 +1,11 @@
 ```javascript
-const CACHE_NAME = "magische-spiegel-v25";
+const CACHE_NAME = "magische-spiegel-v26";
 
 const FILES_TO_CACHE = [
 
   "./",
   "./index.html",
+  "./service-worker.js",
 
   "./spiegel.png",
 
@@ -29,10 +30,16 @@ self.addEventListener(
   function(event) {
 
     event.waitUntil(
+
       caches.open(CACHE_NAME)
         .then(function(cache) {
-          return cache.addAll(FILES_TO_CACHE);
+
+          return cache.addAll(
+            FILES_TO_CACHE
+          );
+
         })
+
     );
 
     self.skipWaiting();
@@ -46,6 +53,7 @@ self.addEventListener(
   function(event) {
 
     event.waitUntil(
+
       caches.keys()
         .then(function(keys) {
 
@@ -53,8 +61,14 @@ self.addEventListener(
 
             keys.map(function(key) {
 
-              if (key !== CACHE_NAME) {
-                return caches.delete(key);
+              if (
+                key !== CACHE_NAME
+              ) {
+
+                return caches.delete(
+                  key
+                );
+
               }
 
             })
@@ -62,6 +76,7 @@ self.addEventListener(
           );
 
         })
+
     );
 
     self.clients.claim();
@@ -76,12 +91,20 @@ self.addEventListener(
 
     event.respondWith(
 
-      caches.match(event.request)
-        .then(function(response) {
+      caches.match(
+        event.request
+      )
+      .then(function(response) {
 
-          return response || fetch(event.request);
+        if (response) {
+          return response;
+        }
 
-        })
+        return fetch(
+          event.request
+        );
+
+      })
 
     );
 

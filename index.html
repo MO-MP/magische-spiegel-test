@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -28,6 +27,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
+
       background-image: url("spiegel.png");
       background-size: cover;
       background-position: center;
@@ -46,20 +46,26 @@
     #scherm {
       position: relative;
       z-index: 5;
+
       width: 100%;
       height: 100%;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 18px;
-      padding: 40px;
+
+      gap: 14px;
+      padding: 30px;
       box-sizing: border-box;
+
       transition: opacity 0.8s ease;
       cursor: pointer;
     }
 
-    /* BEGIN */
+    /* ==========================================
+       BEGIN
+       ========================================== */
 
     #titel {
       font-size: clamp(38px, 6vw, 70px);
@@ -95,86 +101,129 @@
       text-decoration: underline;
     }
 
-    /* INTRO */
+    /* ==========================================
+       INTRO
+       ========================================== */
 
     #intro {
       font-size: clamp(25px, 4vw, 48px);
       line-height: 1.5;
+
       max-width: 80vw;
       padding: 0 30px;
       box-sizing: border-box;
+
       opacity: 0;
+
       animation: introVerschijnen 2s ease forwards;
     }
 
-    /* ROLAFBEELDING */
+    /* ==========================================
+       ROLAFBEELDING — EXTRA GROOT
+       ========================================== */
 
     #rol-afbeelding {
       display: block;
+
       width: auto;
       height: auto;
-      max-width: 75vw;
-      max-height: 45vh;
+
+      max-width: 85vw;
+      max-height: 52vh;
+
       object-fit: contain;
-      margin: 0 auto 5px auto;
+
+      margin: 0 auto;
+
       opacity: 0;
+
       animation: afbeeldingverschijnen 1.8s ease forwards;
     }
 
-    /* ROLNAAM */
+    /* ==========================================
+       ROLNAAM — IETS KLEINER
+       ========================================== */
 
     #uitkomst {
-      font-size: clamp(30px, 4.5vw, 55px);
+      font-size: clamp(28px, 4vw, 46px);
       font-weight: normal;
-      max-width: 90vw;
-      padding: 5px 20px;
+
+      max-width: 85vw;
+      padding: 5px 15px;
       box-sizing: border-box;
+
       animation: verschijnen 1.8s ease forwards;
     }
 
-    /* BESCHRIJVING */
+    /* ==========================================
+       BESCHRIJVING
+       ========================================== */
 
     #beschrijving {
-      font-size: clamp(18px, 2.6vw, 30px);
-      max-width: 80vw;
-      line-height: 1.35;
-      padding: 0 20px;
+      font-size: clamp(18px, 2.3vw, 26px);
+
+      max-width: 65vw;
+
+      line-height: 1.3;
+
+      padding: 0 10px;
       box-sizing: border-box;
+
       opacity: 0;
+
       animation: beschrijving 1.8s ease 0.4s forwards;
     }
 
-    /* AFSLUITING */
+    /* ==========================================
+       AFSLUITING
+       ========================================== */
 
     #afsluiting {
       font-size: clamp(25px, 4vw, 48px);
+
       line-height: 1.5;
+
       max-width: 80vw;
+
       padding: 0 30px;
       box-sizing: border-box;
+
       opacity: 0;
+
       animation: afsluitingVerschijnen 2s ease forwards;
     }
 
-    /* GEHEIM */
+    /* ==========================================
+       GEHEIM
+       ========================================== */
 
     #geheim-tekst {
       font-size: clamp(30px, 5vw, 60px);
+
       opacity: 0;
+
       animation: geheimTekst 1.5s ease forwards;
     }
 
-    /* GEHEIME AFBEELDING */
+    /* ==========================================
+       GEHEIME AFBEELDING
+       ========================================== */
 
     #geheim-afbeelding {
       position: fixed;
+
       left: 50%;
       top: 50%;
+
       transform: translate(-50%, -50%);
+
       max-width: 85vw;
       max-height: 80vh;
+
       object-fit: contain;
+
       z-index: 20;
+
       opacity: 0;
     }
 
@@ -182,34 +231,55 @@
       animation: geheimFlits 0.7s ease forwards;
     }
 
-    /* EZEL */
+    /* ==========================================
+       EZEL
+       ========================================== */
 
     #ezel-afbeelding {
       display: block;
+
       width: auto;
       height: auto;
+
       max-width: 75vw;
       max-height: 55vh;
+
       object-fit: contain;
+
       margin: 0 auto 10px auto;
+
       opacity: 0;
+
       animation: ezelVerschijnen 1.5s ease forwards;
     }
 
     #ezel-tekst {
       font-size: clamp(25px, 4vw, 48px);
+
       line-height: 1.4;
+
       opacity: 0;
-      animation: afsluitingVerschijnen 1.5s ease 0.5s forwards;
+
+      animation:
+        afsluitingVerschijnen
+        1.5s
+        ease
+        0.5s
+        forwards;
     }
 
-    /* MAGIE */
+    /* ==========================================
+       MAGIE
+       ========================================== */
 
     #magie {
       position: fixed;
       inset: 0;
+
       pointer-events: none;
+
       opacity: 0;
+
       background:
         radial-gradient(
           circle at center,
@@ -217,6 +287,7 @@
           rgba(50, 35, 10, 0.25) 35%,
           rgba(0, 0, 0, 0.95) 80%
         );
+
       z-index: 10;
     }
 
@@ -224,26 +295,35 @@
       animation: magisch 2.5s ease-in-out forwards;
     }
 
-    /* ROOK */
+    /* ==========================================
+       ROOK
+       ========================================== */
 
     #rook {
       position: fixed;
+
       inset: -20%;
+
       pointer-events: none;
+
       opacity: 0;
+
       z-index: 11;
 
       background:
+
         radial-gradient(
           ellipse at 30% 50%,
           rgba(170, 125, 45, 0.22),
           transparent 45%
         ),
+
         radial-gradient(
           ellipse at 70% 40%,
           rgba(210, 170, 80, 0.18),
           transparent 40%
         ),
+
         radial-gradient(
           ellipse at 50% 80%,
           rgba(120, 90, 35, 0.20),
@@ -257,12 +337,16 @@
       animation: rook 2.5s ease-in-out forwards;
     }
 
-    /* SLOTGLOED */
+    /* ==========================================
+       SLOTGLOED
+       ========================================== */
 
     #slotgloed {
       position: fixed;
       inset: 0;
+
       pointer-events: none;
+
       opacity: 0;
 
       background:
@@ -280,7 +364,9 @@
       animation: slotgloed 3.5s ease-in-out forwards;
     }
 
-    /* ANIMATIES */
+    /* ==========================================
+       ANIMATIES
+       ========================================== */
 
     @keyframes introVerschijnen {
       from {
@@ -357,12 +443,18 @@
     @keyframes geheimFlits {
       0% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0.8);
+
+        transform:
+          translate(-50%, -50%)
+          scale(0.8);
       }
 
       20% {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
+
+        transform:
+          translate(-50%, -50%)
+          scale(1);
       }
 
       75% {
@@ -371,7 +463,10 @@
 
       100% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(1.05);
+
+        transform:
+          translate(-50%, -50%)
+          scale(1.05);
       }
     }
 
@@ -448,7 +543,10 @@
     @keyframes rook {
       0% {
         opacity: 0;
-        transform: scale(0.8) rotate(0deg);
+
+        transform:
+          scale(0.8)
+          rotate(0deg);
       }
 
       30% {
@@ -457,24 +555,33 @@
 
       70% {
         opacity: 0.8;
-        transform: scale(1.1) rotate(4deg);
+
+        transform:
+          scale(1.1)
+          rotate(4deg);
       }
 
       100% {
         opacity: 0;
-        transform: scale(1.4) rotate(-5deg);
+
+        transform:
+          scale(1.4)
+          rotate(-5deg);
       }
     }
 
   </style>
 </head>
 
+
 <body>
 
   <div id="spiegel">
 
     <div id="magie"></div>
+
     <div id="rook"></div>
+
     <div id="slotgloed"></div>
 
     <div id="scherm"></div>
@@ -510,7 +617,8 @@
             "Tu as quelque chose de royal. Ou tu fais simplement semblant."
         },
 
-        afbeelding: "koninklijke.png"
+        afbeelding:
+          "koninklijke.png"
       },
 
 
@@ -527,7 +635,8 @@
             "Tes intentions sont excellentes. C'est justement ce qui est suspect."
         },
 
-        afbeelding: "schurk.png"
+        afbeelding:
+          "schurk.png"
       },
 
 
@@ -544,7 +653,8 @@
             "Certaines choses sont écrites d'avance. Apparemment, celle-ci en faisait partie."
         },
 
-        afbeelding: "het-noodlot.png"
+        afbeelding:
+          "het-noodlot.png"
       },
 
 
@@ -561,7 +671,8 @@
             "Le destin t'a choisi. Espérons qu'il sait ce qu'il fait."
         },
 
-        afbeelding: "uitverkorene.png"
+        afbeelding:
+          "uitverkorene.png"
       },
 
 
@@ -578,7 +689,8 @@
             "Tu possèdes de grands pouvoirs. Surtout quand personne ne regarde."
         },
 
-        afbeelding: "magier.png"
+        afbeelding:
+          "magier.png"
       },
 
 
@@ -595,7 +707,8 @@
             "Il y a de la magie autour de toi. Ou peut-être est-ce simplement ton charme."
         },
 
-        afbeelding: "betoverde.png"
+        afbeelding:
+          "betoverde.png"
       },
 
 
@@ -612,7 +725,8 @@
             "Tu apparais quand personne ne t'attend... même pas toi."
         },
 
-        afbeelding: "ruiter-uit-de-mist.png"
+        afbeelding:
+          "ruiter-uit-de-mist.png"
       },
 
 
@@ -629,7 +743,8 @@
             "Tu arrives à cheval. Pourquoi ? Personne ne le sait."
         },
 
-        afbeelding: "vrolijke-ruiter.png"
+        afbeelding:
+          "vrolijke-ruiter.png"
       }
 
     ];
@@ -687,26 +802,38 @@
         {
           tekst:
             "De spiegel heeft gesproken... maar sommige geheimen blijven verborgen.",
-          actie: "geheim1"
+
+          actie:
+            "geheim1"
         },
+
 
         {
           tekst:
             "De magie verdwijnt... maar de spiegel is nog niet uitgesproken.",
-          actie: "geheim2"
+
+          actie:
+            "geheim2"
         },
+
 
         {
           tekst:
             "Was dit werkelijk jouw lot? Misschien moet je nog eens kijken...",
-          actie: "ezel"
+
+          actie:
+            "ezel"
         },
+
 
         {
           tekst:
             "De spiegel zwijgt weer... maar hij heeft jou gezien.",
-          actie: "oog"
+
+          actie:
+            "oog"
         },
+
 
         {
           tekst:
@@ -721,26 +848,38 @@
         {
           tekst:
             "Le miroir a parlé... mais certains secrets restent cachés.",
-          actie: "geheim1"
+
+          actie:
+            "geheim1"
         },
+
 
         {
           tekst:
             "La magie disparaît... mais le miroir n'a pas encore tout dit.",
-          actie: "geheim2"
+
+          actie:
+            "geheim2"
         },
+
 
         {
           tekst:
             "Était-ce vraiment ton destin ? Peut-être devrais-tu regarder encore une fois...",
-          actie: "ezel"
+
+          actie:
+            "ezel"
         },
+
 
         {
           tekst:
             "Le miroir se tait à nouveau... mais il t'a vu.",
-          actie: "oog"
+
+          actie:
+            "oog"
         },
+
 
         {
           tekst:
@@ -773,37 +912,42 @@
 
 
     /* ==========================================
-       ALLE AFBEELDINGEN VOORAF LADEN
+       AFBEELDINGEN VOORAF LADEN
        ========================================== */
 
-    const afbeeldingen = [
+    acties.forEach(function(actie) {
 
-      "spiegel.png",
+      if (actie.afbeelding) {
 
-      "koninklijke.png",
-      "schurk.png",
-      "het-noodlot.png",
-      "uitverkorene.png",
-      "magier.png",
-      "betoverde.png",
-      "ruiter-uit-de-mist.png",
-      "vrolijke-ruiter.png",
+        const img =
+          new Image();
 
-      "geheim.png",
-      "prins-heks.png",
-      "ezel.png",
-      "oog.png"
-
-    ];
-
-
-    afbeeldingen.forEach(function(bestand) {
-
-      const img = new Image();
-
-      img.src = bestand;
+        img.src =
+          actie.afbeelding;
+      }
 
     });
+
+
+    const ezelVoorladen =
+      new Image();
+
+    ezelVoorladen.src =
+      "ezel.png";
+
+
+    const prinsHeksVoorladen =
+      new Image();
+
+    prinsHeksVoorladen.src =
+      "prins-heks.png";
+
+
+    const oogVoorladen =
+      new Image();
+
+    oogVoorladen.src =
+      "oog.png";
 
 
     /* ==========================================
@@ -813,10 +957,14 @@
     function toonBeginScherm() {
 
       const nederlandsActief =
-        taal === "nl" ? "actief" : "";
+        taal === "nl"
+          ? "actief"
+          : "";
 
       const fransActief =
-        taal === "fr" ? "actief" : "";
+        taal === "fr"
+          ? "actief"
+          : "";
 
 
       if (taal === "nl") {
@@ -836,20 +984,15 @@
           '</div>' +
 
           '<div id="taalkeuze">' +
-
             '<span class="' +
             nederlandsActief +
-            '" data-taal="nl">' +
-            '🇳🇱 Nederlands' +
-            '</span>' +
+            '" data-taal="nl">🇳🇱 Nederlands</span>' +
 
             ' | ' +
 
             '<span class="' +
             fransActief +
-            '" data-taal="fr">' +
-            '🇫🇷 Français' +
-            '</span>' +
+            '" data-taal="fr">🇫🇷 Français</span>' +
 
           '</div>';
 
@@ -870,45 +1013,40 @@
           '</div>' +
 
           '<div id="taalkeuze">' +
-
             '<span class="' +
             nederlandsActief +
-            '" data-taal="nl">' +
-            '🇳🇱 Nederlands' +
-            '</span>' +
+            '" data-taal="nl">🇳🇱 Nederlands</span>' +
 
             ' | ' +
 
             '<span class="' +
             fransActief +
-            '" data-taal="fr">' +
-            '🇫🇷 Français' +
-            '</span>' +
+            '" data-taal="fr">🇫🇷 Français</span>' +
 
           '</div>';
 
       }
 
 
-      document
-        .querySelectorAll("#taalkeuze span")
-        .forEach(function(element) {
+      document.querySelectorAll(
+        "#taalkeuze span"
+      ).forEach(function(element) {
 
-          element.addEventListener(
-            "click",
-            function(event) {
+        element.addEventListener(
+          "click",
+          function(event) {
 
-              event.stopPropagation();
+            event.stopPropagation();
 
-              taal =
-                element.dataset.taal;
+            taal =
+              element.dataset.taal;
 
-              toonBeginScherm();
+            toonBeginScherm();
 
-            }
-          );
+          }
+        );
 
-        });
+      });
 
     }
 
@@ -922,64 +1060,86 @@
       const lijst =
         intros[taal];
 
+
       const intro =
         lijst[
           Math.floor(
-            Math.random() * lijst.length
+            Math.random() *
+            lijst.length
           )
         ];
 
 
-      scherm.innerHTML = "";
+      scherm.innerHTML =
+        "";
 
 
       const tekst =
         document.createElement("div");
 
-      tekst.id = "intro";
 
-      tekst.textContent = intro;
+      tekst.id =
+        "intro";
 
-      scherm.appendChild(tekst);
 
-      scherm.style.opacity = "1";
+      tekst.textContent =
+        intro;
+
+
+      scherm.appendChild(
+        tekst
+      );
+
+
+      scherm.style.opacity =
+        "1";
 
     }
 
 
     /* ==========================================
        GEHEIM 1
-       Prins op stokpaard
        ========================================== */
 
     function toonGeheim1() {
 
-      scherm.style.opacity = "0";
+      scherm.style.opacity =
+        "0";
 
 
       setTimeout(function() {
 
-        scherm.innerHTML = "";
+        scherm.innerHTML =
+          "";
 
 
         const tekst =
           document.createElement("div");
 
-        tekst.id = "geheim-tekst";
+
+        tekst.id =
+          "geheim-tekst";
+
 
         tekst.textContent =
           taal === "nl"
             ? "GEHEIM"
             : "SECRET";
 
-        scherm.appendChild(tekst);
 
-        scherm.style.opacity = "1";
+        scherm.appendChild(
+          tekst
+        );
+
+
+        scherm.style.opacity =
+          "1";
 
 
         setTimeout(function() {
 
-          scherm.style.opacity = "0";
+          scherm.style.opacity =
+            "0";
 
 
           setTimeout(function() {
@@ -987,16 +1147,19 @@
             const afbeelding =
               document.createElement("img");
 
+
             afbeelding.id =
               "geheim-afbeelding";
 
+
             afbeelding.src =
-              "geheim.png";
+              "prins-heks.png";
+
 
             afbeelding.alt =
               taal === "nl"
                 ? "Een prins op een stokpaard"
-                : "Un prince sur un cheval à bâton";
+                : "Un prince sur un cheval à bascule";
 
 
             document.body.appendChild(
@@ -1046,7 +1209,9 @@
 
           }, 700);
 
+
         }, 1800);
+
 
       }, 800);
 
@@ -1059,19 +1224,23 @@
 
     function toonGeheim2() {
 
-      scherm.style.opacity = "0";
+      scherm.style.opacity =
+        "0";
 
 
       setTimeout(function() {
 
-        scherm.innerHTML = "";
+        scherm.innerHTML =
+          "";
 
 
         const tekst =
           document.createElement("div");
 
+
         tekst.id =
           "geheim-tekst";
+
 
         tekst.textContent =
           taal === "nl"
@@ -1079,7 +1248,10 @@
             : "Il en sait plus...";
 
 
-        scherm.appendChild(tekst);
+        scherm.appendChild(
+          tekst
+        );
+
 
         scherm.style.opacity =
           "1";
@@ -1095,17 +1267,13 @@
 
             scherm.innerHTML =
               '<div id="afsluiting">' +
-
               (
                 taal === "nl"
 
-                  ? 'De spiegel heeft je outfit eens goed bekeken...<br><br>' +
-                    'Je kunt die kans op de prijs wel vergeten.'
+                  ? "De spiegel heeft je outfit eens goed bekeken...<br><br>Je kunt die kans op de prijs wel vergeten."
 
-                  : 'Le miroir a bien examiné ta tenue...<br><br>' +
-                    'Tu peux oublier tes chances de gagner le prix.'
+                  : "Le miroir a bien examiné ta tenue...<br><br>Tu peux oublier tes chances de gagner le prix."
               ) +
-
               '</div>';
 
 
@@ -1126,9 +1294,12 @@
 
             }, 6000);
 
+
           }, 700);
 
+
         }, 2500);
+
 
       }, 800);
 
@@ -1141,22 +1312,27 @@
 
     function toonEzel() {
 
-      scherm.style.opacity = "0";
+      scherm.style.opacity =
+        "0";
 
 
       setTimeout(function() {
 
-        scherm.innerHTML = "";
+        scherm.innerHTML =
+          "";
 
 
         const afbeelding =
           document.createElement("img");
 
+
         afbeelding.id =
           "ezel-afbeelding";
 
+
         afbeelding.src =
           "ezel.png";
+
 
         afbeelding.alt =
           taal === "nl"
@@ -1172,8 +1348,10 @@
         const tekst =
           document.createElement("div");
 
+
         tekst.id =
           "ezel-tekst";
+
 
         tekst.textContent =
           taal === "nl"
@@ -1204,6 +1382,7 @@
 
         }, 5000);
 
+
       }, 800);
 
     }
@@ -1215,22 +1394,27 @@
 
     function toonOog() {
 
-      scherm.style.opacity = "0";
+      scherm.style.opacity =
+        "0";
 
 
       setTimeout(function() {
 
-        scherm.innerHTML = "";
+        scherm.innerHTML =
+          "";
 
 
         const afbeelding =
           document.createElement("img");
 
+
         afbeelding.id =
           "geheim-afbeelding";
 
+
         afbeelding.src =
           "oog.png";
+
 
         afbeelding.alt =
           taal === "nl"
@@ -1256,13 +1440,14 @@
 
         }, 800);
 
+
       }, 500);
 
     }
 
 
     /* ==========================================
-       LAATSTE GLOED
+       LAATSTE GOUDEN GLOED
        ========================================== */
 
     function toonLaatsteGloed() {
@@ -1271,7 +1456,9 @@
         "actief"
       );
 
+
       void slotgloed.offsetWidth;
+
 
       slotgloed.classList.add(
         "actief"
@@ -1280,13 +1467,19 @@
 
       setTimeout(function() {
 
-        taal = "nl";
+        taal =
+          "nl";
+
 
         toonBeginScherm();
 
-        scherm.style.opacity = "1";
 
-        bezig = false;
+        scherm.style.opacity =
+          "1";
+
+
+        bezig =
+          false;
 
       }, 3500);
 
@@ -1306,7 +1499,8 @@
       const gekozen =
         lijst[
           Math.floor(
-            Math.random() * lijst.length
+            Math.random() *
+            lijst.length
           )
         ];
 
@@ -1323,6 +1517,7 @@
 
         const tekst =
           document.createElement("div");
+
 
         tekst.id =
           "afsluiting";
@@ -1399,6 +1594,7 @@
 
         }, 8000);
 
+
       }, 800);
 
     }
@@ -1410,33 +1606,16 @@
 
     scherm.addEventListener(
       "click",
-      function(event) {
-
-        /*
-         * Taalkeuze mag de spiegel
-         * niet starten.
-         */
-
-        if (
-          event.target.closest(
-            "#taalkeuze"
-          )
-        ) {
-
-          return;
-        }
-
+      function() {
 
         if (bezig) {
-
           return;
         }
 
 
-        bezig = true;
+        bezig =
+          true;
 
-
-        /* INTRO */
 
         toonIntro();
 
@@ -1451,6 +1630,7 @@
             "actief"
           );
 
+
           rook.classList.remove(
             "actief"
           );
@@ -1463,6 +1643,7 @@
           magie.classList.add(
             "actief"
           );
+
 
           rook.classList.add(
             "actief"
@@ -1574,7 +1755,7 @@
 
 
             /*
-             * Rol blijft 8 seconden zichtbaar.
+             * De rol blijft 8 seconden zichtbaar.
              */
 
             setTimeout(
@@ -1603,9 +1784,7 @@
        SERVICE WORKER
        ========================================== */
 
-    if (
-      "serviceWorker" in navigator
-    ) {
+    if ("serviceWorker" in navigator) {
 
       navigator.serviceWorker.register(
         "service-worker.js"
@@ -1617,4 +1796,3 @@
 
 </body>
 </html>
-```

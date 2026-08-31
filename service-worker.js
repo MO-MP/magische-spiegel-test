@@ -1,5 +1,5 @@
 ```javascript
-const CACHE_NAME = "magische-spiegel-v45";
+const CACHE_NAME = "magische-spiegel-v46";
 
 const BESTANDEN = [
   "./",
@@ -18,32 +18,108 @@ const BESTANDEN = [
   "./vrolijke-ruiter.png"
 ];
 
+
+/* ==========================================
+   INSTALLEREN EN ALLES OPSLAAN
+   ========================================== */
+
 self.addEventListener("install", event => {
+
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(BESTANDEN))
+
+    caches
+      .open(CACHE_NAME)
+      .then(cache => {
+
+        return cache.addAll(BESTANDEN);
+
+      })
       .then(() => self.skipWaiting())
+
   );
+
 });
+
+
+/* ==========================================
+   OUDE CACHE VERWIJDEREN
+   ========================================== */
 
 self.addEventListener("activate", event => {
+
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys
-          .filter(key => key !== CACHE_NAME)
-          .map(key => caches.delete(key))
-      )
-    ).then(() => self.clients.claim())
+
+    caches
+      .keys()
+      .then(keys => {
+
+        return Promise.all(
+
+          keys
+            .filter(key => key !== CACHE_NAME)
+            .map(key => caches.delete(key))
+
+        );
+
+      })
+      .then(() => self.clients.claim())
+
   );
+
 });
 
+
+/* ==========================================
+   OFFLINE ONDERSTEUNING
+   ========================================== */
+
 self.addEventListener("fetch", event => {
+
+  /*
+   * Voor pagina-navigatie:
+   * altijd index.html gebruiken als fallback.
+   */
+
+  if (event.request.mode === "navigate") {
+
+    event.respondWith(
+
+      caches.match("./index.html")
+        .then(response => {
+
+          return response || fetch(event.request);
+
+        })
+        .catch(() => caches.match("./index.html"))
+
+    );
+
+    return;
+
+  }
+
+
+  /*
+   * Voor afbeeldingen en andere bestanden:
+   * eerst cache, daarna internet.
+   */
+
   event.respondWith(
+
     caches.match(event.request)
       .then(cachedResponse => {
-        return cachedResponse || fetch(event.request);
+
+        if (cachedResponse) {
+
+          return cachedResponse;
+
+        }
+
+        return fetch(event.request);
+
       })
+
   );
+
 });
 ```

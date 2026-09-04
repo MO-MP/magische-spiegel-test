@@ -231,11 +231,11 @@
     #intro {
 
       font-size:
-        clamp(25px, 4vw, 48px);
+        clamp(30px, 4.8vw, 56px);
 
-      line-height: 1.5;
+      line-height: 1.4;
 
-      max-width: 85vw;
+      max-width: 88vw;
 
       padding: 0 30px;
 
@@ -245,7 +245,7 @@
 
       animation:
         introVerschijnen
-        2s
+        1.5s
         ease
         forwards;
     }
@@ -331,24 +331,37 @@
 
       left: 50%;
 
-      top: 8vh;
+      top: 0;
+
+      bottom: 0;
 
       transform:
         translateX(-50%);
 
       z-index: 8;
 
-      width: 92vw;
+      width: 90vw;
 
-      max-width: 1200px;
+      max-width: 1100px;
 
-      height: 84vh;
+      padding:
+        6vh
+        0
+        18vh;
+
+      box-sizing: border-box;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: space-between;
 
       opacity: 0;
 
       pointer-events: none;
-
-      text-align: center;
 
       animation:
         tekstLater
@@ -359,67 +372,35 @@
     }
 
 
-    /* ==========================================
-       ROLNAAM BOVENIN
-       ========================================== */
-
     #uitkomst {
 
-      position: absolute;
-
-      top: 0;
-
-      left: 50%;
-
-      transform:
-        translateX(-50%);
-
-      width: 100%;
-
       font-size:
-        clamp(46px, 7vw, 82px);
+        clamp(44px, 6.5vw, 78px);
 
       font-weight: normal;
-
-      line-height: 1.1;
-
-      text-shadow:
-        0 2px 8px black,
-        0 0 18px black,
-        0 0 30px black;
-    }
-
-
-    /* ==========================================
-       ONDERZIN ONDERIN
-       ========================================== */
-
-    #beschrijving {
-
-      position: absolute;
-
-      left: 50%;
-
-      bottom: 0;
-
-      transform:
-        translateX(-50%);
-
-      width: 92%;
-
-      max-width: 1100px;
-
-      font-size:
-        clamp(30px, 4vw, 50px);
-
-      line-height: 1.3;
 
       margin: 0;
 
       text-shadow:
         0 2px 8px black,
-        0 0 18px black,
-        0 0 30px black;
+        0 0 18px black;
+    }
+
+
+    #beschrijving {
+
+      font-size:
+        clamp(32px, 4.6vw, 58px);
+
+      line-height: 1.3;
+
+      max-width: 1050px;
+
+      margin: 0;
+
+      text-shadow:
+        0 2px 8px black,
+        0 0 18px black;
     }
 
 
@@ -446,6 +427,23 @@
         afsluitingVerschijnen
         2s
         ease
+        forwards;
+    }
+
+
+    /* ==========================================
+       SPECIALE AFSLUITING
+       ========================================== */
+
+    #prijs-vergeten {
+
+      display: inline-block;
+
+      animation:
+        prijsZoom
+        2.8s
+        ease-in-out
+        1.5s
         forwards;
     }
 
@@ -588,7 +586,7 @@
 
       position: relative;
 
-      top: -6vh;
+      top: -4vh;
 
       font-size:
         clamp(30px, 4.5vw, 54px);
@@ -808,6 +806,34 @@
       to {
 
         opacity: 1;
+
+        transform:
+          scale(1);
+      }
+    }
+
+
+    @keyframes prijsZoom {
+
+      0% {
+
+        transform:
+          scale(1);
+      }
+
+      35% {
+
+        transform:
+          scale(1.45);
+      }
+
+      60% {
+
+        transform:
+          scale(1.45);
+      }
+
+      100% {
 
         transform:
           scale(1);
@@ -1054,17 +1080,6 @@
        GESCHUDDE ZAKKEN
        ========================================== */
 
-    /*
-     * Iedere soort heeft zijn eigen zak.
-     *
-     * Intro's en afsluitingen hebben bovendien
-     * een aparte zak voor Nederlands en Frans.
-     *
-     * Daardoor kan een taalwissel nooit zorgen
-     * dat een Nederlandse tekst ineens uit een
-     * Franse zak wordt gehaald.
-     */
-
     let introZakken = {
 
       nl: [],
@@ -1085,13 +1100,6 @@
 
     };
 
-
-    /*
-     * Maakt een nieuwe zak en schudt alle items
-     * volledig willekeurig door elkaar.
-     *
-     * Fisher-Yates shuffle.
-     */
 
     function maakZak(lijst) {
 
@@ -1122,14 +1130,6 @@
 
     }
 
-
-    /*
-     * Pakt één item uit de zak.
-     *
-     * Is de zak leeg?
-     * Dan wordt de volledige lijst opnieuw
-     * gevuld en opnieuw geschud.
-     */
 
     function pakUitZak(lijst, zak) {
 
@@ -1832,21 +1832,37 @@
 
           setTimeout(function() {
 
-            scherm.innerHTML =
+            if (taal === "nl") {
 
-              '<div id="afsluiting">' +
+              scherm.innerHTML =
 
-              (
+                '<div id="afsluiting">' +
 
-                taal === "nl"
+                'De spiegel heeft je outfit eens goed bekeken...<br><br>' +
 
-                  ? "De spiegel heeft je outfit eens goed bekeken...<br><br>Je kunt die kans op de prijs wel vergeten."
+                '<span id="prijs-vergeten">' +
+                'Je kunt die kans op de prijs wel vergeten.' +
+                '</span>' +
 
-                  : "Le miroir a bien examiné ta tenue...<br><br>Tu peux oublier tes chances de gagner le prix."
+                '</div>';
 
-              ) +
+            }
 
-              '</div>';
+            else {
+
+              scherm.innerHTML =
+
+                '<div id="afsluiting">' +
+
+                "Le miroir a bien examiné ta tenue...<br><br>" +
+
+                '<span id="prijs-vergeten">' +
+                "Tu peux oublier tes chances de gagner le prix." +
+                '</span>' +
+
+                '</div>';
+
+            }
 
             scherm.style.opacity =
               "1";
@@ -2174,14 +2190,6 @@
             "0";
 
           setTimeout(function() {
-
-            /*
-             * De rol wordt niet meer volledig
-             * willekeurig gekozen.
-             *
-             * Eerst komen alle 8 rollen één keer
-             * aan bod. Daarna wordt opnieuw geschud.
-             */
 
             const willekeurig =
               pakUitZak(

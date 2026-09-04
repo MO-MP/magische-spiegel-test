@@ -6,47 +6,34 @@
 
   <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-
->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
 
   <!-- ==========================================
        IPAD / IOS WEB-APP
        ========================================== -->
 
-  <!-- Openen als zelfstandige web-app vanaf beginscherm -->
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
 
-<meta
-name="apple-mobile-web-app-capable"
-content="yes"
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black"
+  >
 
->
+  <meta
+    name="apple-mobile-web-app-title"
+    content="Magische Spiegel"
+  >
 
-  <!-- iOS-statusbalk -->
-
-<meta
-name="apple-mobile-web-app-status-bar-style"
-content="black"
-
->
-
-  <!-- Naam van de web-app op iPad -->
-
-<meta
-name="apple-mobile-web-app-title"
-content="Magische Spiegel"
-
->
-
-  <!-- Voor andere mobiele browsers -->
-
-<meta
-name="mobile-web-app-capable"
-content="yes"
-
->
+  <meta
+    name="mobile-web-app-capable"
+    content="yes"
+  >
 
   <title>De Magische Spiegel</title>
 
@@ -65,11 +52,6 @@ content="yes"
       font-family: Georgia, serif;
 
       background: black;
-
-      /*
-       * Zorgt ervoor dat de inhoud ook netjes
-       * rekening houdt met de iPad veilige schermranden.
-       */
 
       padding:
         env(safe-area-inset-top)
@@ -92,11 +74,6 @@ content="yes"
       -webkit-user-select: none;
 
       -webkit-touch-callout: none;
-
-      /*
-       * Voorkomt ongewenst scrollen / trekken
-       * op iPad.
-       */
 
       overscroll-behavior: none;
 
@@ -1012,17 +989,16 @@ content="yes"
 
   <div id="spiegel">
 
-```
-<div id="magie"></div>
+    <div id="magie"></div>
 
-<div id="rook"></div>
+    <div id="rook"></div>
 
-<div id="slotgloed"></div>
+    <div id="slotgloed"></div>
 
-<div id="scherm"></div>
-```
+    <div id="scherm"></div>
 
   </div>
+
 
   <script>
 
@@ -1032,6 +1008,102 @@ content="yes"
        ========================================== */
 
     let taal = "nl";
+
+
+    /* ==========================================
+       GESCHUDDE ZAKKEN
+       ========================================== */
+
+    /*
+     * Iedere soort heeft zijn eigen zak.
+     *
+     * Intro's en afsluitingen hebben bovendien
+     * een aparte zak voor Nederlands en Frans.
+     *
+     * Daardoor kan een taalwissel nooit zorgen
+     * dat een Nederlandse tekst ineens uit een
+     * Franse zak wordt gehaald.
+     */
+
+    let introZakken = {
+
+      nl: [],
+
+      fr: []
+
+    };
+
+
+    let rolZak = [];
+
+
+    let afsluitingZakken = {
+
+      nl: [],
+
+      fr: []
+
+    };
+
+
+    /*
+     * Maakt een nieuwe zak en schudt alle items
+     * volledig willekeurig door elkaar.
+     *
+     * Fisher-Yates shuffle.
+     */
+
+    function maakZak(lijst) {
+
+      const zak = [...lijst];
+
+      for (
+        let i = zak.length - 1;
+        i > 0;
+        i--
+      ) {
+
+        const j =
+          Math.floor(
+            Math.random() * (i + 1)
+          );
+
+        [
+          zak[i],
+          zak[j]
+        ] = [
+          zak[j],
+          zak[i]
+        ];
+
+      }
+
+      return zak;
+
+    }
+
+
+    /*
+     * Pakt één item uit de zak.
+     *
+     * Is de zak leeg?
+     * Dan wordt de volledige lijst opnieuw
+     * gevuld en opnieuw geschud.
+     */
+
+    function pakUitZak(lijst, zak) {
+
+      if (zak.length === 0) {
+
+        zak.push(
+          ...maakZak(lijst)
+        );
+
+      }
+
+      return zak.pop();
+
+    }
 
 
     /* ==========================================
@@ -1240,6 +1312,7 @@ content="yes"
 
       ],
 
+
       fr: [
 
         "Une douce brume envahit le miroir... Quelque part entre magie et tragédie, ton histoire commence.",
@@ -1305,6 +1378,7 @@ content="yes"
         }
 
       ],
+
 
       fr: [
 
@@ -1542,12 +1616,10 @@ content="yes"
         intros[taal];
 
       const intro =
-        lijst[
-          Math.floor(
-            Math.random() *
-            lijst.length
-          )
-        ];
+        pakUitZak(
+          lijst,
+          introZakken[taal]
+        );
 
       scherm.innerHTML =
         "";
@@ -1926,12 +1998,10 @@ content="yes"
         afsluitingen[taal];
 
       const gekozen =
-        lijst[
-          Math.floor(
-            Math.random() *
-            lijst.length
-          )
-        ];
+        pakUitZak(
+          lijst,
+          afsluitingZakken[taal]
+        );
 
       scherm.style.opacity =
         "0";
@@ -2065,13 +2135,19 @@ content="yes"
 
           setTimeout(function() {
 
+            /*
+             * De rol wordt niet meer volledig
+             * willekeurig gekozen.
+             *
+             * Eerst komen alle 8 rollen één keer
+             * aan bod. Daarna wordt opnieuw geschud.
+             */
+
             const willekeurig =
-              acties[
-                Math.floor(
-                  Math.random() *
-                  acties.length
-                )
-              ];
+              pakUitZak(
+                acties,
+                rolZak
+              );
 
             const taalData =
               willekeurig[taal];

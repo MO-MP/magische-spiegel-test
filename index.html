@@ -235,9 +235,11 @@
 
       line-height: 1.4;
 
-      max-width: 88vw;
+      width: 78vw;
 
-      padding: 0 30px;
+      max-width: 850px;
+
+      padding: 0;
 
       box-sizing: border-box;
 
@@ -245,7 +247,7 @@
 
       animation:
         introVerschijnen
-        1.5s
+        1.2s
         ease
         forwards;
     }
@@ -345,9 +347,9 @@
       max-width: 1100px;
 
       padding:
-        6vh
+        11vh
         0
-        18vh;
+        14vh;
 
       box-sizing: border-box;
 
@@ -411,13 +413,15 @@
     #afsluiting {
 
       font-size:
-        clamp(25px, 4vw, 48px);
+        clamp(30px, 4.8vw, 56px);
 
-      line-height: 1.5;
+      line-height: 1.4;
 
-      max-width: 85vw;
+      width: 78vw;
 
-      padding: 0 30px;
+      max-width: 850px;
+
+      padding: 0;
 
       box-sizing: border-box;
 
@@ -425,7 +429,7 @@
 
       animation:
         afsluitingVerschijnen
-        2s
+        1.5s
         ease
         forwards;
     }
@@ -437,11 +441,13 @@
 
     #prijs-vergeten {
 
-      display: inline-block;
+      display: block;
+
+      margin-top: 12px;
 
       animation:
         prijsZoom
-        2.8s
+        3s
         ease-in-out
         1.5s
         forwards;
@@ -586,7 +592,7 @@
 
       position: relative;
 
-      top: -4vh;
+      top: -10vh;
 
       font-size:
         clamp(30px, 4.5vw, 54px);
@@ -821,16 +827,22 @@
           scale(1);
       }
 
-      35% {
+      25% {
 
         transform:
           scale(1.45);
       }
 
-      60% {
+      50% {
 
         transform:
           scale(1.45);
+      }
+
+      75% {
+
+        transform:
+          scale(1);
       }
 
       100% {
@@ -1838,7 +1850,7 @@
 
                 '<div id="afsluiting">' +
 
-                'De spiegel heeft je outfit eens goed bekeken...<br><br>' +
+                'De spiegel heeft je outfit eens goed bekeken...' +
 
                 '<span id="prijs-vergeten">' +
                 'Je kunt die kans op de prijs wel vergeten.' +
@@ -1854,7 +1866,7 @@
 
                 '<div id="afsluiting">' +
 
-                "Le miroir a bien examiné ta tenue...<br><br>" +
+                "Le miroir a bien examiné ta tenue..." +
 
                 '<span id="prijs-vergeten">' +
                 "Tu peux oublier tes chances de gagner le prix." +
@@ -2164,6 +2176,11 @@
 
         toonIntro();
 
+        /*
+         * De intro blijft nu ongeveer
+         * 4,5 seconden zichtbaar.
+         */
+
         setTimeout(function() {
 
           magie.classList.remove(
@@ -2310,7 +2327,7 @@
 
           }, 1700);
 
-        }, 8000);
+        }, 4500);
 
       }
     );

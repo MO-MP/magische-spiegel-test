@@ -1,5 +1,5 @@
 ```javascript
-const CACHE_NAME = "magische-spiegel-v46";
+const CACHE_NAME = "magische-spiegel-v47";
 
 const BESTANDEN = [
   "./",

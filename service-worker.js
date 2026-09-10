@@ -1,5 +1,4 @@
-```javascript
-const CACHE_NAME = "magische-spiegel-v52";
+const CACHE_NAME = "magische-spiegel-v53";
 
 const BESTANDEN = [
   "./",
@@ -8,6 +7,7 @@ const BESTANDEN = [
   "./ezel.png",
   "./geheim.png",
   "./oog.png",
+  "./vergadering.png",
   "./koninklijke.png",
   "./schurk.png",
   "./het-noodlot.png",
@@ -122,4 +122,3 @@ self.addEventListener("fetch", event => {
   );
 
 });
-```

@@ -633,6 +633,88 @@
 
 
     /* ==========================================
+       VERGADERING
+       ========================================== */
+
+    #vergadering-afbeelding {
+
+      position: fixed;
+
+      left: 50%;
+
+      top: 50%;
+
+      transform:
+        translate(-50%, -50%);
+
+      width: 100vw;
+
+      height: 100vh;
+
+      max-width: 100%;
+
+      max-height: 100%;
+
+      object-fit: contain;
+
+      z-index: 20;
+
+      opacity: 0;
+
+      filter:
+        drop-shadow(
+          0 0 30px
+          rgba(255,255,255,0.35)
+        );
+
+      -webkit-mask-image:
+        radial-gradient(
+          ellipse at center,
+          black 42%,
+          rgba(0,0,0,0.95) 58%,
+          rgba(0,0,0,0.65) 72%,
+          transparent 94%
+        );
+
+      mask-image:
+        radial-gradient(
+          ellipse at center,
+          black 42%,
+          rgba(0,0,0,0.95) 58%,
+          rgba(0,0,0,0.65) 72%,
+          transparent 94%
+        );
+    }
+
+
+    #vergadering-afbeelding.flits {
+
+      animation:
+        vergaderingFlits
+        3s
+        ease
+        forwards;
+    }
+
+
+    #vergadering-laatste {
+
+      display: block;
+
+      opacity: 0;
+
+      margin-top: 14px;
+
+      animation:
+        vergaderingLaatste
+        1.2s
+        ease
+        1.8s
+        forwards;
+    }
+
+
+    /* ==========================================
        MAGIE
        ========================================== */
 
@@ -945,6 +1027,66 @@
 
         transform:
           scale(0.7);
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform:
+          scale(1);
+      }
+    }
+
+
+    @keyframes vergaderingFlits {
+
+      0% {
+
+        opacity: 0;
+
+        transform:
+          translate(-50%, -50%)
+          scale(0.88);
+      }
+
+      18% {
+
+        opacity: 1;
+
+        transform:
+          translate(-50%, -50%)
+          scale(1);
+      }
+
+      82% {
+
+        opacity: 1;
+
+        transform:
+          translate(-50%, -50%)
+          scale(1);
+      }
+
+      100% {
+
+        opacity: 0;
+
+        transform:
+          translate(-50%, -50%)
+          scale(1.04);
+      }
+    }
+
+
+    @keyframes vergaderingLaatste {
+
+      from {
+
+        opacity: 0;
+
+        transform:
+          scale(0.95);
       }
 
       to {
@@ -1450,7 +1592,10 @@
 
         {
           tekst:
-            "Een verhaal eindigt hier... of begint het pas?"
+            "Er is één ding dat je moet weten…",
+
+          actie:
+            "vergadering"
         }
 
       ],
@@ -1492,7 +1637,10 @@
 
         {
           tekst:
-            "Une histoire se termine ici... ou est-ce seulement le début ?"
+            "Il y a une chose que tu dois savoir…",
+
+          actie:
+            "vergadering"
         }
 
       ]
@@ -1557,6 +1705,13 @@
 
     oogVoorladen.src =
       "oog.png";
+
+
+    const vergaderingVoorladen =
+      new Image();
+
+    vergaderingVoorladen.src =
+      "vergadering.png";
 
 
     /* ==========================================
@@ -2063,6 +2218,88 @@
 
 
     /* ==========================================
+       VERGADERING
+       ========================================== */
+
+    function toonVergadering() {
+
+      scherm.style.opacity =
+        "0";
+
+      setTimeout(function() {
+
+        scherm.innerHTML =
+          "";
+
+        const afbeelding =
+          document.createElement(
+            "img"
+          );
+
+        afbeelding.id =
+          "vergadering-afbeelding";
+
+        afbeelding.src =
+          "vergadering.png";
+
+        afbeelding.alt =
+          taal === "nl"
+            ? "Een sprookjesvergadering"
+            : "Une réunion de conte de fées";
+
+        document.body.appendChild(
+          afbeelding
+        );
+
+        afbeelding.classList.add(
+          "flits"
+        );
+
+        setTimeout(function() {
+
+          afbeelding.remove();
+
+          scherm.innerHTML =
+
+            '<div id="afsluiting">' +
+
+            (
+              taal === "nl"
+                ? "Zo is je lot beslist." +
+                  '<span id="vergadering-laatste">' +
+                  "Ze waren het verrassend snel eens." +
+                  "</span>"
+                : "Voilà. Ton destin est décidé." +
+                  '<span id="vergadering-laatste">' +
+                  "Ils se sont mis d'accord étonnamment vite." +
+                  "</span>"
+            ) +
+
+            "</div>";
+
+          scherm.style.opacity =
+            "1";
+
+          setTimeout(function() {
+
+            scherm.style.opacity =
+              "0";
+
+            setTimeout(
+              toonLaatsteGloed,
+              800
+            );
+
+          }, 6000);
+
+        }, 3000);
+
+      }, 800);
+
+    }
+
+
+    /* ==========================================
        LAATSTE GLOED
        ========================================== */
 
@@ -2136,6 +2373,25 @@
 
         scherm.style.opacity =
           "1";
+
+
+        /* ======================================
+           SPECIALE VERGADERING
+           ====================================== */
+
+        if (
+          gekozen.actie ===
+          "vergadering"
+        ) {
+
+          setTimeout(
+            toonVergadering,
+            3000
+          );
+
+          return;
+        }
+
 
         setTimeout(function() {
 

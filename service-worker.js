@@ -1,8 +1,9 @@
-const CACHE_NAME = "magische-spiegel-v60";
+const CACHE_NAME = "magische-spiegel-v61";
 
 const BESTANDEN = [
   "./",
   "./index.html",
+  "./manifest.json",
   "./spiegel.png",
   "./ezel.png",
   "./geheim.png",
